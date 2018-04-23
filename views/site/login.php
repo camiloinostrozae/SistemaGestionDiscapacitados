@@ -21,9 +21,12 @@ $fieldOptions2 = [
 ?>
 
 <body style="background-color:#000033;">
+    <div class="container">
+       <div> </div>
+    </div>
     <div class="login-box">
         <div class="login-logo">
-            <a href="#"><b>Admin</b>LTE</a>
+            <?php echo Html::img('@web/images/pdi.png', ['width'=>'350','height'=>'200'])?>
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
