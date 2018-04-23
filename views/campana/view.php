@@ -1,8 +1,8 @@
 <?php
 
 use yii\helpers\Html;
-//use kartik\detail\DetailView;
-use yii\widgets\DetailView;
+use kartik\detail\DetailView;
+//use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Vendedor
@@ -18,14 +18,40 @@ use yii\widgets\DetailView;
             'fecha_vencimiento',
             'estado',
         ],
-    ]) ?>*/
+    ]) ?>
+    
+    
+    
+   
+
+    <?= DetailView::widget([
+    'model' => $model,
+    'attributes' => [
+        'titulo',
+        [
+            'attribute'=>'contenido',
+            //'value'=>'<span class="text-justify"><em>'.$model->contenido.'</em></span>',
+            'options'=>['row'=>5],
+            'contentOptions'=>['style'=>'max-width: 300px;max-height: 1000px;overflow: auto; word-wrap: break-word;white-space: normal;text-align: justify;height: 300px;margin: 0 0 10px;'],
+        ],
+        'fecha_publicacion',
+
+
+    ],
+
+]) ?> 
+    
+    
+    
+    
+    */
 
 
 ?>
 
 
 <?php 
-/*
+
 $atributos = [
     [
         'group'=>true,
@@ -78,26 +104,26 @@ $atributos = [
         ],
     ],
 
-    
+
    ['columns'=> [[
         'attribute'=>'contenido',
         'format'=>'raw',
         'value'=>'<span class="text-justify"><em>'.$model->contenido.'</em></span>',
         'type'=>DetailView::INPUT_TEXTAREA, 
-        'options'=>['rows'=>5]
+       'valueColOptions'=>['style'=>'max-width: 300px;max-height: 1000px;overflow: auto; word-wrap: break-word;white-space: normal;text-align: justify;margin: 0 0 10px;'],
+       
    ] ],], 
-   
+
 
 
 
 ]
-*/
+
 
 ?>
 <div class="modal-body">
+
     
-    <?php
-/*
     <?= DetailView::widget([
 
     'model'=>$model,
@@ -111,24 +137,10 @@ $atributos = [
         'type'=>DetailView::TYPE_INFO,
     ],
     'attributes' => $atributos
-*/ ?>
-    
-    
-     <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'titulo',
-            [
-            'attribute'=>'contenido',
-                'value'=>'<span class="text-justify"><em>'.$model->contenido.'</em></span>',
-                'options'=>['row'=>5],
-                'contentOptions'=>['style'=>'max-width: 300px;max-height: 500px;overflow: auto; word-wrap: break-word;white-space: nowrap;'],
-                ],
-            'fecha_publicacion',
-            
-           
-        ],
-    
+
+
+
+
 ]) ?>
 
 
