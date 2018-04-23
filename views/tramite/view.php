@@ -1,11 +1,12 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
+//use yii\widgets\DetailView;
+use kartik\detail\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Tramite */
-
+/*
 $this->title = $model->id_tramite;
 $this->params['breadcrumbs'][] = ['label' => 'Tramites', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
@@ -38,4 +39,103 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+</div>*/
+?>
+
+<?php 
+
+$atributos = [
+    [
+        'group'=>true,
+        'label'=>'Acerca del Trámite',
+        'rowOptions'=>['class'=>'info']
+    ],
+
+    [
+        'columns' => [
+            [
+                'attribute'=>'id_tramite', 
+                'label'=>'Trámite Número',
+                'displayOnly'=>true,
+                'valueColOptions'=>['style'=>'width:30%']
+            ],
+            [
+                'attribute'=>'estado', 
+                'format'=>'raw', 
+                'valueColOptions'=>['style'=>'width:30%'], 
+                'displayOnly'=>true
+            ],
+        ],
+    ],
+
+    [
+        'columns' => [
+            [
+                'attribute'=>'fecha_publicacion',
+                'valueColOptions'=>['style'=>'width:30%'],
+            ],
+            [
+                'attribute'=>'fecha_vencimiento', 
+                'format'=>'raw', 
+                'valueColOptions'=>['style'=>'width:30%'], 
+            ],
+        ],
+    ],
+
+    [
+        'columns' => [
+            [
+                'attribute'=>'titulo',
+                'valueColOptions'=>['style'=>'width:30%'],
+            ],
+            [
+                'attribute'=>'id_tipo_tramite', 
+                'format'=>'raw', 
+                'valueColOptions'=>['style'=>'width:30%'], 
+            ],
+        ],
+    ],
+
+
+   ['columns'=> [[
+        'attribute'=>'contenido',
+        'format'=>'raw',
+        'value'=>'<span class="text-justify"><em>'.$model->contenido.'</em></span>',
+        'type'=>DetailView::INPUT_TEXTAREA, 
+       'valueColOptions'=>['style'=>'max-width: 300px;max-height: 1000px;overflow: auto; word-wrap: break-word;white-space: normal;text-align: justify;margin: 0 0 10px;'],
+       
+   ] ],], 
+
+
+
+
+]
+
+
+?>
+<div class="modal-body">
+
+    
+    <?= DetailView::widget([
+
+    'model'=>$model,
+    'condensed'=>true,
+    'mode'=>'view',
+    'hover' => 'true',
+
+    'mode'=>DetailView::MODE_VIEW,
+    'panel'=>[
+        'heading'=>'Trámite # ' . $model->id_tramite,
+        'type'=>DetailView::TYPE_INFO,
+    ],
+    'attributes' => $atributos
+
+
+
+
+]) ?>
+
+
+
 </div>
+

@@ -9,7 +9,7 @@ use kartik\select2\Select2;
 use kartik\date\DatePicker;
 use kartik\markdown\MarkdownEditor;
 use froala\froalaeditor\FroalaEditorWidget;
-
+use app\models\TipoTramite;
 /* @var $this yii\web\View */
 /* @var $model app\models\Tramite */
 /* @var $form yii\widgets\ActiveForm */
@@ -19,7 +19,7 @@ use froala\froalaeditor\FroalaEditorWidget;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'titulo')->textarea(['placeholder'=>'Ingrese el título del Trámite']) ?>
+    <?= $form->field($model, 'titulo')->textarea(['rows'=>1]) ?>
 
     <?= $form->field($model, 'contenido')->widget(
     FroalaEditorWidget::classname(), 
@@ -52,10 +52,17 @@ use froala\froalaeditor\FroalaEditorWidget;
 	]
 ]); ?>
 
-    <?= $form->field($model, 'id_tipo_tramite')->textInput() ?>
+     <?= $form->field($model, 'id_tipo_tramite')->widget(Select2::classname(), [
+        'data' => TipoTramite::getTipoTramite(),
+        'language' => 'es',
+        'options' => ['placeholder' => 'Seleccione un tipo de trámite ...'],
+        'pluginOptions' => [
+            'allowClear' => true
+    ],
+]); ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Enviar', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

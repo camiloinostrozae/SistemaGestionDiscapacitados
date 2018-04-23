@@ -40,12 +40,12 @@
 
 
             [
-                'label' => 'Tramites',
+                'label' => 'Trámites',
                 'icon' => 'tasks',
                 'url' => '#',
                 'items' => [
                     ['label' => 'Ingresar Trámite', 'icon' => 'file-code-o', 'url' => ['/tramite/index'],],
-                    ['label' => 'Listar Trámites', 'icon' => 'dashboard', 'url' => ['/debug'],],
+                    ['label' => 'Listar Trámites', 'icon' => 'dashboard', 'url' => ['/tramite/listar'],],
                 ],
             ],
 
@@ -55,7 +55,7 @@
                 'icon' => 'user',
                 'url' => '#',
                 'items' => [
-                    ['label' => 'Ingresar Administrador', 'icon' => 'user-plus', 'url' => ['/tramite/index'],],
+                    ['label' => 'Ingresar Administrador', 'icon' => 'user-plus', 'url' => ['/persona/index'],],
                     ['label' => 'Listar Administradores', 'icon' => 'users', 'url' => ['/debug'],],
                 ],
             ],
