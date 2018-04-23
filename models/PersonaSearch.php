@@ -19,7 +19,7 @@ class PersonaSearch extends Persona
     {
         return [
             [['id_persona', 'comuna_id_comuna', 'rol_id_rol'], 'integer'],
-            [['nombre', 'apellido', 'rut', 'fecha_nacimiento', 'email', 'telefono', 'sexo', 'contrasena'], 'safe'],
+            [['nombre', 'apellido', 'rut', 'fecha_nacimiento', 'email', 'telefono', 'sexo', 'contrasena', 'auth_key'], 'safe'],
         ];
     }
 
@@ -71,7 +71,8 @@ class PersonaSearch extends Persona
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'telefono', $this->telefono])
             ->andFilterWhere(['like', 'sexo', $this->sexo])
-            ->andFilterWhere(['like', 'contrasena', $this->contrasena]);
+            ->andFilterWhere(['like', 'contrasena', $this->contrasena])
+            ->andFilterWhere(['like', 'auth_key', $this->auth_key]);
 
         return $dataProvider;
     }

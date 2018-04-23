@@ -51,12 +51,12 @@ class Campana extends \yii\db\ActiveRecord
     {
         return [
             'id_campana' => 'Id Campana',
-            'titulo' => 'Titulo',
+            'titulo' => 'Título',
             'contenido' => 'Contenido',
-            'fecha_publicacion' => 'Fecha Publicacion',
+            'fecha_publicacion' => 'Fecha Publicación',
             'fecha_vencimiento' => 'Fecha Vencimiento',
             'estado' => 'Estado',
-            'id_tipo_campana' => 'Id Tipo Campana',
+            'id_tipo_campana' => 'Tipo de Campaña',
         ];
     }
 
@@ -82,5 +82,23 @@ class Campana extends \yii\db\ActiveRecord
     public function getPersonaIdPersonas()
     {
         return $this->hasMany(Persona::className(), ['id_persona' => 'persona_id_persona'])->viaTable('interactuar_campana', ['campana_id_campana' => 'id_campana']);
+    }
+
+
+    //Función para formatear la fecha ingresada en el form y se inserte en el formato correcto
+
+    public function beforeSave($insert){
+        //Se formatea al formato que guarda MYSQL
+        $time = date("Y-m-d", strtotime($this->fecha_publicacion));
+        $time2 = date("Y-m-d", strtotime($this->fecha_vencimiento));
+        if ($time && $time2) {
+            $this->fecha_publicacion = $time;
+            $this->fecha_vencimiento = $time2;
+            return parent::beforeSave($insert);
+        }
+        else {
+            return false;
+        }
+
     }
 }

@@ -16,6 +16,7 @@ use Yii;
  * @property string $telefono
  * @property string $sexo
  * @property string $contrasena
+ * @property string $auth_key
  * @property int $comuna_id_comuna
  * @property int $rol_id_rol
  *
@@ -27,7 +28,7 @@ use Yii;
  * @property Comuna $comunaIdComuna
  * @property Rol $rolIdRol
  */
-class Persona extends \yii\db\ActiveRecord
+class Persona extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
     /**
      * @inheritdoc
@@ -43,13 +44,14 @@ class Persona extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre', 'apellido', 'rut', 'fecha_nacimiento', 'email', 'telefono', 'sexo', 'contrasena', 'comuna_id_comuna', 'rol_id_rol'], 'required'],
+            [['nombre', 'apellido', 'fecha_nacimiento', 'email', 'telefono', 'sexo', 'contrasena', 'auth_key', 'comuna_id_comuna', 'rol_id_rol'], 'required'],
             [['fecha_nacimiento'], 'safe'],
             [['comuna_id_comuna', 'rol_id_rol'], 'integer'],
             [['nombre', 'contrasena'], 'string', 'max' => 45],
             [['apellido', 'email'], 'string', 'max' => 100],
             [['rut', 'telefono'], 'string', 'max' => 20],
             [['sexo'], 'string', 'max' => 10],
+            [['auth_key'], 'string', 'max' => 32],
             [['comuna_id_comuna'], 'exist', 'skipOnError' => true, 'targetClass' => Comuna::className(), 'targetAttribute' => ['comuna_id_comuna' => 'id_comuna']],
             [['rol_id_rol'], 'exist', 'skipOnError' => true, 'targetClass' => Rol::className(), 'targetAttribute' => ['rol_id_rol' => 'id_rol']],
         ];
@@ -69,7 +71,8 @@ class Persona extends \yii\db\ActiveRecord
             'email' => 'Email',
             'telefono' => 'Telefono',
             'sexo' => 'Sexo',
-            'contrasena' => 'Contrasena',
+            'contrasena' => 'Contraseña',
+            'auth_key' => 'Auth Key',
             'comuna_id_comuna' => 'Comuna Id Comuna',
             'rol_id_rol' => 'Rol Id Rol',
         ];
@@ -129,5 +132,36 @@ class Persona extends \yii\db\ActiveRecord
     public function getRolIdRol()
     {
         return $this->hasOne(Rol::className(), ['id_rol' => 'rol_id_rol']);
+    }
+    
+    
+    public function getAuthKey(){
+        return $this->auth_key;
+    }
+    
+    public function getId(){
+        return $this->id_persona;
+    }
+    
+    public function validateAuthKey($authKey){
+        return $this->auth_key === $authKey;
+    }
+    
+    public static function findIdentity($id){
+        return self::findOne($id);
+    }
+    
+    public static function findIdentityByAccessToken($token,$type=null){
+        throw new \yii\base\NotSupportedException();
+    }
+    
+    //Función para buscar el usuario por email, servirá para el login
+    public static function findByEmail($email){
+        return self::findOne(['email'=>$email]);
+    }
+    
+    //Función para validar la contraseña
+    public function validatePassword($contrasena){
+        return $this->contrasena === $contrasena;
     }
 }

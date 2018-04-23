@@ -1,7 +1,7 @@
 <?php
 
 namespace app\models;
-
+use yii\helpers\ArrayHelper;
 use Yii;
 
 /**
@@ -50,5 +50,12 @@ class TipoCampana extends \yii\db\ActiveRecord
     public function getCampanas()
     {
         return $this->hasMany(Campana::className(), ['id_tipo_campana' => 'id_tipo_campana']);
+    }
+    
+    //Obtengo el tipo de campañas
+    public static function getTipoCampana(){
+        $data = ArrayHelper::map(TipoCampana::find()->all(),'id_tipo_campana','tipo');
+                                
+        return $data;
     }
 }

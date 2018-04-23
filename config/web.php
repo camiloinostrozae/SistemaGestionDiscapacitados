@@ -11,6 +11,8 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+
+    'language' => 'es',
     'components' => [
 
         'view' => [
@@ -21,27 +23,6 @@ $config = [
             ],
         ],
 
-
-
-        'assetManager' => [
-            'bundles' => [
-                'yii\web\JqueryAsset' => [
-                    'sourcePath' => null, 'js' => [],
-                ],
-                'yii\bootstrap\BootstrapAsset' => [
-                    'sourcePath' => null, 'css' => [],
-                ],
-                'yii\bootstrap\BootstrapPluginAsset' => [
-                    'sourcePath' => null, 'js' => [],
-                ],
-                'yii\jui\JuiAsset' => [
-                    'sourcePath' => null, 'css' => [], 'js' => [],
-                ],
-                '\rmrevin\yii\fontawesome\AssetBundle' => [
-                    'sourcePath' => null, 'css' => [],
-                ],
-            ],
-        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => '0KLb6suHNA0H4guA1fmVckHbB_wVlWHB',
@@ -50,8 +31,9 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
+            'identityClass' => 'app\models\Persona',
+            'enableAutoLogin' => false,
+            'enableSession' => true,
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -81,6 +63,38 @@ $config = [
             ],
         ],
         */
+
+        'i18n' => [
+            'translations' => [
+                '*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@app/messages', // if advanced application, set @frontend/messages
+                    'sourceLanguage' => 'es',
+                    'fileMap' => [
+                        //'main' => 'main.php',
+                    ],
+                ],
+            ],
+        ],
+    ],
+
+
+
+
+    'modules' => [
+        /* other modules */
+        'markdown' => [
+            'class' => 'kartik\markdown\Module',
+        ],
+
+        'dynagrid'=> [
+            'class'=>'\kartik\dynagrid\Module',
+            // other module settings
+        ],
+        'gridview'=> [
+            'class'=>'\kartik\grid\Module',
+            // other module settings
+        ],
     ],
     'params' => $params,
 ];
