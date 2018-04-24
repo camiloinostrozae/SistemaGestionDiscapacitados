@@ -73,7 +73,7 @@ class Persona extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'sexo' => 'Sexo',
             'contrasena' => 'Contraseña',
             'auth_key' => 'Auth Key',
-            'comuna_id_comuna' => 'Comuna Id Comuna',
+            'comuna_id_comuna' => 'Comuna',
             'rol_id_rol' => 'Rol Id Rol',
         ];
     }

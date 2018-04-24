@@ -102,11 +102,14 @@ class PersonaController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
+    public function actionDelete($id){
 
-        return $this->redirect(['index']);
+        Yii::$app->getSession()->setFlash('error', [
+
+            'message' => 'Usuario eliminado exitosamente',
+        ]);
+        $this->findModel($id)->delete();
+        return $this->redirect(['listarnodiscapacitados']);
     }
 
     /**
@@ -138,5 +141,18 @@ class PersonaController extends Controller
         return $this->render('createadmin', [
             'model' => $model,
         ]);
+    }
+    
+    //Accion listar para usuario no discapacitado
+    public function actionListarnodiscapacitados(){
+        $searchModel = new PersonaSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->andWhere('persona.rol_id_rol = 3'); //usuario discapacitado = rol 3
+        return $this->render('listarnodisc', [
+
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+
     }
 }
