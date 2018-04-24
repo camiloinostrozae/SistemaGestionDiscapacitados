@@ -51,12 +51,12 @@ class Tramite extends \yii\db\ActiveRecord
     {
         return [
             'id_tramite' => 'Id Tramite',
-            'titulo' => 'Titulo',
+            'titulo' => 'Título',
             'contenido' => 'Contenido',
-            'fecha_publicacion' => 'Fecha Publicacion',
+            'fecha_publicacion' => 'Fecha Publicación',
             'fecha_vencimiento' => 'Fecha Vencimiento',
             'estado' => 'Estado',
-            'id_tipo_tramite' => 'Id Tipo Tramite',
+            'id_tipo_tramite' => 'Tipo de Trámite',
         ];
     }
 
@@ -82,5 +82,20 @@ class Tramite extends \yii\db\ActiveRecord
     public function getTipoTramite()
     {
         return $this->hasOne(TipoTramite::className(), ['id_tipo_tramite' => 'id_tipo_tramite']);
+    }
+    
+     public function beforeSave($insert){
+        //Se formatea al formato que guarda MYSQL
+        $time = date("Y-m-d", strtotime($this->fecha_publicacion));
+        $time2 = date("Y-m-d", strtotime($this->fecha_vencimiento));
+        if ($time && $time2) {
+            $this->fecha_publicacion = $time;
+            $this->fecha_vencimiento = $time2;
+            return parent::beforeSave($insert);
+        }
+        else {
+            return false;
+        }
+
     }
 }

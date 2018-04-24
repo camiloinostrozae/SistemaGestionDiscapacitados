@@ -5,14 +5,12 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Tramite */
 
-$this->title = 'Update Tramite: {nameAttribute}';
-$this->params['breadcrumbs'][] = ['label' => 'Tramites', 'url' => ['index']];
+$this->title = 'Actualizar Trámite: '.$model->titulo;
+$this->params['breadcrumbs'][] = ['label' => 'Trámites', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id_tramite, 'url' => ['view', 'id' => $model->id_tramite]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Actualizar Trámite';
 ?>
 <div class="tramite-update">
-
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,

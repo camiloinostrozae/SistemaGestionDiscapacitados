@@ -1,7 +1,7 @@
 <?php
 
 namespace app\models;
-
+use yii\helpers\ArrayHelper;
 use Yii;
 
 /**
@@ -50,5 +50,12 @@ class TipoTramite extends \yii\db\ActiveRecord
     public function getTramites()
     {
         return $this->hasMany(Tramite::className(), ['id_tipo_tramite' => 'id_tipo_tramite']);
+    }
+    
+    //Obtengo el tipo de tramites
+    public static function getTipoTramite(){
+        $data = ArrayHelper::map(TipoTramite::find()->all(),'id_tipo_tramite','tipo');
+                                
+        return $data;
     }
 }
