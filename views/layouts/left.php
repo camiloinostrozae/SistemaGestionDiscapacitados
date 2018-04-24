@@ -58,7 +58,7 @@
 
                     ['label' => 'Ingresar Administrador', 'icon' => 'user-plus', 'url' => ['/persona/administrador'],],
 
-                    ['label' => 'Listar Administradores', 'icon' => 'users', 'url' => ['/debug'],],
+                    ['label' => 'Listar Administradores', 'icon' => 'users', 'url' => ['/persona/listaradministradores'],],
                 ],
             ],
 

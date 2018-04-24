@@ -9,6 +9,7 @@ class CampanaController extends \yii\web\Controller{
     public function actionIndex() {
         $model = new Campana();
         $model->fecha_publicacion=date('Y-m-d');
+        $model->estado="Vigente";
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             // datos validos recibidos
             Yii::$app->getSession()->setFlash('success', [
