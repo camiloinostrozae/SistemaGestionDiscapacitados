@@ -33,7 +33,6 @@ class CampanaController extends \yii\web\Controller{
         $searchModel = new CampanaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         return $this->render('listar', [
-
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
