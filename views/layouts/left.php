@@ -75,12 +75,11 @@
 
 
             [
-                'label' => 'Usuarios simple',
+                'label' => 'No Discapacitados',
                 'icon' => 'user',
                 'url' => '#',
                 'items' => [
-                    ['label' => 'Ingresar Usuario ', 'icon' => 'user-plus', 'url' => ['/tramite/index'],],
-                    ['label' => 'Listar Usuarios', 'icon' => 'users', 'url' => ['/debug'],],
+                    ['label' => 'Listar Usuarios', 'icon' => 'users', 'url' => ['/persona/listarnodiscapacitados'],],
                 ],
             ],
         ],
