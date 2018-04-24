@@ -56,7 +56,7 @@
                 'url' => '#',
                 'items' => [
 
-                    ['label' => 'Ingresar Administrador', 'icon' => 'user-plus', 'url' => ['/persona/index'],],
+                    ['label' => 'Ingresar Administrador', 'icon' => 'user-plus', 'url' => ['/persona/administrador'],],
 
                     ['label' => 'Listar Administradores', 'icon' => 'users', 'url' => ['/debug'],],
                 ],
