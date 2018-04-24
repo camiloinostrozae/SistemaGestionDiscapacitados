@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+use yii\helpers\ArrayHelper;
 
 use Yii;
 
@@ -63,5 +64,9 @@ class Comuna extends \yii\db\ActiveRecord
     public function getPersonas()
     {
         return $this->hasMany(Persona::className(), ['comuna_id_comuna' => 'id_comuna']);
+    }
+    
+       public static function getComunas(){
+        return ArrayHelper::map(Comuna::find()->all(),'id_comuna','nombre');
     }
 }

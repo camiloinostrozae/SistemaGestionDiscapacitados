@@ -164,4 +164,25 @@ class Persona extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function validatePassword($contrasena){
         return $this->contrasena === $contrasena;
     }
+    
+      public  function generateAuthKey()
+    {
+        return $this->auth_key = Yii::$app->security->generateRandomString();
+    }
+    
+    
+      //Función para formatear la fecha ingresada en el form y se inserte en el formato correcto
+
+    public function beforeSave($insert){
+        //Se formatea al formato que guarda MYSQL
+        $time = date("Y-m-d", strtotime($this->fecha_nacimiento));
+        if ($time) {
+            $this->fecha_nacimiento = $time;
+            return parent::beforeSave($insert);
+        }
+        else {
+            return false;
+        }
+
+    }
 }

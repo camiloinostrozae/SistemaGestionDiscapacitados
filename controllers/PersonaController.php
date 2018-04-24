@@ -124,4 +124,19 @@ class PersonaController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+    
+    
+    
+    //Acción create para administrador
+    public function actionAdministrador(){
+          $model = new Persona();
+           $model->generateAuthKey();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['listarAdmin', 'id' => $model->id_persona]);
+        }
+
+        return $this->render('createadmin', [
+            'model' => $model,
+        ]);
+    }
 }

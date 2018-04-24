@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+use yii\helpers\ArrayHelper;
 
 use Yii;
 
@@ -49,5 +50,12 @@ class Rol extends \yii\db\ActiveRecord
     public function getPersonas()
     {
         return $this->hasMany(Persona::className(), ['rol_id_rol' => 'id_rol']);
+    }
+    
+    
+    public static function getTipoAdministrador(){
+        return ArrayHelper::map(Rol::find()
+                                ->where(['id_rol'=>[1,2]])
+                                ->all(),'id_rol','tipo');
     }
 }
