@@ -71,7 +71,6 @@ use app\models\TipoCampana;
 	]
 ]); ?>
 
-    <?= $form->field($model, 'estado')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'id_tipo_campana')->widget(Select2::classname(), [
         'data' => TipoCampana::getTipoCampana(),
@@ -83,7 +82,7 @@ use app\models\TipoCampana;
 ]); ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Ingresar', ['class' => 'btn btn-primary']) ?>
+        <?= Html::submitButton('Enviar', ['class' => 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

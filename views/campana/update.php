@@ -5,14 +5,12 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Campana */
 
-$this->title = 'Update Campana: {nameAttribute}';
-$this->params['breadcrumbs'][] = ['label' => 'Campanas', 'url' => ['index']];
+$this->title = 'Actualizar Campaña: '.$model->titulo;
+$this->params['breadcrumbs'][] = ['label' => 'Campañas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id_campana, 'url' => ['view', 'id' => $model->id_campana]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Actualizar Campaña';
 ?>
 <div class="campana-update">
-
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,

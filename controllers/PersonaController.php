@@ -155,4 +155,17 @@ class PersonaController extends Controller
         ]);
 
     }
+    
+     //Accion listar para administradores
+    public function actionListaradministradores(){
+        $searchModel = new PersonaSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->andWhere('persona.rol_id_rol = 1 or persona.rol_id_rol = 2'); //usuario discapacitado = rol 3
+        return $this->render('listarAdmin', [
+
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+
+    }
 }

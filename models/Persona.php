@@ -50,7 +50,9 @@ class Persona extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             [['nombre', 'contrasena'], 'string', 'max' => 45],
             [['apellido', 'email'], 'string', 'max' => 100],
             [['rut', 'telefono'], 'string', 'max' => 20],
+            [['rut'], 'validateRut'],
             [['sexo'], 'string', 'max' => 10],
+            [['email'], 'email','message'=>'Formato no Válido'],
             [['auth_key'], 'string', 'max' => 32],
             [['comuna_id_comuna'], 'exist', 'skipOnError' => true, 'targetClass' => Comuna::className(), 'targetAttribute' => ['comuna_id_comuna' => 'id_comuna']],
             [['rol_id_rol'], 'exist', 'skipOnError' => true, 'targetClass' => Rol::className(), 'targetAttribute' => ['rol_id_rol' => 'id_rol']],
@@ -69,12 +71,12 @@ class Persona extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'rut' => 'Rut',
             'fecha_nacimiento' => 'Fecha Nacimiento',
             'email' => 'Email',
-            'telefono' => 'Telefono',
+            'telefono' => 'Teléfono',
             'sexo' => 'Sexo',
             'contrasena' => 'Contraseña',
             'auth_key' => 'Auth Key',
             'comuna_id_comuna' => 'Comuna',
-            'rol_id_rol' => 'Rol Id Rol',
+            'rol_id_rol' => 'Rol',
         ];
     }
 
@@ -184,5 +186,27 @@ class Persona extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             return false;
         }
 
+    }
+    
+    //Función para validar el rut de persona
+    public function validateRut($attribute, $params) {
+        $data = explode('-', $this->rut);
+        $evaluate = strrev($data[0]);
+        $multiply = 2;
+        $store = 0;
+        for ($i = 0; $i < strlen($evaluate); $i++) {
+            $store += $evaluate[$i] * $multiply;
+            $multiply++;
+            if ($multiply > 7)
+                $multiply = 2;
+        }
+        isset($data[1]) ? $verifyCode = strtolower($data[1]) : $verifyCode = '';
+        $result = 11 - ($store % 11);
+        if ($result == 10)
+            $result = 'k';
+        if ($result == 11)
+            $result = 0;
+        if ($verifyCode != $result)
+            $this->addError('rut', 'Rut inválido.');
     }
 }
