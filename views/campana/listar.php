@@ -32,6 +32,7 @@ use yii\bootstrap\Modal;
 ?>
 
 <?php
+$this->title = 'Listar Campañas Educativas';
 $columns=[
 
     ['class'=>'kartik\grid\SerialColumn', 'order'=>DynaGrid::ORDER_FIX_LEFT],

@@ -32,6 +32,7 @@ use yii\bootstrap\Modal;
 ?>
 
 <?php
+$this->title = 'Listar Administradores';
 $columns=[
 
     ['class'=>'kartik\grid\SerialColumn', 'order'=>DynaGrid::ORDER_FIX_LEFT],
@@ -60,17 +61,6 @@ $columns=[
     ],
 
     [
-        'attribute'=>'fecha_nacimiento',
-        'filterType'=>GridView::FILTER_DATE,
-        'format'=>'raw',
-        'width'=>'170px',
-        'contentOptions'=>['style'=>'max-width: 100px;'],
-        'filterWidgetOptions'=>[
-            'pluginOptions'=>['format'=>'dd-mm-yyyy']
-        ],
-    ],
-
-    [
         'attribute'=>'email',
         'pageSummary'=>'Page Total',
         'vAlign'=>'middle',
@@ -79,21 +69,15 @@ $columns=[
     ],
     
     [
-        'attribute'=>'telefono',
-        'pageSummary'=>'Page Total',
-        'vAlign'=>'middle',
-        'order'=>DynaGrid::ORDER_FIX_LEFT,
-        'contentOptions'=>['style'=>'max-width: 300px;max-height: 150px;overflow: auto; word-wrap: break-word;white-space: nowrap;'],
-    ],
-    
-    [
-        'attribute'=>'sexo',
-        'pageSummary'=>'Page Total',
-        'vAlign'=>'middle',
-        'order'=>DynaGrid::ORDER_FIX_LEFT,
-        'contentOptions'=>['style'=>'max-width: 300px;max-height: 150px;overflow: auto; word-wrap: break-word;white-space: nowrap;'],
-    ],
+                'attribute' => 'rol_id_rol',
+                'value' => function($model){
+                    return $model->rolIdRol->tipo;
+                },
+            ],
 
+    
+  
+   
 
    /* [
         'class'=>'kartik\grid\BooleanColumn',
