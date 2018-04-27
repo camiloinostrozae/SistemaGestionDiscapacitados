@@ -41,8 +41,10 @@ class PersonaSearch extends Persona
      */
     public function search($params)
     {
+        
+        
         $query = Persona::find();
-
+      
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
