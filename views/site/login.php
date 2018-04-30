@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
@@ -6,6 +6,7 @@ header("Content-Type: text/html; charset=utf-8");
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \common\models\LoginForm */
+
 
 $this->title = 'Inicio de Sesión';
 
@@ -42,7 +43,7 @@ $fieldOptions2 = [
             <?= $form
     ->field($model, 'contrasena', $fieldOptions2)
     ->label(false)
-    ->passwordInput(['placeholder' => $model->getAttributeLabel('Contraseña')]) ?>
+    ->passwordInput(['placeholder' => $model->getAttributeLabel('Clave')]) ?>
 
             <div class="row">
                 <div class="col-xs-6">

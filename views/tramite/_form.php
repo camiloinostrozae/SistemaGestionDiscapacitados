@@ -19,9 +19,10 @@ use app\models\TipoTramite;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'titulo')->textarea(['rows'=>1]) ?>
+    <?= $form->field($model, 'titulo')->textarea(['rows'=>1,'placeholder'=>'Ingrese el título del trámite' ]) ?>
+    <?= $form->field($model, 'contenido')->textarea(['rows'=>10, 'placeholder'=>'Ingrese el contenido del trámite']) ?>
 
-    <?= $form->field($model, 'contenido')->widget(
+    <!--$form->field($model, 'contenido')->widget(
     FroalaEditorWidget::classname(), 
     [
         'name' => 'content',
@@ -38,14 +39,14 @@ use app\models\TipoTramite;
             'pluginsEnabled'=> ['lists']
         ]
     ]
-); ?>
+); -->
     
         <?= $form->field($model, 'fecha_vencimiento')->widget(
     DatePicker::classname(),
     [
 	'name' => 'check_issue_date', 
 	'value' => date('d-M-Y', strtotime('+2 days')),
-	'options' => ['placeholder' => 'Seleccione una fecha ...'],
+	'options' => ['placeholder' => 'Seleccione una fecha'],
 	'pluginOptions' => [
 		'format' => 'dd-mm-yyyy',
 		'todayHighlight' => true
@@ -55,7 +56,7 @@ use app\models\TipoTramite;
      <?= $form->field($model, 'id_tipo_tramite')->widget(Select2::classname(), [
         'data' => TipoTramite::getTipoTramite(),
         'language' => 'es',
-        'options' => ['placeholder' => 'Seleccione un tipo de trámite ...'],
+        'options' => ['placeholder' => 'Seleccione un tipo de trámite'],
         'pluginOptions' => [
             'allowClear' => true
     ],

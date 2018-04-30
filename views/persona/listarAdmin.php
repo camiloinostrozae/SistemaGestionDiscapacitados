@@ -52,13 +52,6 @@ $columns=[
         'contentOptions'=>['style'=>'max-width: 300px;max-height: 150px;overflow: auto; word-wrap: break-word;white-space: nowrap;'],
     ],
     
-    [
-        'attribute'=>'rut',
-        'pageSummary'=>'Page Total',
-        'vAlign'=>'middle',
-        'order'=>DynaGrid::ORDER_FIX_LEFT,
-        'contentOptions'=>['style'=>'max-width: 300px;max-height: 150px;overflow: auto; word-wrap: break-word;white-space: nowrap;'],
-    ],
 
     [
         'attribute'=>'email',
@@ -72,6 +65,12 @@ $columns=[
                 'attribute' => 'rol_id_rol',
                 'value' => function($model){
                     return $model->rolIdRol->tipo;
+                },
+            ],
+     [
+                'attribute' => 'comuna_id_comuna',
+                'value' => function($model){
+                    return $model->comunaIdComuna->nombre;
                 },
             ],
 
@@ -108,7 +107,8 @@ $columns=[
 
                                [  
                                    'title' => Yii::t('yii', 'update'),
-                                   'data-method'=>'post'
+                                   'data-method'=>'post',
+                                    
                                ]);
             },
             'view' => function ($url, $model) {
@@ -144,7 +144,7 @@ $columns=[
         'floatHeader'=>true,
         'pjax'=>true,
         'responsiveWrap'=>false,
-        'panel'=>['heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-tasks"></i>&nbsp;Personas</h3>'],
+        'panel'=>['heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-tasks"></i>&nbsp;Administradores</h3>'],
     ],
     'options'=>['id'=>'dynagrid-1'] // a unique identifier is important
 ]) ?>

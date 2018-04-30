@@ -36,11 +36,12 @@ use app\models\TipoCampana;
         'fieldConfig' => ['autoPlaceholder'=>false]
     ]);
     ?>
-    <?= $form->field($model, 'titulo')->textarea(['placeholder'=>'Ingrese el título de la campaña']) ?>
+    <?= $form->field($model, 'titulo')->textarea(['placeholder'=>'Ingrese el título de la campaña', 'rows'=>'1']) ?>
+    
 
+    <?= $form->field($model, 'contenido')->textarea(['rows'=>10, 'placeholder'=>'Ingrese el contenido de la campaña']) ?>
 
-
-    <?= $form->field($model, 'contenido')->widget(
+    <!--$form->field($model, 'contenido')->widget(
     FroalaEditorWidget::classname(), 
     [
         'name' => 'content',
@@ -57,14 +58,14 @@ use app\models\TipoCampana;
             'pluginsEnabled'=> ['lists']
         ]
     ]
-); ?>
+);-->
 
     <?= $form->field($model, 'fecha_vencimiento')->widget(
     DatePicker::classname(),
     [
 	'name' => 'check_issue_date', 
 	'value' => date('d-M-Y', strtotime('+2 days')),
-	'options' => ['placeholder' => 'Seleccione una fecha ...'],
+	'options' => ['placeholder' => 'Seleccione una fecha'],
 	'pluginOptions' => [
 		'format' => 'dd-mm-yyyy',
 		'todayHighlight' => true
@@ -75,7 +76,7 @@ use app\models\TipoCampana;
     <?= $form->field($model, 'id_tipo_campana')->widget(Select2::classname(), [
         'data' => TipoCampana::getTipoCampana(),
         'language' => 'es',
-        'options' => ['placeholder' => 'Seleccione un tipo de campaña ...'],
+        'options' => ['placeholder' => 'Seleccione un tipo de campaña'],
         'pluginOptions' => [
             'allowClear' => true
     ],

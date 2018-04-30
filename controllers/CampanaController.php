@@ -65,7 +65,7 @@ class CampanaController extends \yii\web\Controller{
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
-            Yii::$app->getSession()->setFlash('success', [
+            Yii::$app->getSession()->setFlash('info', [
 
                 'message' => 'Campaña actualizada exitosamente',
             ]);

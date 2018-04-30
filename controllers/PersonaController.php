@@ -87,14 +87,39 @@ class PersonaController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_persona]);
-        }
+            Yii::$app->getSession()->setFlash('info', [
 
-        return $this->render('update', [
+                'message' => 'Persona actualizada exitosamente',
+            ]);
+            if($model->rol_id_rol ==1 ||$model->rol_id_rol ==2){
+            return $this->redirect(['listaradministradores', 'id' => $model->id_persona]);
+            }else{
+                if($model->rol_id_rol ==4){
+                return $this->redirect(['listardiscapacitados', 'id' => $model->id_persona]);
+                }else{
+                    return $this->redirect(['listarnodiscapacitados', 'id' => $model->id_persona]);
+                }
+            }
+        }else{
+            if($model->rol_id_rol ==1 ||$model->rol_id_rol ==2 ){
+        
+            return $this->render('updateAdmin', [
             'model' => $model,
         ]);
+            }else{
+                if($model->rol_id_rol ==4 ){
+                return $this->render('updateDisc', [
+                'model' => $model,
+        ]);
+                }else{
+                    return $this->render('updateNodisc', [
+                    'model' => $model,
+        ]);
+                }
+            }
     }
-
+    }
+    
     /**
      * Deletes an existing Persona model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -103,14 +128,25 @@ class PersonaController extends Controller
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id){
+        
+        $model = $this->findModel($id);
 
         Yii::$app->getSession()->setFlash('error', [
 
             'message' => 'Usuario eliminado exitosamente',
         ]);
         $this->findModel($id)->delete();
-        return $this->redirect(['listarnodiscapacitados']);
+        if($model->rol_id_rol ==1 ||$model->rol_id_rol ==2 ){
+        return $this->redirect(['listaradministradores']);
+        }else{
+            if($model->rol_id_rol ==4){
+            return $this->redirect(['listardiscapacitados']);
+            }else{
+            return $this->redirect(['listarnodiscapacitados']);
+        }   
+        }
     }
+    
 
     /**
      * Finds the Persona model based on its primary key value.
@@ -135,10 +171,32 @@ class PersonaController extends Controller
           $model = new Persona();
            $model->generateAuthKey();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['listarAdmin', 'id' => $model->id_persona]);
+            Yii::$app->getSession()->setFlash('success', [
+
+                'message' => 'Administrador ingresado exitosamente',
+            ]);
+            return $this->redirect(['listaradministradores', 'id' => $model->id_persona]);
         }
 
         return $this->render('createadmin', [
+            'model' => $model,
+        ]);
+    }
+    
+    //Acción create para personas discapacitadas
+    public function actionDiscapacitado(){
+          $model = new Persona();
+           $model->generateAuthKey();
+           $model->rol_id_rol=4;    
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->getSession()->setFlash('success', [
+
+                'message' => 'Usuario ingresado exitosamente',
+            ]);
+            return $this->redirect(['listardiscapacitados', 'id' => $model->id_persona]);
+        }
+
+        return $this->render('createDisc', [
             'model' => $model,
         ]);
     }
@@ -147,8 +205,21 @@ class PersonaController extends Controller
     public function actionListarnodiscapacitados(){
         $searchModel = new PersonaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->query->andWhere('persona.rol_id_rol = 3'); //usuario discapacitado = rol 3
+        $dataProvider->query->andWhere('persona.rol_id_rol = 3'); //usuario no discapacitado = rol 3
         return $this->render('listarnodisc', [
+
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+
+    }
+    
+    //Accion listar para discapacitados
+    public function actionListardiscapacitados(){
+        $searchModel = new PersonaSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->andWhere('persona.rol_id_rol = 4'); //usuario discapacitado = rol 4
+        return $this->render('listardisc', [
 
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

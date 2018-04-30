@@ -5,6 +5,9 @@ use yii\helpers\Html;
 /* @var $content string */
 ?>
 
+
+
+ $session = Yii::$app->session->getId(); 
 <header class="main-header">
 
     <?= Html::a('<span class="logo-mini">APP</span><span class="logo-lg">' . "Inicio" . '</span>', Yii::$app->homeUrl, ['class' => 'logo']) ?>
@@ -239,17 +242,15 @@ use yii\helpers\Html;
                                  alt="User Image"/>
 
                             <p>
-                                Nombre Apellido
+                                
+                               
                                 <small>Administrador</small>
                             </p>
                         </li>
                         
                         <!-- Menu Footer-->
                         <li class="user-footer">
-                            <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Perfil</a>
-                            </div>
-                            <div class="pull-right">
+                            <div class="pull-left" style="text-align=center;">
                                 <?= Html::a(
                                     'Cerrar Sesión',
                                     ['/site/logout'],

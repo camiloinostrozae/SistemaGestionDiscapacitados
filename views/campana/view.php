@@ -2,49 +2,6 @@
 
 use yii\helpers\Html;
 use kartik\detail\DetailView;
-//use yii\widgets\DetailView;
-
-/* @var $this yii\web\View */
-/* @var $model app\models\Vendedor
-
-
- /* <?= DetailView::widget([
-
-        'attributes' => [
-            'id_campana',
-            'titulo',
-            'contenido',
-            'fecha_publicacion',
-            'fecha_vencimiento',
-            'estado',
-        ],
-    ]) ?>
-    
-    
-    
-   
-
-    <?= DetailView::widget([
-    'model' => $model,
-    'attributes' => [
-        'titulo',
-        [
-            'attribute'=>'contenido',
-            //'value'=>'<span class="text-justify"><em>'.$model->contenido.'</em></span>',
-            'options'=>['row'=>5],
-            'contentOptions'=>['style'=>'max-width: 300px;max-height: 1000px;overflow: auto; word-wrap: break-word;white-space: normal;text-align: justify;height: 300px;margin: 0 0 10px;'],
-        ],
-        'fecha_publicacion',
-
-
-    ],
-
-]) ?> 
-    
-    
-    
-    
-    */
 
 
 ?>
@@ -96,11 +53,7 @@ $atributos = [
                 'attribute'=>'titulo',
                 'valueColOptions'=>['style'=>'width:30%'],
             ],
-            [
-                'attribute'=>'id_tipo_campana', 
-                'format'=>'raw', 
-                'valueColOptions'=>['style'=>'width:30%'], 
-            ],
+           
         ],
     ],
 
