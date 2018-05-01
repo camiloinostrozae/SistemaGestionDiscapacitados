@@ -243,8 +243,8 @@ use yii\helpers\Html;
 
                             <p>
                                 
-                               
-                                <small>Administrador</small>
+                               Administrador
+                                <!--<small>?= //Yii::$app->user->identity->email; ?></small>-->
                             </p>
                         </li>
                         
@@ -261,10 +261,7 @@ use yii\helpers\Html;
                     </ul>
                 </li>
 
-                <!-- User Account: style can be found in dropdown.less -->
-                <li>
-                    <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                </li>
+               
             </ul>
         </div>
     </nav>
