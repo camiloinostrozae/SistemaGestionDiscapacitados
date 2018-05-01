@@ -26,6 +26,10 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => '0KLb6suHNA0H4guA1fmVckHbB_wVlWHB',
+            //Para habilitar JSON dentro del servicio WEB
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ],
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -55,14 +59,30 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
+        
+        'response' => [
+            
+            'formatters' => [
+              \yii\web\Response::FORMAT_JSON => [
+             'class' => 'yii\web\JsonResponseFormatter',
+             'prettyPrint' => YII_DEBUG, // use "pretty" output in debug mode
+             
+        ],
+    ],
+        ],
+        
         'urlManager' => [
             'enablePrettyUrl' => true,
+            //'enableStrictParsing' => true,
             'showScriptName' => false,
             'rules' => [
+                ['class'=>'yii\rest\UrlRule','controller'=>'service', ],
+                
+               
+                '<controller:\w+>/<action:\w+>/<user:[^/]+>/<password:\w+>' => '<controller>/<action>',
             ],
         ],
-        */
+        
 
         'i18n' => [
             'translations' => [
