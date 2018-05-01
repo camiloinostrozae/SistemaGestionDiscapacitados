@@ -8,7 +8,7 @@ use yii\bootstrap\ButtonDropdown;
 use yii\bootstrap\ActiveForm;
 use kartik\dynagrid\DynaGrid;
 use kartik\grid\GridView;
-use app\models\Tramite;
+use app\models\Persona;
 use kartik\growl\Growl;
 use kartik\alert\AlertBlock;
 use yii\widgets\Pjax;
@@ -32,12 +32,12 @@ use yii\bootstrap\Modal;
 ?>
 
 <?php
-$this->title = 'Listar Trámites';
+$this->title = 'Listar Discapacitados Visuales';
 $columns=[
 
     ['class'=>'kartik\grid\SerialColumn', 'order'=>DynaGrid::ORDER_FIX_LEFT],
     [
-        'attribute'=>'titulo',
+        'attribute'=>'nombre',
         'pageSummary'=>'Page Total',
         'vAlign'=>'middle',
         'order'=>DynaGrid::ORDER_FIX_LEFT,
@@ -45,31 +45,38 @@ $columns=[
     ],
 
     [
-        'attribute'=>'contenido',
+        'attribute'=>'apellido',
         'pageSummary'=>'Page Total',
         'vAlign'=>'middle',
         'order'=>DynaGrid::ORDER_FIX_LEFT,
         'contentOptions'=>['style'=>'max-width: 300px;max-height: 150px;overflow: auto; word-wrap: break-word;white-space: nowrap;'],
     ],
     
-     [
-                'attribute' => 'id_tipo_tramite',
-                'value' => function($model){
-                    return $model->tipoTramite->tipo;
-                },
-        ],
 
     [
-        'attribute'=>'fecha_publicacion',
-        'filterType'=>GridView::FILTER_DATE,
-        'format'=>'raw',
-        'width'=>'170px',
-        'contentOptions'=>['style'=>'max-width: 100px;'],
-        'filterWidgetOptions'=>[
-            'pluginOptions'=>['format'=>'dd-mm-yyyy']
-        ],
+        'attribute'=>'email',
+        'pageSummary'=>'Page Total',
+        'vAlign'=>'middle',
+        'order'=>DynaGrid::ORDER_FIX_LEFT,
+        'contentOptions'=>['style'=>'max-width: 300px;max-height: 150px;overflow: auto; word-wrap: break-word;white-space: nowrap;'],
     ],
+    
+    [
+                'attribute' => 'rol_id_rol',
+                'value' => function($model){
+                    return $model->rolIdRol->tipo;
+                },
+            ],
+     [
+                'attribute' => 'comuna_id_comuna',
+                'value' => function($model){
+                    return $model->comunaIdComuna->nombre;
+                },
+            ],
 
+    
+  
+   
 
    /* [
         'class'=>'kartik\grid\BooleanColumn',
@@ -89,7 +96,7 @@ $columns=[
 
                                [  
                                    'title' => Yii::t('yii', 'delete'),
-                                   'data-confirm' => "¿Esta seguro de eliminar este trámite?",
+                                   'data-confirm' => "¿Esta seguro de eliminar a esta persona discapacitada?",
                                    'data-method' => 'post',
                                    'data-pjax' => 0
                                ]);
@@ -100,7 +107,8 @@ $columns=[
 
                                [  
                                    'title' => Yii::t('yii', 'update'),
-                                   'data-method'=>'post'
+                                   'data-method'=>'post',
+                                
                                ]);
             },
             'view' => function ($url, $model) {
@@ -108,7 +116,7 @@ $columns=[
 
                                ['data-toggle'=>"modal",
                                 'data-target'=>"#myModal",
-                                'data-title'=>"Detalle del Trámite",]);
+                                'data-title'=>"Detalle del Discapacitado",]);
             }
 
         ],
@@ -122,7 +130,7 @@ $columns=[
 ];
 ?>
 
-<div class="tramite-view">
+<div class="persona-view">
 
     <?= DynaGrid::widget([
     'columns'=>$columns,
@@ -136,7 +144,7 @@ $columns=[
         'floatHeader'=>true,
         'pjax'=>true,
         'responsiveWrap'=>false,
-        'panel'=>['heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-tasks"></i>&nbsp;Trámites</h3>'],
+        'panel'=>['heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-tasks"></i>&nbsp;Discapacitados Visuales</h3>'],
     ],
     'options'=>['id'=>'dynagrid-1'] // a unique identifier is important
 ]) ?>

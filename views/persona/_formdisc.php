@@ -55,15 +55,6 @@ use app\models\Comuna;
     <?= $form->field($model, 'sexo')->dropDownList(['Masculino' => 'Masculino', 'Femenino' => 'Femenino'],['prompt'=>'Seleccione el Sexo'])?>
     <?= $form->field($model, 'contrasena')->passwordInput(['placeholder'=>'Ingrese la contraseña']) ?>
 
-    <?= $form->field($model, 'rol_id_rol')->widget(Select2::classname(), [
-        'data' => Rol::getTipoAdministrador(),
-        'language' => 'es',
-        'options' => ['placeholder' => 'Seleccione un tipo de administrador'],
-        'pluginOptions' => [
-            'allowClear' => true
-    ],
-]); ?>
-    
         <?= $form->field($model, 'comuna_id_comuna')->widget(Select2::classname(), [
         'data' => Comuna::getComunas(),
         'language' => 'es',

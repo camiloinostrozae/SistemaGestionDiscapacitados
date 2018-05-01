@@ -44,12 +44,12 @@ class Persona extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['nombre', 'apellido', 'fecha_nacimiento', 'email', 'telefono', 'sexo', 'contrasena', 'auth_key', 'comuna_id_comuna', 'rol_id_rol'], 'required'],
+            [['nombre', 'apellido', 'fecha_nacimiento', 'email', 'rut' ,'telefono', 'sexo', 'contrasena', 'auth_key', 'comuna_id_comuna', 'rol_id_rol'], 'required'],
             [['fecha_nacimiento'], 'safe'],
             [['comuna_id_comuna', 'rol_id_rol'], 'integer'],
             [['nombre', 'contrasena'], 'string', 'max' => 45],
             [['apellido', 'email'], 'string', 'max' => 100],
-            [['rut', 'telefono'], 'string', 'max' => 20],
+            [['telefono'], 'string', 'max' => 20],
             [['rut'], 'validateRut'],
             [['sexo'], 'string', 'max' => 10],
             [['email'], 'email','message'=>'Formato no Válido'],
@@ -189,24 +189,35 @@ class Persona extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     }
     
     //Función para validar el rut de persona
-    public function validateRut($attribute, $params) {
-        $data = explode('-', $this->rut);
-        $evaluate = strrev($data[0]);
-        $multiply = 2;
-        $store = 0;
-        for ($i = 0; $i < strlen($evaluate); $i++) {
-            $store += $evaluate[$i] * $multiply;
-            $multiply++;
-            if ($multiply > 7)
-                $multiply = 2;
-        }
-        isset($data[1]) ? $verifyCode = strtolower($data[1]) : $verifyCode = '';
-        $result = 11 - ($store % 11);
-        if ($result == 10)
-            $result = 'k';
-        if ($result == 11)
-            $result = 0;
-        if ($verifyCode != $result)
-            $this->addError('rut', 'Rut inválido.');
-    }
-}
+    public function validateRut($attribute,$params){
+        $rut=$this->rut;
+        if(strpos($rut,"-")===false){
+            $this->addError($attribute, 'El RUT ingresado no es válido, Ingrese formato XXXXXXXX-Y');
+        }else{
+            if(strpos($rut,".")!=false){
+                $this->addError($attribute, 'El RUT ingresado no es válido, Ingrese formato XXXXXXXX-Y');
+            }else{
+            $data = explode('-', $rut);
+            if(is_numeric($data[0])){
+            $evaluate = strrev($data[0]);
+            $multiply = 2;
+            $store = 0;
+            for ($i = 0; $i < strlen($evaluate); $i++) {
+                $store += $evaluate[$i] * $multiply;
+                $multiply++;
+                if ($multiply > 7)
+                    $multiply = 2;
+            }
+            isset($data[1]) ? $verifyCode = strtolower($data[1]) : $verifyCode = '';
+            $result = 11 - ($store % 11);
+            if ($result == 10)
+                $result = 'k';
+            if ($result == 11)
+                $result = 0;
+            if ($verifyCode != $result)
+                $this->addError('rut', 'El RUT ingresado no es válido, Ingrese formato XXXXXXXX-Y');
+    }else{
+              $this->addError($attribute, 'El RUT ingresado no es válido, Ingrese formato XXXXXXXX-Y');  
+            }
+    }}
+}}

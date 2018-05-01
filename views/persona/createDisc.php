@@ -2,15 +2,16 @@
 
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Campana */
 
-$this->title = 'Registrar Administrador';
+/* @var $this yii\web\View */
+/* @var $model app\models\Persona */
+
+$this->title = 'Ingresar Discapacitado Visual';
 
 ?>
 <div class="persona-create">
 
-    <?= $this->render('_formadmin', [
+    <?= $this->render('_formdisc', [
         'model' => $model,
     ]) ?>
 

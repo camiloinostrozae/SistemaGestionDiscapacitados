@@ -32,8 +32,7 @@ use yii\bootstrap\Modal;
 ?>
 
 <?php
-$this->title = 'Listar Usuarios no Discapacitados';
-
+$this->title = 'Listar No Discapacitados';
 $columns=[
 
     ['class'=>'kartik\grid\SerialColumn', 'order'=>DynaGrid::ORDER_FIX_LEFT],
@@ -53,24 +52,6 @@ $columns=[
         'contentOptions'=>['style'=>'max-width: 300px;max-height: 150px;overflow: auto; word-wrap: break-word;white-space: nowrap;'],
     ],
     
-    [
-        'attribute'=>'rut',
-        'pageSummary'=>'Page Total',
-        'vAlign'=>'middle',
-        'order'=>DynaGrid::ORDER_FIX_LEFT,
-        'contentOptions'=>['style'=>'max-width: 300px;max-height: 150px;overflow: auto; word-wrap: break-word;white-space: nowrap;'],
-    ],
-
-    [
-        'attribute'=>'fecha_nacimiento',
-        'filterType'=>GridView::FILTER_DATE,
-        'format'=>'raw',
-        'width'=>'170px',
-        'contentOptions'=>['style'=>'max-width: 100px;'],
-        'filterWidgetOptions'=>[
-            'pluginOptions'=>['format'=>'dd-mm-yyyy']
-        ],
-    ],
 
     [
         'attribute'=>'email',
@@ -81,21 +62,21 @@ $columns=[
     ],
     
     [
-        'attribute'=>'telefono',
-        'pageSummary'=>'Page Total',
-        'vAlign'=>'middle',
-        'order'=>DynaGrid::ORDER_FIX_LEFT,
-        'contentOptions'=>['style'=>'max-width: 300px;max-height: 150px;overflow: auto; word-wrap: break-word;white-space: nowrap;'],
-    ],
-    
-    [
-        'attribute'=>'sexo',
-        'pageSummary'=>'Page Total',
-        'vAlign'=>'middle',
-        'order'=>DynaGrid::ORDER_FIX_LEFT,
-        'contentOptions'=>['style'=>'max-width: 300px;max-height: 150px;overflow: auto; word-wrap: break-word;white-space: nowrap;'],
-    ],
+                'attribute' => 'rol_id_rol',
+                'value' => function($model){
+                    return $model->rolIdRol->tipo;
+                },
+            ],
+     [
+                'attribute' => 'comuna_id_comuna',
+                'value' => function($model){
+                    return $model->comunaIdComuna->nombre;
+                },
+            ],
 
+    
+  
+   
 
    /* [
         'class'=>'kartik\grid\BooleanColumn',
@@ -115,7 +96,7 @@ $columns=[
 
                                [  
                                    'title' => Yii::t('yii', 'delete'),
-                                   'data-confirm' => "¿Esta seguro de eliminar a esta persona?",
+                                   'data-confirm' => "¿Esta seguro de eliminar a este usuario?",
                                    'data-method' => 'post',
                                    'data-pjax' => 0
                                ]);
@@ -126,7 +107,8 @@ $columns=[
 
                                [  
                                    'title' => Yii::t('yii', 'update'),
-                                   'data-method'=>'post'
+                                   'data-method'=>'post',
+                                
                                ]);
             },
             'view' => function ($url, $model) {
@@ -134,7 +116,7 @@ $columns=[
 
                                ['data-toggle'=>"modal",
                                 'data-target'=>"#myModal",
-                                'data-title'=>"Detalle de la Persona",]);
+                                'data-title'=>"Detalle del Usuario",]);
             }
 
         ],
@@ -162,7 +144,7 @@ $columns=[
         'floatHeader'=>true,
         'pjax'=>true,
         'responsiveWrap'=>false,
-        'panel'=>['heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-tasks"></i>&nbsp;Personas</h3>'],
+        'panel'=>['heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-tasks"></i>&nbsp;No Discapacitados</h3>'],
     ],
     'options'=>['id'=>'dynagrid-1'] // a unique identifier is important
 ]) ?>

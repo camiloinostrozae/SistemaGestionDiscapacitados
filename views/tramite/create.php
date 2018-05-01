@@ -7,8 +7,6 @@ use yii\helpers\Html;
 /* @var $model app\models\Tramite */
 
 $this->title = 'Ingresar Trámite';
-$this->params['breadcrumbs'][] = ['label' => 'Trámites', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tramite-create">
 

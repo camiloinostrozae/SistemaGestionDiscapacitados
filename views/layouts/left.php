@@ -68,8 +68,8 @@
                 'icon' => 'user',
                 'url' => '#',
                 'items' => [
-                    ['label' => 'Ingresar Usuario ', 'icon' => 'user-plus', 'url' => ['/tramite/index'],],
-                    ['label' => 'Listar Usuarios', 'icon' => 'users', 'url' => ['/debug'],],
+                    ['label' => 'Ingresar Usuario ', 'icon' => 'user-plus', 'url' => ['/persona/discapacitado'],],
+                    ['label' => 'Listar Usuarios', 'icon' => 'users', 'url' => ['/persona/listardiscapacitados'],],
                 ],
             ],
 

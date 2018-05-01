@@ -88,11 +88,7 @@ $atributos = [
                 'attribute'=>'titulo',
                 'valueColOptions'=>['style'=>'width:30%'],
             ],
-            [
-                'attribute'=>'id_tipo_tramite', 
-                'format'=>'raw', 
-                'valueColOptions'=>['style'=>'width:30%'], 
-            ],
+            
         ],
     ],
 

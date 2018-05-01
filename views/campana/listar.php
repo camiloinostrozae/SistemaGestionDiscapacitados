@@ -51,6 +51,14 @@ $columns=[
         'order'=>DynaGrid::ORDER_FIX_LEFT,
         'contentOptions'=>['style'=>'max-width: 300px;max-height: 150px;overflow: auto; word-wrap: break-word;white-space: nowrap;'],
     ],
+    
+      [
+                'attribute' => 'id_tipo_campana',
+                'value' => function($model){
+                    return $model->tipoCampana->tipo;
+                },
+        ],
+
 
     [
         'attribute'=>'fecha_publicacion',
@@ -63,22 +71,6 @@ $columns=[
         ],
     ],
 
-    [
-        'attribute'=>'fecha_vencimiento',
-        'filterType'=>GridView::FILTER_DATE,
-        'format'=>'raw',
-        'width'=>'170px',
-        'filterWidgetOptions'=>[
-            'pluginOptions'=>['format'=>'dd-mm-yyyy']
-        ],
-    ],
-
-    [
-        'attribute'=>'estado',
-        'pageSummary'=>'Page Total',
-        'width'=>'100px',
-        'order'=>DynaGrid::ORDER_FIX_LEFT
-    ],
 
    /* [
         'class'=>'kartik\grid\BooleanColumn',
