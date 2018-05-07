@@ -98,4 +98,26 @@ class Tramite extends \yii\db\ActiveRecord
         }
 
     }
+    
+    public function serviceListarTramites(){
+        
+         /*  $tramites = Tramite::find()->all();
+        if($tramites){
+            return $tramites;
+        }else{
+            return false;
+        }
+       */ 
+        $tramites = (new \yii\db\Query())
+            ->from('tramite')
+            ->innerJoin('tipo_tramite','tramite.id_tipo_tramite = tipo_tramite.id_tipo_tramite')
+             ->all();
+        if($tramites){
+             return $tramites;
+        }else{
+            return false;
+        }
+       
+        
+    }
 }

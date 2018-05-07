@@ -101,4 +101,21 @@ class Campana extends \yii\db\ActiveRecord
         }
 
     }
+    
+    
+    public function serviceListarCampanas(){
+        /* $campana = Campana::find()->joinWith('tipoCampana')->all();
+        if($campana){
+            return $campana;
+        }else{
+            return false;
+        }*/
+        
+        $campanas = (new \yii\db\Query())
+            ->from('campana')
+            ->innerJoin('tipo_campana','campana.id_tipo_campana = tipo_campana.id_tipo_campana')
+             ->all();
+        return $campanas;
+        
+    }
 }

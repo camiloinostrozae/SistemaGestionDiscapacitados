@@ -76,10 +76,16 @@ $config = [
             //'enableStrictParsing' => true,
             'showScriptName' => false,
             'rules' => [
-                ['class'=>'yii\rest\UrlRule','controller'=>'service', ],
-                
-               
-                '<controller:\w+>/<action:\w+>/<user:[^/]+>/<password:\w+>' => '<controller>/<action>',
+                ['class'=>'yii\rest\UrlRule','controller'=>'service',],
+                ['class'=>'yii\rest\UrlRule','controller'=>'service-campana',],
+                ['class'=>'yii\rest\UrlRule','pluralize' => 'false','controller'=>'service-comuna',],
+                ['class'=>'yii\rest\UrlRule','pluralize' => 'false','controller'=>'service-region',],
+                'services/service-comuna/get-comuna/<region_id_region:\d+>' => 'services/service-comuna/get-comuna',
+                 'services/service-comuna/listar-comunas' => 'services/service-comuna/listar-comunas',
+                'services/service-region/get-region/<id:\d+>' => 'services/service-region/get-region',
+                'services/service-campana/listar-campanas' => 'services/service-campana/listar-campanas',
+                'services/service-tramite/listar-tramites' => 'services/service-tramite/listar-tramites',
+               '<controller:\w+>/<action:\w+>/<user:[^/]+>/<password:\w+>' => '<controller>/<action>',
             ],
         ],
         
