@@ -54,7 +54,7 @@ class Tramite extends \yii\db\ActiveRecord
             'titulo' => 'Título',
             'contenido' => 'Contenido',
             'fecha_publicacion' => 'Fecha Publicación',
-            'fecha_vencimiento' => 'Fecha Vencimiento',
+            'fecha_vencimiento' => 'Fecha Término',
             'estado' => 'Estado',
             'id_tipo_tramite' => 'Tipo de Trámite',
         ];

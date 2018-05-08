@@ -232,14 +232,13 @@ use yii\helpers\Html;
 
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="images/qwerty.png" class="user-image" alt="User Image"/>
+                        <img src="<?= $directoryAsset ?>/img/avatar5.png" class="user-image" alt="User Image"/>
                         <span class="hidden-xs"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="images/qwerty.png" class="img-circle"
-                                 alt="User Image"/>
+                            <img src="<?= $directoryAsset ?>/img/avatar5.png" class="img-circle"/>
 
                             <p>
                                 

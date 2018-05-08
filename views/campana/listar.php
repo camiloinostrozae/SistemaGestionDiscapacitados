@@ -43,14 +43,14 @@ $columns=[
         'order'=>DynaGrid::ORDER_FIX_LEFT,
         'contentOptions'=>['style'=>'max-width: 100px;overflow: auto; word-wrap: break-word;']
     ],
-
+/**
     [
         'attribute'=>'contenido',
         'pageSummary'=>'Page Total',
         'vAlign'=>'middle',
         'order'=>DynaGrid::ORDER_FIX_LEFT,
         'contentOptions'=>['style'=>'max-width: 300px;max-height: 150px;overflow: auto; word-wrap: break-word;white-space: nowrap;'],
-    ],
+    ],*/
     
       [
                 'attribute' => 'id_tipo_campana',
