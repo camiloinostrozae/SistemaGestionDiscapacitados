@@ -189,13 +189,13 @@ class PersonaController extends Controller
           $model = new Persona();
            $model->generateAuthKey();
             $model->contrasena=substr( md5(microtime()), 1, 12);
-           Yii::$app->mailer->compose()
+          /** Yii::$app->mailer->compose()
                 ->setFrom('')
                 ->setTo('')
                 ->setSubject('holi')
                 ->setTextBody('chao')
                 ->setHtmlBody('<b>qwerty</b>')
-                ->send();
+                ->send();*/
            $model->rol_id_rol=4;    
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->getSession()->setFlash('success', [
