@@ -113,7 +113,9 @@ class Campana extends \yii\db\ActiveRecord
         
         $campanas = (new \yii\db\Query())
             ->from('campana')
+            ->select('id_campana, titulo, contenido,fecha_publicacion, fecha_vencimiento, tipo')
             ->innerJoin('tipo_campana','campana.id_tipo_campana = tipo_campana.id_tipo_campana')
+            ->orderBy('id_campana')
              ->all();
         return $campanas;
         
