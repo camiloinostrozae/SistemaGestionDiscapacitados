@@ -170,6 +170,7 @@ class PersonaController extends Controller
     public function actionAdministrador(){
           $model = new Persona();
            $model->generateAuthKey();
+           $model->contrasena=substr(md5(microtime()), 1, 12);//genera contraseña aleatoria de 12 caracteres
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->getSession()->setFlash('success', [
 
@@ -187,6 +188,14 @@ class PersonaController extends Controller
     public function actionDiscapacitado(){
           $model = new Persona();
            $model->generateAuthKey();
+            $model->contrasena=substr( md5(microtime()), 1, 12);
+           Yii::$app->mailer->compose()
+                ->setFrom('')
+                ->setTo('')
+                ->setSubject('holi')
+                ->setTextBody('chao')
+                ->setHtmlBody('<b>qwerty</b>')
+                ->send();
            $model->rol_id_rol=4;    
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->getSession()->setFlash('success', [

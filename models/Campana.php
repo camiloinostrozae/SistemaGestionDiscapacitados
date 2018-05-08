@@ -54,7 +54,7 @@ class Campana extends \yii\db\ActiveRecord
             'titulo' => 'Título',
             'contenido' => 'Contenido',
             'fecha_publicacion' => 'Fecha Publicación',
-            'fecha_vencimiento' => 'Fecha Vencimiento',
+            'fecha_vencimiento' => 'Fecha Término',
             'estado' => 'Estado',
             'id_tipo_campana' => 'Tipo de Campaña',
         ];

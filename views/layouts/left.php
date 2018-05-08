@@ -26,7 +26,7 @@
         'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
         'items' => [
 
-            ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
+           // ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
 
             [
                 'label' => 'Campañas',

@@ -37,6 +37,8 @@ class Persona extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return 'persona';
     }
+    
+    public $region_id;
 
     /**
      * @inheritdoc
@@ -76,7 +78,8 @@ class Persona extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'contrasena' => 'Contraseña',
             'auth_key' => 'Auth Key',
             'comuna_id_comuna' => 'Comuna',
-            'rol_id_rol' => 'Rol',
+            'rol_id_rol' => 'Tipo Administrador',
+            'region_id' => 'Región'
         ];
     }
 
@@ -187,6 +190,8 @@ class Persona extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         }
 
     }
+    
+    
     
     //Función para validar el rut de persona
     public function validateRut($attribute,$params){

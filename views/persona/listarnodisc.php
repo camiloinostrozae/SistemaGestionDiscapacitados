@@ -61,12 +61,16 @@ $columns=[
         'contentOptions'=>['style'=>'max-width: 300px;max-height: 150px;overflow: auto; word-wrap: break-word;white-space: nowrap;'],
     ],
     
+    
     [
-                'attribute' => 'rol_id_rol',
-                'value' => function($model){
-                    return $model->rolIdRol->tipo;
-                },
-            ],
+        'attribute'=>'rut',
+        'pageSummary'=>'Page Total',
+        'vAlign'=>'middle',
+        'order'=>DynaGrid::ORDER_FIX_LEFT,
+        'contentOptions'=>['style'=>'max-width: 300px;max-height: 150px;overflow: auto; word-wrap: break-word;white-space: nowrap;'],
+    ],
+    
+    
      [
                 'attribute' => 'comuna_id_comuna',
                 'value' => function($model){

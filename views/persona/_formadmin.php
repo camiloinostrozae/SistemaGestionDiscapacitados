@@ -9,6 +9,9 @@ use kartik\select2\Select2;
 use kartik\date\DatePicker;
 use app\models\Rol;
 use app\models\Comuna;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
+use app\models\Region;
 /* @var $this yii\web\View */
 /* @var $model app\models\Campana */
 /* @var $form yii\widgets\ActiveForm */
@@ -53,7 +56,7 @@ use app\models\Comuna;
     <?= $form->field($model, 'email')->textInput(['placeholder'=>'Ingrese el email']) ?>
     <?= $form->field($model, 'telefono')->textInput(['placeholder'=>'Ingrese el número de teléfono anteponiendo el 9','maxlength'=>9, 'onKeypress' => 'if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;']) ?>
     <?= $form->field($model, 'sexo')->dropDownList(['Masculino' => 'Masculino', 'Femenino' => 'Femenino'],['prompt'=>'Seleccione el Sexo'])?>
-    <?= $form->field($model, 'contrasena')->passwordInput(['placeholder'=>'Ingrese la contraseña']) ?>
+    
 
     <?= $form->field($model, 'rol_id_rol')->widget(Select2::classname(), [
         'data' => Rol::getTipoAdministrador(),
@@ -64,14 +67,33 @@ use app\models\Comuna;
     ],
 ]); ?>
     
-        <?= $form->field($model, 'comuna_id_comuna')->widget(Select2::classname(), [
-        'data' => Comuna::getComunas(),
-        'language' => 'es',
-        'options' => ['placeholder' => 'Seleccione la comuna'],
-        'pluginOptions' => [
-            'allowClear' => true
-    ],
-]); ?>
+    
+    <?php
+            $regiones = ArrayHelper::map(Region::find()->all(), 'id_region', 'nombre');
+            echo $form->field($model, 'region_id')->dropDownList(
+                $regiones,
+                [
+                    'prompt'=>'---Seleccione la Región---',
+                    'onchange'=>'
+                                    $.get( "'.Url::toRoute('dependent-dropdown/comuna').'", { id: $(this).val() } )
+                                        .done(function( data ) {
+                                            $( "#'.Html::getInputId($model, 'comuna_id_comuna').'" ).html( data );
+                                        }
+                                    );
+                                '
+                ]
+            );
+    
+                $comuna = ArrayHelper::map(Comuna::find()->where(['id_comuna' =>$model->comuna_id_comuna])->all(), 'id_comuna', 'nombre');
+                echo $form->field($model, 'comuna_id_comuna')->dropDownList($comuna);        
+    
+            ?>
+            
+            
+                
+            
+    
+
 
     <div class="form-group">
         <?= Html::submitButton('Enviar', ['class' => 'btn btn-primary']) ?>
