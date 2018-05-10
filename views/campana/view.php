@@ -12,7 +12,7 @@ use kartik\detail\DetailView;
 $atributos = [
     [
         'group'=>true,
-        'label'=>'Acerca de la campaña',
+        'label'=>$model->titulo,
         'rowOptions'=>['class'=>'info']
     ],
 
@@ -83,12 +83,10 @@ $atributos = [
     'condensed'=>true,
     'mode'=>'view',
     'hover' => 'true',
+    
 
     'mode'=>DetailView::MODE_VIEW,
-    'panel'=>[
-        'heading'=>'Campaña # ' . $model->id_campana,
-        'type'=>DetailView::TYPE_INFO,
-    ],
+    
     'attributes' => $atributos
 
 

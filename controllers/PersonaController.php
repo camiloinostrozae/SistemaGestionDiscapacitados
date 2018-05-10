@@ -170,7 +170,14 @@ class PersonaController extends Controller
     public function actionAdministrador(){
           $model = new Persona();
            $model->generateAuthKey();
-           $model->contrasena=substr(md5(microtime()), 1, 12);//genera contraseña aleatoria de 12 caracteres
+           $model->contrasena=substr(md5(microtime()), 1, 8);//genera contraseña aleatoria de 12 caracteres
+            $email = Yii::$app->request->post('Persona') ['email']; 
+            Yii::$app->mailer->compose()
+                ->setFrom(Yii::$app->params['adminEmail'])
+                ->setTo($email)
+                ->setSubject('Envío de Contraseña')
+                ->setTextBody('Su contraseña de acceso al sistema Web es: '.$model->contrasena)
+                ->send();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->getSession()->setFlash('success', [
 
@@ -188,15 +195,16 @@ class PersonaController extends Controller
     public function actionDiscapacitado(){
           $model = new Persona();
            $model->generateAuthKey();
-            $model->contrasena=substr( md5(microtime()), 1, 12);
-          /** Yii::$app->mailer->compose()
-                ->setFrom('')
-                ->setTo('')
-                ->setSubject('holi')
-                ->setTextBody('chao')
-                ->setHtmlBody('<b>qwerty</b>')
-                ->send();*/
-           $model->rol_id_rol=4;    
+            $model->rol_id_rol=4;
+            $model->contrasena=substr(md5(microtime()), 1, 8);
+            $email = Yii::$app->request->post('Persona') ['email']; 
+         Yii::$app->mailer->compose()
+                ->setFrom(Yii::$app->params['adminEmail'])
+                ->setTo($email)
+                ->setSubject('Envío de Contraseña')
+                ->setTextBody('Su contraseña de acceso a la aplicación móvil es: '.$model->contrasena)
+                ->send();
+               
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->getSession()->setFlash('success', [
 

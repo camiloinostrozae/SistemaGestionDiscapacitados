@@ -70,6 +70,15 @@ $columns=[
             'pluginOptions'=>['format'=>'dd-mm-yyyy']
         ],
     ],
+    
+    [
+        'attribute'=>'estado',
+        'pageSummary'=>'Page Total',
+        'vAlign'=>'middle',
+        
+        'contentOptions'=>['style'=>'max-width: 100px;overflow: auto; word-wrap: break-word;']
+    ],
+    
 
 
    /* [

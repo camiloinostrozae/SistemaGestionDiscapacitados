@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
 $atributos = [
     [
         'group'=>true,
-        'label'=>'Acerca del Trámite',
+        'label'=>$model->titulo,
         'rowOptions'=>['class'=>'info']
     ],
 
@@ -120,10 +120,7 @@ $atributos = [
     'hover' => 'true',
 
     'mode'=>DetailView::MODE_VIEW,
-    'panel'=>[
-        'heading'=>'Trámite # ' . $model->id_tramite,
-        'type'=>DetailView::TYPE_INFO,
-    ],
+    
     'attributes' => $atributos
 
 
