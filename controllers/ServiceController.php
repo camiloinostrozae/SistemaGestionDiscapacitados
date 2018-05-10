@@ -26,11 +26,11 @@ class ServiceController extends ActiveController{
     
     //Servicio Web para el Login
    public function actionLogin($user,$password){
-       $persona = Persona::findOne(['email'=>$user,'contrasena'=>$password]);
+       $persona = Persona::findOne(['rut'=>$user,'contrasena'=>$password]);
 	   $respuesta = array();
        if($persona){
            return array('codigo'=>200,'estado'=>true,'mensaje'=>'Usuario válido','nombre'=>$persona->nombre,
-                        'apellido'=>$persona->apellido,'auth_key'=>$persona->auth_key);
+                        'apellido'=>$persona->apellido,'rut'=>$persona->rut,'contrasena'=>$persona->contrasena,'auth_key'=>$persona->auth_key);
        }else{
            
            return array('codigo'=>401,'estado'=>false,'mensaje'=>'El usuario no existe');
