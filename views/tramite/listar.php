@@ -88,7 +88,7 @@ $columns=[
                 return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url,
 
                                [  
-                                   'title' => Yii::t('yii', 'delete'),
+                                   'title' => Yii::t('yii', 'Eliminar'),
                                    'data-confirm' => "¿Esta seguro de eliminar este trámite?",
                                    'data-method' => 'post',
                                    'data-pjax' => 0
@@ -99,14 +99,15 @@ $columns=[
                 return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url,
 
                                [  
-                                   'title' => Yii::t('yii', 'update'),
+                                   'title' => Yii::t('yii', 'Actualizar'),
                                    'data-method'=>'post'
                                ]);
             },
             'view' => function ($url, $model) {
                 return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url,
 
-                               ['data-toggle'=>"modal",
+                               ['title' => Yii::t('yii', 'Ver'),
+                                'data-toggle'=>"modal",
                                 'data-target'=>"#myModal",
                                 'data-title'=>"Detalle del Trámite",]);
             }

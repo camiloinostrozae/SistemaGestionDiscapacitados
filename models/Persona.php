@@ -52,9 +52,11 @@ class Persona extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             [['nombre', 'contrasena'], 'string', 'max' => 45],
             [['apellido', 'email'], 'string', 'max' => 100],
             [['telefono'], 'string', 'max' => 20],
+            [['telefono'], 'validarTel'],
+            [['telefono'], 'validarTel2'],
             [['rut'], 'validateRut'],
             [['sexo'], 'string', 'max' => 10],
-            [['email'], 'email','message'=>'Formato no Válido'],
+            [['email'], 'email','message'=>'Email con Formato no Válido'],
             [['auth_key'], 'string', 'max' => 32],
             [['comuna_id_comuna'], 'exist', 'skipOnError' => true, 'targetClass' => Comuna::className(), 'targetAttribute' => ['comuna_id_comuna' => 'id_comuna']],
             [['rol_id_rol'], 'exist', 'skipOnError' => true, 'targetClass' => Rol::className(), 'targetAttribute' => ['rol_id_rol' => 'id_rol']],
@@ -220,9 +222,27 @@ class Persona extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             if ($result == 11)
                 $result = 0;
             if ($verifyCode != $result)
-                $this->addError('rut', 'El RUT ingresado no es válido, Ingrese formato XXXXXXXX-Y');
+                $this->addError('rut', 'El RUT ingresado no es válido');
     }else{
-              $this->addError($attribute, 'El RUT ingresado no es válido, Ingrese formato XXXXXXXX-Y');  
+              $this->addError($attribute, 'El RUT ingresado no es válido');  
             }
     }}
-}}
+}
+    
+    public function validarTel($attribute,$params){
+        
+        $telefono=$this->telefono;
+        if(strlen($telefono)<8){
+            $this->addError($attribute, 'Ingrese un teléfono de 8 dígitos');
+        }
+}
+    
+    public function validarTel2($attribute,$params){
+        $telefono=$this->telefono;
+           if(ctype_digit($telefono)==false){//ve si telefono se compone de puros digitos
+               $this->addError($attribute, 'Teléfono con formato inválido');
+            }
+            
+        }
+
+}

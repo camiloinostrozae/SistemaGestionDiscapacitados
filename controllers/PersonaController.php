@@ -89,7 +89,7 @@ class PersonaController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->getSession()->setFlash('info', [
 
-                'message' => 'Persona actualizada exitosamente',
+                'message' => 'Actualización Exitosa',
             ]);
             if($model->rol_id_rol ==1 ||$model->rol_id_rol ==2){
             return $this->redirect(['listaradministradores', 'id' => $model->id_persona]);
@@ -133,7 +133,7 @@ class PersonaController extends Controller
 
         Yii::$app->getSession()->setFlash('error', [
 
-            'message' => 'Usuario eliminado exitosamente',
+            'message' => 'Eliminación Exitosa',
         ]);
         $this->findModel($id)->delete();
         if($model->rol_id_rol ==1 ||$model->rol_id_rol ==2 ){
