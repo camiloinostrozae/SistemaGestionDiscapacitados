@@ -38,6 +38,7 @@ class Tramite extends \yii\db\ActiveRecord
             [['titulo', 'contenido', 'fecha_publicacion', 'fecha_vencimiento', 'estado', 'id_tipo_tramite'], 'required'],
             [['titulo', 'contenido'], 'string'],
             [['fecha_publicacion', 'fecha_vencimiento'], 'safe'],
+            [['fecha_vencimiento'], 'validarFecha'],
             [['id_tipo_tramite'], 'integer'],
             [['estado'], 'string', 'max' => 10],
             [['id_tipo_tramite'], 'exist', 'skipOnError' => true, 'targetClass' => TipoTramite::className(), 'targetAttribute' => ['id_tipo_tramite' => 'id_tipo_tramite']],
@@ -121,5 +122,13 @@ class Tramite extends \yii\db\ActiveRecord
         }
        
         
+    }
+    
+    
+    public function validarFecha($attribute,$params)
+    {
+        $fechaT=$this->fecha_vencimiento;
+   if (date("Y-m-d",strtotime($fechaT)) <= date("Y-m-d"))
+      $this->addError('fecha_vencimiento','Fecha de Término debe ser posterior a la Fecha actual');
     }
 }

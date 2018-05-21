@@ -97,10 +97,7 @@ $atributos = [
     'hover' => 'true',
 
     'mode'=>DetailView::MODE_VIEW,
-    'panel'=>[
-        'heading'=>'Usuario # ' . $model->id_persona,
-        'type'=>DetailView::TYPE_INFO,
-    ],
+    
     'attributes' => $atributos
 
 

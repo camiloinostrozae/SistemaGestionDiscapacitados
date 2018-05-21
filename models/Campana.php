@@ -38,6 +38,7 @@ class Campana extends \yii\db\ActiveRecord
             [['titulo', 'contenido', 'fecha_publicacion', 'fecha_vencimiento', 'estado', 'id_tipo_campana'], 'required'],
             [['titulo', 'contenido'], 'string'],
             [['fecha_publicacion', 'fecha_vencimiento'], 'safe'],
+            [['fecha_vencimiento'], 'validarFecha'],
             [['id_tipo_campana'], 'integer'],
             [['estado'], 'string', 'max' => 10],
             [['id_tipo_campana'], 'exist', 'skipOnError' => true, 'targetClass' => TipoCampana::className(), 'targetAttribute' => ['id_tipo_campana' => 'id_tipo_campana']],
@@ -119,5 +120,13 @@ class Campana extends \yii\db\ActiveRecord
              ->all();
         return $campanas;
         
+    }
+    
+    
+    public function validarFecha($attribute,$params)
+    {
+        $fechaT=$this->fecha_vencimiento;
+   if (date("Y-m-d",strtotime($fechaT)) <= date("Y-m-d"))
+      $this->addError('fecha_vencimiento','Fecha de Término debe ser posterior a la Fecha actual');
     }
 }

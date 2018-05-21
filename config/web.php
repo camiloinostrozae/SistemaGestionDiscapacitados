@@ -44,15 +44,15 @@ $config = [
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
-                       'viewPath' => '@app/mail',
+                      'viewPath' => '@app/mail',
                        'useFileTransport' => true,
                     'transport' => [
              'class' => 'Swift_SmtpTransport',
              'host' => 'smtp.gmail.com',  // ej. smtp.mandrillapp.com o smtp.gmail.com
-             'username' => '',
-             'password' => '',
+             'username' => 'sistemadiscvisual@gmail.com',
+             'password' => 'camiloqwerty99',
              'port' => '587', // El puerto 25 es un puerto común también
-             'encryption' => 'ssl', // Es usado también a menudo, revise la configuración del servidor
+             'encryption' => 'ssl',
          ],
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport

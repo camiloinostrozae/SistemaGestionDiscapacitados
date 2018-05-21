@@ -54,7 +54,7 @@ use app\models\Region;
 ]); ?>
 
     <?= $form->field($model, 'email')->textInput(['placeholder'=>'Ingrese el email']) ?>
-    <?= $form->field($model, 'telefono')->textInput(['placeholder'=>'Ingrese el número de teléfono anteponiendo el 9','maxlength'=>9, 'onKeypress' => 'if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;']) ?>
+    <?= $form->field($model, 'telefono')->textInput(['placeholder'=>'Ingrese el número de teléfono','maxlength'=>8, 'onKeypress' => 'if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;']) ?>
     <?= $form->field($model, 'sexo')->dropDownList(['Masculino' => 'Masculino', 'Femenino' => 'Femenino'],['prompt'=>'Seleccione el Sexo'])?>
     
 
@@ -76,7 +76,7 @@ use app\models\Region;
             );
     
                 $comuna = ArrayHelper::map(Comuna::find()->where(['id_comuna' =>$model->comuna_id_comuna])->all(), 'id_comuna', 'nombre');
-                echo $form->field($model, 'comuna_id_comuna')->dropDownList($comuna);        
+                echo $form->field($model, 'comuna_id_comuna')->dropDownList($comuna,['prompt'=>'Primero Seleccione Región']);        
     
             ?>
             
