@@ -27,7 +27,11 @@ class ServiceInteractuarCampanaController extends ActiveController{
     }
 
 
-    public function actionRegistrarInteraccionCampana($auth_key){
+    public function actionRegistrarInteraccionCampana(){
+        
+        $persona = new Persona();
+        $persona->attributes = Yii::$app->request->post();
+        $auth_key = $persona->auth_key;
         $id_persona = Persona::getUserId($auth_key);
         if(!$id_persona){
             return array('codigo'=>401,'estado'=>false);

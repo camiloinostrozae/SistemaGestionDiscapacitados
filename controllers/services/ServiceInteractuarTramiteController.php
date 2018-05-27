@@ -28,8 +28,12 @@ class ServiceInteractuarTramiteController extends ActiveController{
 
 
     //Registrar la interacción de un usuario con una campana
-    public function actionRegistrarInteraccionTramite($auth_key){
-
+    public function actionRegistrarInteraccionTramite(){
+        //Obtenemos la auth_key de la persona y en base a ello obtenemos su ID
+        $persona = new Persona();
+        $persona->attributes = Yii::$app->request->post();
+        $auth_key = $persona->auth_key;
+        
         $id_persona = Persona::getUserId($auth_key);
         if(!$id_persona){
             return array('codigo'=>401,'estado'=>false);
