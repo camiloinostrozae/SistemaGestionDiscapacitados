@@ -206,8 +206,13 @@ class Persona extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return $this->auth_key = Yii::$app->security->generateRandomString();
     }
     
+    //Seleccionar el ID del usuario en base a su authkey
+    public static function getUserId($auth_key){
+        return self::findOne(['auth_key'=>$auth_key]);
+    }
     
-      //Función para formatear la fecha ingresada en el form y se inserte en el formato correcto
+    
+    //Función para formatear la fecha ingresada en el form y se inserte en el formato correcto
 
     public function beforeSave($insert){
         //Se formatea al formato que guarda MYSQL

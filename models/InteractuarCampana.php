@@ -68,4 +68,6 @@ class InteractuarCampana extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Campana::className(), ['id_campana' => 'campana_id_campana']);
     }
+    
+   
 }
