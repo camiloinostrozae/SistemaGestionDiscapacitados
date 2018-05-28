@@ -69,7 +69,7 @@ class InteractuarCampana extends \yii\db\ActiveRecord
         return $this->hasOne(Campana::className(), ['id_campana' => 'campana_id_campana']);
     }
     
-<<<<<<< HEAD
+
     public function getComunaIdComuna()
     {
         return $this->hasOne(Comuna::className(), ['id_comuna' => 'comuna_id_comuna'])->viaTable('persona', ['id_persona' => 'persona_id_persona']);
@@ -79,7 +79,5 @@ class InteractuarCampana extends \yii\db\ActiveRecord
         return $this->hasOne(Rol::className(), ['id_rol' => 'rol_id_rol'])->viaTable('persona', ['id_persona' => 'persona_id_persona']);
     }
     
-=======
-   
->>>>>>> cd0a895110b78b74277ee0e4c7e6877cf1a723b7
+
 }
