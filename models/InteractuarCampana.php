@@ -46,10 +46,10 @@ class InteractuarCampana extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'persona_id_persona' => 'Persona Id Persona',
+            'persona_id_persona' => 'Nombre',
             'campana_id_campana' => 'Campana Id Campana',
-            'fecha' => 'Fecha',
-            'hora' => 'Hora',
+            'fecha' => 'Fecha Acceso',
+            'hora' => 'Hora Acceso',
         ];
     }
 
@@ -68,4 +68,14 @@ class InteractuarCampana extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Campana::className(), ['id_campana' => 'campana_id_campana']);
     }
+    
+    public function getComunaIdComuna()
+    {
+        return $this->hasOne(Comuna::className(), ['id_comuna' => 'comuna_id_comuna'])->viaTable('persona', ['id_persona' => 'persona_id_persona']);
+    }
+      public function getRolIdRol()
+    {
+        return $this->hasOne(Rol::className(), ['id_rol' => 'rol_id_rol'])->viaTable('persona', ['id_persona' => 'persona_id_persona']);
+    }
+    
 }

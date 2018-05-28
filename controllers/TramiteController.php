@@ -4,6 +4,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Tramite;
 use app\models\TramiteSearch;
+use app\models\InteractuarTramiteSearch;
 
 class TramiteController extends \yii\web\Controller
 {
@@ -64,6 +65,27 @@ class TramiteController extends \yii\web\Controller
         ]);
         $this->findModel($id)->delete();
         return $this->redirect(['listar']);
+    }
+    
+      public function actionListartramites(){
+        $searchModel = new TramiteSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        return $this->render('listartramites', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+
+    }
+    
+     public function actionUser($id){
+        $searchModel = new InteractuarTramiteSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->andWhere('tramite_id_tramite = '.$id);
+        return $this->render('listaraccesotramites', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+
     }
     
     public function actionUpdate($id){

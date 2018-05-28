@@ -86,6 +86,8 @@ class Campana extends \yii\db\ActiveRecord
     }
 
 
+
+
     //Función para formatear la fecha ingresada en el form y se inserte en el formato correcto
 
     public function beforeSave($insert){

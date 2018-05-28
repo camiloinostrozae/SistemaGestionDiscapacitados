@@ -4,6 +4,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Campana;
 use app\models\CampanaSearch;
+use app\models\InteractuarCampanaSearch;
 class CampanaController extends \yii\web\Controller{
 
     public function actionIndex() {
@@ -34,6 +35,26 @@ class CampanaController extends \yii\web\Controller{
         $searchModel = new CampanaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         return $this->render('listar', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+
+    }
+    
+    public function actionListarcampanas(){
+        $searchModel = new CampanaSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        return $this->render('listarcampanas', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+
+    }
+    public function actionUser($id){
+        $searchModel = new InteractuarCampanaSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->andWhere('campana_id_campana = '.$id);
+        return $this->render('listaraccesocampanas', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);

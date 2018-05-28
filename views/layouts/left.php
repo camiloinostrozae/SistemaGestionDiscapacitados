@@ -77,6 +77,15 @@
                     ['label' => 'Listar Usuarios', 'icon' => 'users', 'url' => ['/persona/listarnodiscapacitados'],],
                 ],
             ],
+    [
+                'label' => 'Estadísticas',
+                'icon' => 'tasks',
+                'url' => '#',
+                'items' => [
+                    ['label' => 'Listar Acceso a Campañas', 'icon' => 'dashboard', 'url' => ['/campana/listarcampanas'],],
+                    ['label' => 'Listar Acceso a Trámites', 'icon' => 'dashboard', 'url' => ['/tramite/listartramites'],],
+                ],
+            ],
         ],
     ]
 ) ?>

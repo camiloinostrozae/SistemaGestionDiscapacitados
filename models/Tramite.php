@@ -76,6 +76,8 @@ class Tramite extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Persona::className(), ['id_persona' => 'persona_id_persona'])->viaTable('interactuar_tramite', ['tramite_id_tramite' => 'id_tramite']);
     }
+    
+ 
 
     /**
      * @return \yii\db\ActiveQuery
