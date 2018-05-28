@@ -25,7 +25,7 @@ class ServiceComunaController extends ActiveController{
     
     public function actionListarComunas(){
           $comuna = Comuna::find()->select('nombre')->joinWith('regionIdRegion')->all();
-        if($comuna){
+        if($comuna){ 
             return $comuna;
         }else{
             return false;

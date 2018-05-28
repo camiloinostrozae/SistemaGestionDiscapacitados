@@ -3,6 +3,7 @@ namespace app\controllers;
 use yii\web\Response;
 use yii\rest\ActiveController;
 use app\models\Persona;
+use app\models\Comuna;
 use Yii;
 class ServiceController extends ActiveController{
 
@@ -23,37 +24,44 @@ class ServiceController extends ActiveController{
 
         return $behaviors;
     }
-    
+
     //Servicio Web para el Login
-   public function actionLogin($user,$password){
-       $persona = Persona::findOne(['rut'=>$user,'contrasena'=>$password]);
-	   $respuesta = array();
-       if($persona){
-           return array('codigo'=>200,'estado'=>true,'mensaje'=>'Usuario válido','nombre'=>$persona->nombre,
-                        'apellido'=>$persona->apellido,'rut'=>$persona->rut,'contrasena'=>$persona->contrasena,'auth_key'=>$persona->auth_key);
-       }else{
-           
-           return array('codigo'=>401,'estado'=>false,'mensaje'=>'El usuario no existe');
-       }
-   }
-    
+    public function actionLogin($user,$password){
+        $persona = Persona::findOne(['rut'=>$user,'contrasena'=>$password]);
+
+        if(!Persona::isValidRut($user)){
+            return array('codigo'=>1,'estado'=>false, 'mensaje'=>'Rut no se encuentra registrado');
+        }
+        $respuesta = array();
+        if($persona){
+            return array('codigo'=>200,'estado'=>true,'mensaje'=>'Usuario válido','nombre'=>$persona->nombre,
+                         'apellido'=>$persona->apellido,'rut'=>$persona->rut,'contrasena'=>$persona->contrasena,'auth_key'=>$persona->auth_key);
+        }else{
+
+            return array('codigo'=>401,'estado'=>false,'mensaje'=>'El usuario no existe');
+        }
+    }
+
     //Servicio Web para el registro de usuarios
     public function actionCreatePersona(){
         $persona = new Persona();
         $persona->attributes = Yii::$app->request->post();
         $persona->auth_key = $persona->generateAuthKey();
-        $persona->comuna_id_comuna = 182;
-        $persona->rut="00000000-0";
-		$persona->rol_id_rol = 3;
+        $persona->rol_id_rol = 3;
+        $persona->rut = Persona::formatearRut($persona->rut);
+        $rutYaRegistrado = Persona::findOne(['rut'=>$persona->rut]);
+        if(!empty($rutYaRegistrado)){
+            return array('codigo'=>001, 'estado'=>false);
+        }
         if($persona->validate()){
-			$datos = array( 'nombre'=>$persona->nombre,'apellido'=>$persona->apellido,
-                        'telefono'=>$persona->telefono,'email'=>$persona->email,'contrasena'=>$persona->contrasena,
-                        'fecha_nacimiento'=>$persona->fecha_nacimiento,'sexo'=>$persona->sexo);
+            $datos = array( 'nombre'=>$persona->nombre,'apellido'=>$persona->apellido,'rut'=>$persona->rut, 
+                            'contrasena'=>$persona->contrasena,'auth_key'=>$persona->auth_key);
             if($persona->save());
             return array('codigo'=>200,'estado'=>true,'persona'=>$datos);
         }else{
-            return array('codigo'=>401,'estado'=>false);
+            return array('codigo'=>401,'estado'=>false ,'mensaje'=>$persona->getErrors());
             //'mensaje'=>'Error, usuario no se pudo registrar'
         }
+
     }
 }

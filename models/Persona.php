@@ -167,6 +167,35 @@ class Persona extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return self::findOne(['email'=>$email]);
     }
     
+    //Verifica si el rut se encuentra en la BD
+    public function isValidRut($rut){
+         $run = self::findOne(['rut'=>$rut]);
+         if($run){
+             return true;
+         }else{
+             return false;
+         }
+    }
+    //Formatea el rut ingresado al formato XXXXXXXX-X
+    public function formatearRut($rut){
+        
+        if(strpos($rut,'.')){
+            $rut_formateado = str_replace(".","",$rut);
+            if(strlen($rut_formateado) == 9){
+                $nuevo_rut = substr($rut_formateado, 0, strlen($rut_formateado) - 1) . '-' . substr($rut_formateado, -1) ;
+                return $nuevo_rut;
+            }
+            return $rut_formateado;
+        }
+        
+        if(strlen($rut)==9){
+            $rut_guion = substr($rut, 0, strlen($rut) - 1) . '-' . substr($rut, -1) ;
+            return $rut_guion;
+        }
+        return $rut;
+        
+    }
+    
     //Función para validar la contraseña
     public function validatePassword($contrasena){
         return $this->contrasena === $contrasena;
@@ -177,8 +206,13 @@ class Persona extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return $this->auth_key = Yii::$app->security->generateRandomString();
     }
     
+    //Seleccionar el ID del usuario en base a su authkey
+    public static function getUserId($auth_key){
+        return self::findOne(['auth_key'=>$auth_key]);
+    }
     
-      //Función para formatear la fecha ingresada en el form y se inserte en el formato correcto
+    
+    //Función para formatear la fecha ingresada en el form y se inserte en el formato correcto
 
     public function beforeSave($insert){
         //Se formatea al formato que guarda MYSQL

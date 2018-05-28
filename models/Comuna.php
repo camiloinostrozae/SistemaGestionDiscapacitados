@@ -69,4 +69,8 @@ class Comuna extends \yii\db\ActiveRecord
        public static function getComunas(){
         return ArrayHelper::map(Comuna::find()->all(),'id_comuna','nombre');
     }
+    
+    public static function  getIdComuna($comuna){
+        return self::find()->select('id_comuna')->where(['nombre'=>$comuna])->one() ;
+    }
 }
