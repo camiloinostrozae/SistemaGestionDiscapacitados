@@ -92,7 +92,6 @@ class SiteController extends Controller
             return $this->goBack();
         }
 
-        $model->contrasena = '';
         return $this->render('login', [
             'model' => $model,
         ]);
