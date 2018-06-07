@@ -47,8 +47,10 @@ class LoginForm extends Model
     {
         if (!$this->hasErrors()) {
             $user = $this->getUser();
-
-            if (!$user || !$user->validatePassword($this->contrasena)) {
+            if(isset($user)){
+            $rol = $user->rol_id_rol;
+            }
+            if (!$user || !$user->validatePassword($this->contrasena) || $rol==3 || $rol==4) {
                 $this->addError($attribute, 'El Email o la Contraseña ingresados son incorrectos.');
             }
         }

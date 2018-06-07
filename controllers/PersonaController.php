@@ -37,6 +37,9 @@ class PersonaController extends Controller
                      'allow' =>true,
                      'actions' =>['index','view','update','delete','administrador','discapacitado','listardiscapacitados','listarnodiscapacitados','listaradministradores'],
                      'roles' =>['@'],
+                      'matchCallback' => function ($rule,$action){
+                                                return \app\models\User::isAdmin(Yii::$app->user->identity->id);
+                                         }
                    ],
                 
             

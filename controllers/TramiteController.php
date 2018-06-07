@@ -28,6 +28,9 @@ class TramiteController extends \yii\web\Controller
                      'allow' =>true,
                      'actions' =>['index','update','delete','view','listar','listartramites','user'],
                      'roles' =>['@'],
+                         'matchCallback' => function ($rule,$action){
+                                                return \app\models\User::isAdmin(Yii::$app->user->identity->id);
+                                         }
                    ],
                 
             

@@ -34,6 +34,9 @@ class UbicacionController extends Controller
                      'allow' =>true,
                      'actions' =>['index','update','delete','view','create'],
                      'roles' =>['@'],
+                     'matchCallback' => function ($rule,$action){
+                                                return \app\models\User::isNeutro(Yii::$app->user->identity->id);
+                                         }
                    ],
                 
             
