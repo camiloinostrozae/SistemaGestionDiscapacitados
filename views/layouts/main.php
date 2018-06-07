@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use app\models\User;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -40,21 +41,21 @@ if (Yii::$app->controller->action->id === 'login') {
     <?php $this->beginBody() ?>
     <div class="wrapper">
 
-        <?= $this->render(
-            'header.php',
-            ['directoryAsset' => $directoryAsset]
-        ) ?>
+        <?php echo $this->render('header.php',['directoryAsset' => $directoryAsset]) ?>
 
-        <?= $this->render(
-            'left.php',
-            ['directoryAsset' => $directoryAsset]
-        )
-        ?>
+        <?php 
+        if(isset(Yii::$app->user->identity->rol_id_rol)){
+          $rol = Yii::$app->user->identity->rol_id_rol;
+            if($rol==1){
+               echo $this->render('left.php',['directoryAsset' => $directoryAsset]);
+            }else{
+                if($rol==2){
+               echo $this->render('leftCipol.php',['directoryAsset' => $directoryAsset]);
+                }
+        }
+        }?>
 
-        <?= $this->render(
-            'content.php',
-            ['content' => $content, 'directoryAsset' => $directoryAsset]
-        ) ?>
+        <?php echo $this->render('content.php',['content' => $content, 'directoryAsset' => $directoryAsset]) ?>
 
     </div>
 

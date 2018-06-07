@@ -1,13 +1,16 @@
 <?php
 use yii\helpers\Html;
 
+use app\models\Persona;
+
+
 /* @var $this \yii\web\View */
 /* @var $content string */
+ 
 ?>
 
 
 
- $session = Yii::$app->session->getId(); 
 <header class="main-header">
 
     <?= Html::a('<span class="logo-mini">APP</span><span class="logo-lg">' . "Inicio" . '</span>', Yii::$app->homeUrl, ['class' => 'logo']) ?>
@@ -33,11 +36,39 @@ use yii\helpers\Html;
                         <li class="user-header">
                             <img src="<?= $directoryAsset ?>/img/avatar5.png" class="img-circle"/>
 
-                            <p>
+                           
                                 
-                               Administrador
+                                <?php 
+                                echo '<p>';
+                                if(isset(Yii::$app->user->identity->rol_id_rol)){
+                                    $rol = Yii::$app->user->identity->rol_id_rol;
+                                    if($rol==1){
+                                        echo 'Administrador';
+                                        echo '<br>' ;   
+                                    }else{
+                                        if($rol==2){
+                                            echo 'Administrador CIPOL';
+                                            echo '<br>' ;
+                                        }
+                                    }
+                                    
+                                }
+    
+                                if (isset(Yii::$app->user->identity->nombre)){
+                                    $nombre = Yii::$app->user->identity->nombre; 
+                                    echo $nombre;
+                                    echo ' ';
+                                }
+                                 if (isset(Yii::$app->user->identity->apellido)){
+                                    $apellido = Yii::$app->user->identity->apellido; 
+                                    echo $apellido;
+                                }
+                                
+                                echo '</p>';
+                            
+                                ?> 
                                  
-                            </p>
+                            
                         </li>
                         
                         <!-- Menu Footer-->

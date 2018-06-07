@@ -46,7 +46,9 @@ use app\models\Comuna;
 	'options' => ['placeholder' => 'Seleccione una fecha de nacimiento'],
 	'pluginOptions' => [
 		'format' => 'dd-mm-yyyy',
-		'todayHighlight' => true
+		'todayHighlight' => true,
+        'autoclose' =>true,
+        'endDate' => '0d'
 	]
 ]); ?>
 

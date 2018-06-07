@@ -26,6 +26,24 @@ class PersonaController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            
+             /** Para los permisos  se hace lo siguiente*/ 
+            'access' => [
+               'class' => \yii\filters\AccessControl::className(),
+               'only' => ['index','update','delete','view','administrador','discapacitado','listardiscapacitados','listarnodiscapacitados','listaradministradores'],
+               //Para los ussuario autenticados como super Admin
+               'rules' => [
+                   [
+                     'allow' =>true,
+                     'actions' =>['index','view','update','delete','administrador','discapacitado','listardiscapacitados','listarnodiscapacitados','listaradministradores'],
+                     'roles' =>['@'],
+                   ],
+                
+            
+               ],
+            
+             ],
+            
         ];
     }
 
@@ -62,19 +80,6 @@ class PersonaController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
-        $model = new Persona();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_persona]);
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
-
     /**
      * Updates an existing Persona model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -223,6 +228,7 @@ class PersonaController extends Controller
         $searchModel = new PersonaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->andWhere('persona.rol_id_rol = 3'); //usuario no discapacitado = rol 3
+        $dataProvider->query->orderBy(['id_persona'=>SORT_DESC])->all();
         return $this->render('listarnodisc', [
 
             'searchModel' => $searchModel,
@@ -236,6 +242,7 @@ class PersonaController extends Controller
         $searchModel = new PersonaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->andWhere('persona.rol_id_rol = 4'); //usuario discapacitado = rol 4
+        $dataProvider->query->orderBy(['id_persona'=>SORT_DESC])->all();
         return $this->render('listardisc', [
 
             'searchModel' => $searchModel,
@@ -249,6 +256,7 @@ class PersonaController extends Controller
         $searchModel = new PersonaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->andWhere('persona.rol_id_rol = 1 or persona.rol_id_rol = 2'); 
+        $dataProvider->query->orderBy(['id_persona'=>SORT_DESC])->all();
         return $this->render('listarAdmin', [
 
             'searchModel' => $searchModel,
@@ -256,4 +264,6 @@ class PersonaController extends Controller
         ]);
 
     }
+    
+   
 }

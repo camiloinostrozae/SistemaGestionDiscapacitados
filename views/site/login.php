@@ -31,7 +31,7 @@ $fieldOptions2 = [
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
-            <p class="login-box-msg">Ingrese sus datos para iniciar sesión</p>
+            <p class="login-box-msg">Ingrese sus datos para Iniciar Sesión</p>
 
             <?php $form = ActiveForm::begin(['id' => 'login-form', 'enableClientValidation' => false]); ?>
 

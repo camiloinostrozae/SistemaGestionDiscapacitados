@@ -9,6 +9,7 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
     public $password;
     public $authKey;
     public $accessToken;
+    
 
     private static $users = [
         '100' => [
@@ -75,6 +76,9 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
         return $this->id;
     }
 
+       public function getRol(){
+        return $this->id_rol;
+        }
     /**
      * {@inheritdoc}
      */

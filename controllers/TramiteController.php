@@ -5,15 +5,38 @@ use Yii;
 use app\models\Tramite;
 use app\models\TramiteSearch;
 use app\models\InteractuarTramiteSearch;
-
+use yii\filters\VerbFilter;
 class TramiteController extends \yii\web\Controller
 {
-    /**
-    public function actionIndex()
+    public function behaviors()
     {
-        return $this->render('index');
-    }**/
-    
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],
+            ],
+            
+             /** Para los permisos  se hace lo siguiente*/ 
+            'access' => [
+               'class' => \yii\filters\AccessControl::className(),
+               'only' => ['index','update','delete','view','listar','listartramites','user'],
+               //Para los ussuario autenticados como super Admin
+               'rules' => [
+                   [
+                     'allow' =>true,
+                     'actions' =>['index','update','delete','view','listar','listartramites','user'],
+                     'roles' =>['@'],
+                   ],
+                
+            
+               ],
+            
+             ],
+            
+        ];
+    }
      public function actionIndex() {
         $model = new Tramite();
         $model->fecha_publicacion=date('Y-m-d');
@@ -27,6 +50,7 @@ class TramiteController extends \yii\web\Controller
 
             $searchModel = new TramiteSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            $dataProvider->query->orderBy(['id_tramite'=>SORT_DESC])->all();
             return $this->render('listar',  [
                 'model'=>$model,
                 'searchModel' => $searchModel,
@@ -41,6 +65,7 @@ class TramiteController extends \yii\web\Controller
      public function actionListar(){
         $searchModel = new TramiteSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+         $dataProvider->query->orderBy(['id_tramite'=>SORT_DESC])->all();
         return $this->render('listar', [
 
             'searchModel' => $searchModel,
@@ -70,6 +95,7 @@ class TramiteController extends \yii\web\Controller
       public function actionListartramites(){
         $searchModel = new TramiteSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+          $dataProvider->query->orderBy(['id_tramite'=>SORT_DESC])->all();
         return $this->render('listartramites', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

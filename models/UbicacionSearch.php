@@ -19,7 +19,7 @@ class UbicacionSearch extends Ubicacion
     {
         return [
             [['id_ubicacion'], 'integer'],
-            [['coordena'], 'safe'],
+            [['latitud', 'longitud'], 'number'],
         ];
     }
 
@@ -60,9 +60,9 @@ class UbicacionSearch extends Ubicacion
         // grid filtering conditions
         $query->andFilterWhere([
             'id_ubicacion' => $this->id_ubicacion,
+            'latitud' => $this->latitud,
+            'longitud' => $this->longitud,
         ]);
-
-        $query->andFilterWhere(['like', 'coordena', $this->coordena]);
 
         return $dataProvider;
     }

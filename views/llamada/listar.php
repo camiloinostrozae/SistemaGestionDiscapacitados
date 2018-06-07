@@ -8,7 +8,7 @@ use yii\bootstrap\ButtonDropdown;
 use yii\bootstrap\ActiveForm;
 use kartik\dynagrid\DynaGrid;
 use kartik\grid\GridView;
-use app\models\Campana;
+use app\models\Llamada;
 use kartik\growl\Growl;
 use kartik\alert\AlertBlock;
 use yii\widgets\Pjax;
@@ -32,45 +32,66 @@ use yii\bootstrap\Modal;
 ?>
 
 <?php
-$this->title = 'Listar Acceso a Campañas';
+$this->title = 'Lista de Llamadas';
 $columns=[
 
     ['class'=>'kartik\grid\SerialColumn', 'order'=>DynaGrid::ORDER_FIX_LEFT],
-    [
-        'attribute'=>'titulo',
-        'pageSummary'=>'Page Total',
-        'vAlign'=>'middle',
-        'order'=>DynaGrid::ORDER_FIX_LEFT,
-        'contentOptions'=>['style'=>'max-width: 100px;overflow: auto; word-wrap: break-word;']
-    ],
-/**
-    [
-        'attribute'=>'contenido',
-        'pageSummary'=>'Page Total',
-        'vAlign'=>'middle',
-        'order'=>DynaGrid::ORDER_FIX_LEFT,
-        'contentOptions'=>['style'=>'max-width: 300px;max-height: 150px;overflow: auto; word-wrap: break-word;white-space: nowrap;'],
-    ],*/
     
       [
-                'attribute' => 'id_tipo_campana',
+                'attribute' => 'persona_id_persona',
+                'label' => 'Nombre',
                 'value' => function($model){
-                    return $model->tipoCampana->tipo;
+                    return $model->personaIdPersona->nombre;
                 },
-        ],
-
-
+            ],
+      [
+                'attribute' => 'persona_id_persona',
+                'label' => 'Apellido',
+                'value' => function($model){
+                    return $model->personaIdPersona->apellido;
+                },
+            ],
+      [
+                'attribute' => 'persona_id_persona',
+                'label' => 'Teléfono',
+                'value' => function($model){
+                    return $model->personaIdPersona->telefono;
+                },
+            ],
     [
-        'attribute'=>'fecha_publicacion',
-        'filterType'=>GridView::FILTER_DATE,
-        'format'=>'raw',
-        'width'=>'170px',
-        'contentOptions'=>['style'=>'max-width: 100px;'],
-        'filterWidgetOptions'=>[
-            'pluginOptions'=>['format'=>'dd-mm-yyyy']
-        ],
+        'attribute'=>'fecha',
+        'pageSummary'=>'Page Total',
+        'vAlign'=>'middle',
+        'contentOptions'=>['style'=>'max-width: 100px;overflow: auto; word-wrap: break-word;']
     ],
 
+    [
+        'attribute'=>'hora',
+        'pageSummary'=>'Page Total',
+        'vAlign'=>'middle',
+        'contentOptions'=>['style'=>'max-width: 300px;max-height: 150px;overflow: auto; word-wrap: break-word;white-space: nowrap;'],
+    ],
+    
+    
+    [
+                'attribute' => 'ubicacion_id_ubicacion',
+                'label' => 'Latitud',
+                'value' => function($model){
+                    return $model->ubicacionIdUbicacion->latitud;
+                },
+            ],
+     [
+                'attribute' => 'ubicacion_id_ubicacion',
+                'label' => 'Longitud',
+                'value' => function($model){
+                    return $model->ubicacionIdUbicacion->longitud;
+                },
+            ],
+   
+
+    
+  
+   
 
    /* [
         'class'=>'kartik\grid\BooleanColumn',
@@ -81,17 +102,18 @@ $columns=[
     [
         'class'=>'kartik\grid\ActionColumn',
         'dropdown'=>false,
-        'template'=>'{user}',
+        'template'=>'{localizar}',
 
         'buttons'=>[
 
-            'user' => function ($url, $model) {
-                return Html::a('<span class="glyphicon glyphicon-user"></span>', $url,
+            'localizar' => function ($url, $model) {
+                return Html::a('<span class="glyphicon glyphicon-map-marker"></span>', $url,
 
                                [  
-                                   'title' => Yii::t('yii', 'Usuarios'),
-                                   'data-method'=>'post'
-                               ]);
+                                   'title' => Yii::t('yii', 'Ubicación'),
+                                    ]);
+                                    
+                               
             }
 
         ],
@@ -105,7 +127,7 @@ $columns=[
 ];
 ?>
 
-<div class="campana-view">
+<div class="persona-view">
 
     <?= DynaGrid::widget([
     'columns'=>$columns,
@@ -119,7 +141,7 @@ $columns=[
         'floatHeader'=>true,
         'pjax'=>true,
         'responsiveWrap'=>false,
-        'panel'=>['heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-tasks"></i>&nbsp;Campañas</h3>'],
+        'panel'=>['heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-tasks"></i>&nbsp;Llamadas generadas a través de la Aplicación Móvil</h3>'],
     ],
     'options'=>['id'=>'dynagrid-1'] // a unique identifier is important
 ]) ?>

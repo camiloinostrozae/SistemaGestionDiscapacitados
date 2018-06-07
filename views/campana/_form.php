@@ -68,7 +68,9 @@ use app\models\TipoCampana;
 	'options' => ['placeholder' => 'Seleccione una fecha'],
 	'pluginOptions' => [
 		'format' => 'dd-mm-yyyy',
-		'todayHighlight' => true
+		'todayHighlight' => true,
+        'autoclose' =>true,
+        'startDate' => '0d'
 	]
 ]); ?>
 

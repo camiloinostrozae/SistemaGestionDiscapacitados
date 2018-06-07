@@ -47,6 +47,8 @@ class Persona extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return [
             [['nombre', 'apellido', 'fecha_nacimiento', 'email', 'rut' ,'telefono', 'sexo', 'contrasena', 'auth_key', 'comuna_id_comuna', 'rol_id_rol'], 'required'],
+            [['rut'],'unique','message'=>'Ya existe una persona registrada con ese Rut'],
+            [['email'],'unique','message'=>'Ya existe una persona con ese email'],
             [['fecha_nacimiento'], 'safe'],
             [['comuna_id_comuna', 'rol_id_rol'], 'integer'],
             [['nombre', 'contrasena'], 'string', 'max' => 45],
@@ -71,7 +73,7 @@ class Persona extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return [
             'id_persona' => 'Id Persona',
             'nombre' => 'Nombre',
-            'apellido' => 'Apellido',
+            'apellido' => 'Apellido Paterno',
             'rut' => 'Rut',
             'fecha_nacimiento' => 'Fecha Nacimiento',
             'email' => 'Email',
@@ -148,6 +150,10 @@ class Persona extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     
     public function getId(){
         return $this->id_persona;
+    }
+    
+    public function getRol(){
+        return $this->id_rol;
     }
     
     public function validateAuthKey($authKey){
