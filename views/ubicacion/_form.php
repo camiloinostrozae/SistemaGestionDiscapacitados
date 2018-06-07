@@ -12,7 +12,9 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'coordena')->textInput() ?>
+    <?= $form->field($model, 'latitud')->textInput() ?>
+
+    <?= $form->field($model, 'longitud')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

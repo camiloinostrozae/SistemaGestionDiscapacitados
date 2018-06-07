@@ -5,7 +5,39 @@ use Yii;
 use app\models\Campana;
 use app\models\CampanaSearch;
 use app\models\InteractuarCampanaSearch;
+use yii\filters\VerbFilter;
 class CampanaController extends \yii\web\Controller{
+    
+     public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],
+            ],
+            
+             /** Para los permisos  se hace lo siguiente*/ 
+            'access' => [
+               'class' => \yii\filters\AccessControl::className(),
+               'only' => ['index','update','delete','view','listar','listarcampanas','user'],
+               //Para los ussuario autenticados como super Admin
+               'rules' => [
+                   [
+                     'allow' =>true,
+                     'actions' =>['index','update','delete','view','listar','listarcampanas','user'],
+                     'roles' =>['@'],
+                   ],
+                
+            
+               ],
+            
+             ],
+            
+        ];
+    }
+
 
     public function actionIndex() {
         $model = new Campana();
@@ -20,6 +52,7 @@ class CampanaController extends \yii\web\Controller{
 
             $searchModel = new CampanaSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            $dataProvider->query->orderBy(['id_campana'=>SORT_DESC])->all();
             return $this->render('listar',  [
                 'model'=>$model,
                 'searchModel' => $searchModel,
@@ -34,6 +67,7 @@ class CampanaController extends \yii\web\Controller{
     public function actionListar(){
         $searchModel = new CampanaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->orderBy(['id_campana'=>SORT_DESC])->all();
         return $this->render('listar', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -44,6 +78,7 @@ class CampanaController extends \yii\web\Controller{
     public function actionListarcampanas(){
         $searchModel = new CampanaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->orderBy(['id_campana'=>SORT_DESC])->all();
         return $this->render('listarcampanas', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -51,12 +86,14 @@ class CampanaController extends \yii\web\Controller{
 
     }
     public function actionUser($id){
+        $model = $this->findModel($id);
         $searchModel = new InteractuarCampanaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->andWhere('campana_id_campana = '.$id);
         return $this->render('listaraccesocampanas', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'model' => $model,
         ]);
 
     }

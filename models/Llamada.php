@@ -47,10 +47,10 @@ class Llamada extends \yii\db\ActiveRecord
     {
         return [
             'id_llamada' => 'Id Llamada',
-            'fecha' => 'Fecha',
-            'hora' => 'Hora',
-            'ubicacion_id_ubicacion' => 'Ubicacion Id Ubicacion',
-            'persona_id_persona' => 'Persona Id Persona',
+            'fecha' => 'Fecha Llamada',
+            'hora' => 'Hora Llamada',
+            'ubicacion_id_ubicacion' => 'Ubicacion',
+            'persona_id_persona' => 'Persona',
         ];
     }
 

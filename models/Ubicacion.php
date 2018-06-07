@@ -8,7 +8,8 @@ use Yii;
  * This is the model class for table "ubicacion".
  *
  * @property int $id_ubicacion
- * @property string $coordena
+ * @property double $latitud
+ * @property double $longitud
  *
  * @property Llamada[] $llamadas
  */
@@ -28,8 +29,8 @@ class Ubicacion extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['coordena'], 'required'],
-            [['coordena'], 'string'],
+            [['latitud', 'longitud'], 'required'],
+            [['latitud', 'longitud'], 'number'],
         ];
     }
 
@@ -40,7 +41,8 @@ class Ubicacion extends \yii\db\ActiveRecord
     {
         return [
             'id_ubicacion' => 'Id Ubicacion',
-            'coordena' => 'Coordena',
+            'latitud' => 'Latitud',
+            'longitud' => 'Longitud',
         ];
     }
 

@@ -32,7 +32,7 @@ use yii\bootstrap\Modal;
 ?>
 
 <?php
-$this->title = 'Usuarios que han accedido a la Campaña';
+$this->title = 'Lista de Usuarios ';
 $columns=[
 
     ['class'=>'kartik\grid\SerialColumn', 'order'=>DynaGrid::ORDER_FIX_LEFT],
@@ -114,11 +114,11 @@ $columns=[
     'storage' => 'session',
     'gridOptions'=>[
         'dataProvider'=>$dataProvider,
-        'filterModel'=>$searchModel,
+        //'filterModel'=>$searchModel,
         'floatHeader'=>true,
         'pjax'=>true,
         'responsiveWrap'=>false,
-        'panel'=>['heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-tasks"></i>&nbsp;Usuarios</h3>'],
+        'panel'=>['heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-tasks"></i>&nbsp;'.'Usuarios que han accedido a la Campaña "'.$model->titulo.'"</h3>'],
     ],
     'options'=>['id'=>'dynagrid-1'] // a unique identifier is important
 ]) ?>

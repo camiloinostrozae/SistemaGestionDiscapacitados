@@ -31,7 +31,8 @@
         "kartik-v/yii2-widget-alert": "*",
         "kartik-v/yii2-widget-growl": "*",
         "kartik-v/yii2-dialog": "@dev",
-        "kartik-v/yii2-detail-view": "*"
+        "kartik-v/yii2-detail-view": "*",
+        "2amigos/yii2-google-maps-library" : "*"
         
     },
     "require-dev": {

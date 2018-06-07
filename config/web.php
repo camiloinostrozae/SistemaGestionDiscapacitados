@@ -14,6 +14,21 @@ $config = [
 
     'language' => 'es',
     'components' => [
+    
+    'assetManager' => [
+               'bundles' => [
+                   'dosamigos\google\maps\MapAsset' => [
+                       'options' => [
+                           'key' => 'AIzaSyAiX59wXMyTsTrQvwHXVhvQuroWDHpcYU4',
+                           'language' => 'es',
+                           'version' => '3.1.18',
+                            'libraries' => 'places',
+                            'v' => '3.exp',
+                            
+                       ]
+                   ]
+               ]
+          ],
 
         'view' => [
             'theme' => [
