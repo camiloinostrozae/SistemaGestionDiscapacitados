@@ -82,8 +82,12 @@
                 'icon' => 'tasks',
                 'url' => '#',
                 'items' => [
-                    ['label' => 'Listar Acceso a Campañas', 'icon' => 'dashboard', 'url' => ['/campana/listarcampanas'],],
-                    ['label' => 'Listar Acceso a Trámites', 'icon' => 'dashboard', 'url' => ['/tramite/listartramites'],],
+                    ['label' => 'Usuarios por Campañas', 'icon' => 'dashboard', 'url' => ['/campana/listarcampanas'],],
+                    ['label' => 'Usuarios por Trámites', 'icon' => 'dashboard', 'url' => ['/tramite/listartramites'],],
+                    ['label' => 'Campañas por Usuarios', 'icon' => 'users', 'url' => ['/persona/listarcamporpersona'],],
+                    ['label' => 'Trámites por Usuarios', 'icon' => 'users', 'url' => ['/persona/listartraporpersona'],],
+                    ['label' => 'Llamadas por Usuarios', 'icon' => 'users', 'url' => ['/persona/listarllamadasporpersona'],],
+                    
                 ],
             ],
         ],

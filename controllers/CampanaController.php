@@ -55,7 +55,7 @@ class CampanaController extends \yii\web\Controller{
 
             $searchModel = new CampanaSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-            $dataProvider->query->orderBy(['id_campana'=>SORT_DESC])->all();
+            $dataProvider->query->orderBy(['fecha_publicacion'=>SORT_DESC])->all();
             return $this->render('listar',  [
                 'model'=>$model,
                 'searchModel' => $searchModel,
@@ -70,7 +70,7 @@ class CampanaController extends \yii\web\Controller{
     public function actionListar(){
         $searchModel = new CampanaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->query->orderBy(['id_campana'=>SORT_DESC])->all();
+        $dataProvider->query->orderBy(['fecha_publicacion'=>SORT_DESC])->all();
         return $this->render('listar', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -81,7 +81,7 @@ class CampanaController extends \yii\web\Controller{
     public function actionListarcampanas(){
         $searchModel = new CampanaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->query->orderBy(['id_campana'=>SORT_DESC])->all();
+        $dataProvider->query->orderBy(['fecha_publicacion'=>SORT_DESC])->all();
         return $this->render('listarcampanas', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

@@ -78,5 +78,10 @@ class InteractuarTramite extends \yii\db\ActiveRecord
         return $this->hasOne(Rol::className(), ['id_rol' => 'rol_id_rol'])->viaTable('persona', ['id_persona' => 'persona_id_persona']);
     }
     
+       public function getTipotramiteIdTipotramite()
+    {
+        return $this->hasOne(TipoTramite::className(), ['id_tipo_tramite' => 'id_tipo_tramite'])->viaTable('tramite', ['id_tramite' => 'tramite_id_tramite']);
+    }
+    
     
 }
