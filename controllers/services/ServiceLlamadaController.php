@@ -3,8 +3,9 @@ namespace app\controllers\services;
 use yii\web\Response;
 use yii\rest\ActiveController;
 use app\models\Llamada;
-use app\models\Persona
-    use Yii;
+use app\models\Persona;
+use app\models\Ubicacion;
+use Yii;
 
 class ServiceLlamadaController extends ActiveController{
 
@@ -24,7 +25,7 @@ class ServiceLlamadaController extends ActiveController{
         return $behaviors;
     }
 
-    public actionGuardarLlamada($authkey){
+    public function actionGuardarLlamada(){
 
         $persona = new Persona();
         /*Lo pasado a través de la solicitud POST lo guardamos
@@ -46,6 +47,36 @@ class ServiceLlamadaController extends ActiveController{
         //Se establece la zona horaria de Chile
         date_default_timezone_set('America/Santiago');
         $llamada->hora = date('H:i:s');
+        /*La id de persona obtenida gracias al authkey, se la asignamos al id
+          persona de las instacioación de la llamada.
+         */
+        $llamada->persona_id_persona = $id_persona->id_persona;
+        /*Instaciamos una variable para obtener los atributos 
+          del modelo Ubicación y así recoger los datos pasados
+          por post e insertarlos en la BD.
+          */ 
+        
+        //Se define un id para asignarle posteriormente el id de la ubicación
+        $id_ubicacion;
+        $ubicacion = new Ubicacion;
+        $ubicacion->attributes = Yii::$app->request->post();
+        
+        $latitud = $ubicacion->latitud;
+        $longitud = $ubicacion->longitud;
+        //Insertamos los datos obtenidos relacionados con la ubicación en BD
+        if($ubicacion->validate() && $ubicacion->save()){
+            $id_ubicacion = $ubicacion->id_ubicacion;
+        }else{
+            return array('codigo'=>401,'estado'=>false);
+        }
+        
+        $llamada->ubicacion_id_ubicacion = $id_ubicacion;
+        if($llamada->validate() && $llamada->save()){
+             return array('codigo'=>200,'estado'=>true);
+        }else{
+             return array('codigo'=>1,'estado'=>false , "mensaje"=>$llamada->getErrors());
+        }
+            
 
     }
 }
