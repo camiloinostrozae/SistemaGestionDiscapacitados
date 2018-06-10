@@ -31,6 +31,9 @@ class LlamadaController extends \yii\web\Controller
                      'allow' =>true,
                      'actions' =>['index','listar','localizar'],
                      'roles' =>['@'],
+                    'matchCallback' => function ($rule,$action){
+                                                return \app\models\User::isCipol(Yii::$app->user->identity->id);
+                                         }
                    ],
                 
             

@@ -8,6 +8,9 @@ use app\models\PersonaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\InteractuarCampanaSearch;
+use app\models\InteractuarTramiteSearch;
+use app\models\LlamadaSearch;
 
 /**
  * PersonaController implements the CRUD actions for Persona model.
@@ -30,13 +33,16 @@ class PersonaController extends Controller
              /** Para los permisos  se hace lo siguiente*/ 
             'access' => [
                'class' => \yii\filters\AccessControl::className(),
-               'only' => ['index','update','delete','view','administrador','discapacitado','listardiscapacitados','listarnodiscapacitados','listaradministradores'],
+               'only' => ['update','delete','view','administrador','discapacitado','listardiscapacitados','listarnodiscapacitados','listaradministradores', 'listarcamporpersona','campanas','listartraporpersona','tramites','listarllamadasporpersona','llamadas'],
                //Para los ussuario autenticados como super Admin
                'rules' => [
                    [
                      'allow' =>true,
-                     'actions' =>['index','view','update','delete','administrador','discapacitado','listardiscapacitados','listarnodiscapacitados','listaradministradores'],
+                     'actions' =>['view','update','delete','administrador','discapacitado','listardiscapacitados','listarnodiscapacitados','listaradministradores','listarcamporpersona','campanas','listartraporpersona','tramites','listarllamadasporpersona','llamadas'],
                      'roles' =>['@'],
+                      'matchCallback' => function ($rule,$action){
+                                                return \app\models\User::isAdmin(Yii::$app->user->identity->id);
+                                         }
                    ],
                 
             
@@ -51,7 +57,7 @@ class PersonaController extends Controller
      * Lists all Persona models.
      * @return mixed
      */
-    public function actionIndex()
+    /**public function actionIndex()
     {
         $searchModel = new PersonaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -60,7 +66,7 @@ class PersonaController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
-    }
+    }**/
 
     /**
      * Displays a single Persona model.
@@ -265,5 +271,83 @@ class PersonaController extends Controller
 
     }
     
+     public function actionListarcamporpersona(){
+        $searchModel = new PersonaSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->andWhere('persona.rol_id_rol = 3 or persona.rol_id_rol = 4'); 
+        return $this->render('listarcamxpersonas', [
+
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+
+    }
+    
+    public function actionCampanas($id){
+        $model = $this->findModel($id);
+        $searchModel = new InteractuarCampanaSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->andWhere('persona_id_persona = '.$id);
+        return $this->render('listarcampanasporpersonas', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'model' => $model,
+        ]);
+
+        
+        
+    }
+    
+    
+     public function actionListartraporpersona(){
+        $searchModel = new PersonaSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->andWhere('persona.rol_id_rol = 3 or persona.rol_id_rol = 4'); 
+        return $this->render('listartraxpersonas', [
+
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+
+    }
+    
+     public function actionTramites($id){
+        $model = $this->findModel($id);
+        $searchModel = new InteractuarTramiteSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->andWhere('persona_id_persona = '.$id);
+        return $this->render('listartramitesporpersonas', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'model' => $model,
+        ]);
+
+    }
+    
+    public function actionListarllamadasporpersona(){
+        $searchModel = new PersonaSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->andWhere('persona.rol_id_rol = 4'); 
+        return $this->render('listarllamadasxpersona', [
+
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+
+    }
+
+     public function actionLlamadas($id){
+        $model = $this->findModel($id);
+        $searchModel = new LlamadaSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+         $dataProvider->query->andWhere('llamada.persona_id_persona = '.$id); 
+         $dataProvider->query->orderBy(['fecha'=>SORT_DESC])->all();
+        return $this->render('listarllamadas', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'model' => $model,
+        ]);
+
+    }
    
 }

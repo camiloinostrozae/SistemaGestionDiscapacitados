@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use app\models\Persona;
+
 class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
 {
     public $id;
@@ -104,5 +106,35 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
     public function validatePassword($password)
     {
         return $this->password === $password;
+    }
+    
+      public static function isAdmin($id){
+        
+        if(Persona::findOne(['id_persona'=>$id, 'rol_id_rol'=>1])){
+            return true;
+        }else{
+            return false;
+        }    
+    }
+    
+          public static function isCipol($id){
+        
+        if(Persona::findOne(['id_persona'=>$id, 'rol_id_rol'=>2])){
+            return true;
+        }else{
+            return false;
+        }    
+    }
+    
+    public static function isNeutro($id){
+        
+        if(Persona::findOne(['id_persona'=>$id, 'rol_id_rol'=>3])){
+            return true;
+        }else{
+            if(Persona::findOne(['id_persona'=>$id, 'rol_id_rol'=>4])){
+            return true;
+            }else{
+            return false;
+        }    }
     }
 }

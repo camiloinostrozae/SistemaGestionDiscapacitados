@@ -79,5 +79,10 @@ class InteractuarCampana extends \yii\db\ActiveRecord
         return $this->hasOne(Rol::className(), ['id_rol' => 'rol_id_rol'])->viaTable('persona', ['id_persona' => 'persona_id_persona']);
     }
     
+      public function getTipocampanaIdTipocampana()
+    {
+        return $this->hasOne(TipoCampana::className(), ['id_tipo_campana' => 'id_tipo_campana'])->viaTable('campana', ['id_campana' => 'campana_id_campana']);
+    }
+    
 
 }

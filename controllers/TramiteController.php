@@ -28,6 +28,9 @@ class TramiteController extends \yii\web\Controller
                      'allow' =>true,
                      'actions' =>['index','update','delete','view','listar','listartramites','user'],
                      'roles' =>['@'],
+                         'matchCallback' => function ($rule,$action){
+                                                return \app\models\User::isAdmin(Yii::$app->user->identity->id);
+                                         }
                    ],
                 
             
@@ -50,7 +53,7 @@ class TramiteController extends \yii\web\Controller
 
             $searchModel = new TramiteSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-            $dataProvider->query->orderBy(['id_tramite'=>SORT_DESC])->all();
+            $dataProvider->query->orderBy(['fecha_publicacion'=>SORT_DESC])->all();
             return $this->render('listar',  [
                 'model'=>$model,
                 'searchModel' => $searchModel,
@@ -65,7 +68,7 @@ class TramiteController extends \yii\web\Controller
      public function actionListar(){
         $searchModel = new TramiteSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-         $dataProvider->query->orderBy(['id_tramite'=>SORT_DESC])->all();
+         $dataProvider->query->orderBy(['fecha_publicacion'=>SORT_DESC])->all();
         return $this->render('listar', [
 
             'searchModel' => $searchModel,
@@ -95,7 +98,7 @@ class TramiteController extends \yii\web\Controller
       public function actionListartramites(){
         $searchModel = new TramiteSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-          $dataProvider->query->orderBy(['id_tramite'=>SORT_DESC])->all();
+          $dataProvider->query->orderBy(['fecha_publicacion'=>SORT_DESC])->all();
         return $this->render('listartramites', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
