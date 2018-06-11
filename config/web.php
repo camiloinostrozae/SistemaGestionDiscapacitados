@@ -14,21 +14,21 @@ $config = [
 
     'language' => 'es',
     'components' => [
-    
-    'assetManager' => [
-               'bundles' => [
-                   'dosamigos\google\maps\MapAsset' => [
-                       'options' => [
-                           'key' => 'AIzaSyAiX59wXMyTsTrQvwHXVhvQuroWDHpcYU4',
-                           'language' => 'es',
-                           'version' => '3.1.18',
-                            'libraries' => 'places',
-                            'v' => '3.exp',
-                            
-                       ]
-                   ]
-               ]
-          ],
+
+        'assetManager' => [
+            'bundles' => [
+                'dosamigos\google\maps\MapAsset' => [
+                    'options' => [
+                        'key' => 'AIzaSyAiX59wXMyTsTrQvwHXVhvQuroWDHpcYU4',
+                        'language' => 'es',
+                        'version' => '3.1.18',
+                        'libraries' => 'places',
+                        'v' => '3.exp',
+
+                    ]
+                ]
+            ]
+        ],
 
         'view' => [
             'theme' => [
@@ -59,16 +59,16 @@ $config = [
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
-                      'viewPath' => '@app/mail',
-                       'useFileTransport' => true,
-                    'transport' => [
-             'class' => 'Swift_SmtpTransport',
-             'host' => 'smtp.gmail.com',  // ej. smtp.mandrillapp.com o smtp.gmail.com
-             'username' => 'sistemadiscvisual@gmail.com',
-             'password' => 'camiloqwerty99',
-             'port' => '587', // El puerto 25 es un puerto común también
-             'encryption' => 'ssl',
-         ],
+            'viewPath' => '@app/mail',
+            'useFileTransport' => true,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.gmail.com',  // ej. smtp.mandrillapp.com o smtp.gmail.com
+                'username' => 'sistemadiscvisual@gmail.com',
+                'password' => 'camiloqwerty99',
+                'port' => '587', // El puerto 25 es un puerto común también
+                'encryption' => 'ssl',
+            ],
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.*/
@@ -84,18 +84,18 @@ $config = [
             ],
         ],
         'db' => $db,
-        
+
         'response' => [
-            
+
             'formatters' => [
-              \yii\web\Response::FORMAT_JSON => [
-             'class' => 'yii\web\JsonResponseFormatter',
-             'prettyPrint' => YII_DEBUG, // use "pretty" output in debug mode
-             
+                \yii\web\Response::FORMAT_JSON => [
+                    'class' => 'yii\web\JsonResponseFormatter',
+                    'prettyPrint' => YII_DEBUG, // use "pretty" output in debug mode
+
+                ],
+            ],
         ],
-    ],
-        ],
-        
+
         'urlManager' => [
             'enablePrettyUrl' => true,
             //'enableStrictParsing' => true,
@@ -106,7 +106,8 @@ $config = [
                 ['class'=>'yii\rest\UrlRule','pluralize' => 'false','controller'=>'service-comuna',],
                 ['class'=>'yii\rest\UrlRule','pluralize' => 'false','controller'=>'service-region',],
                 ['class'=>'yii\rest\UrlRule','pluralize'=>false,'controller'=>'service-interactuar-campana'],
-                 ['class'=>'yii\rest\UrlRule','pluralize'=>false,'controller'=>'service-interactuar-tramite'],
+                ['class'=>'yii\rest\UrlRule','pluralize'=>false,'controller'=>'service-interactuar-tramite'],
+                ['class'=>'yii\rest\UrlRule','pluralize'=>false,'controller'=>'service-llamada'],
                 'services/service-comuna/get-comuna/<region_id_region:\d+>' => 'services/service-comuna/get-comuna',
                 'services/service-comuna/listar-comunas' => 'services/service-comuna/listar-comunas',
                 'services/service-region/get-region/<id:\d+>' => 'services/service-region/get-region',
@@ -114,10 +115,11 @@ $config = [
                 'services/service-tramite/listar-tramites' => 'services/service-tramite/listar-tramites',
                 'services/service-interactuar-campana/registrar-interaccion-campana' => 'services/service-interactuar-campana/registrar-interaccion-campana',
                 'services/service-interactuar-tramite/registrar-interaccion-tramite' => 'services/service-interactuar-tramite/registrar-interaccion-tramite',
-               '<controller:\w+>/<action:\w+>/<user:[^/]+>/<password:\w+>' => '<controller>/<action>',
+                'services/service-llamada/guardar-llamada' => 'services/service-llamada/guardar-llamada',
+                '<controller:\w+>/<action:\w+>/<user:[^/]+>/<password:\w+>' => '<controller>/<action>',
             ],
         ],
-        
+
 
         'i18n' => [
             'translations' => [
@@ -133,8 +135,8 @@ $config = [
         ],
     ],
 
-    
-    
+
+
 
 
     'modules' => [
@@ -155,6 +157,7 @@ $config = [
     'params' => $params,
 ];
 
+/*
 if (YII_ENV_DEV) {
     // configuration adjustments for 'dev' environment
     $config['bootstrap'][] = 'debug';
@@ -171,5 +174,5 @@ if (YII_ENV_DEV) {
         //'allowedIPs' => ['127.0.0.1', '::1'],
     ];
 }
-
+*/
 return $config;
