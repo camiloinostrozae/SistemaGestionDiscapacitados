@@ -29,6 +29,7 @@ $coord = new LatLng(['lat' => $latitud, 'lng' => $longitud]);
 $map = new Map([
     'center' => $coord,
     'zoom' => 16,
+    'width' => '100%',
 ]);
 
 // Lets add a marker now
