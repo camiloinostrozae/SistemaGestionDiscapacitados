@@ -37,7 +37,7 @@ class Persona extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return 'persona';
     }
-    
+
     public $region_id;
 
     /**
@@ -142,82 +142,72 @@ class Persona extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return $this->hasOne(Rol::className(), ['id_rol' => 'rol_id_rol']);
     }
-    
-    
+
+
     public function getAuthKey(){
         return $this->auth_key;
     }
-    
+
     public function getId(){
         return $this->id_persona;
     }
-    
+
     public function getRol(){
         return $this->id_rol;
     }
-    
+
     public function validateAuthKey($authKey){
         return $this->auth_key === $authKey;
     }
-    
+
     public static function findIdentity($id){
         return self::findOne($id);
     }
-    
+
     public static function findIdentityByAccessToken($token,$type=null){
         throw new \yii\base\NotSupportedException();
     }
-    
+
     //Función para buscar el usuario por email, servirá para el login
     public static function findByEmail($email){
         return self::findOne(['email'=>$email]);
     }
-    
+
     //Verifica si el rut se encuentra en la BD
     public function isValidRut($rut){
-         $run = self::findOne(['rut'=>$rut]);
-         if($run){
-             return true;
-         }else{
-             return false;
-         }
+        $run = self::findOne(['rut'=>$rut]);
+        if($run){
+            return true;
+        }else{
+            return false;
+        }
     }
     //Formatea el rut ingresado al formato XXXXXXXX-X
     public function formatearRut($rut){
-        
-        if(strpos($rut,'.')){
-            $rut_formateado = str_replace(".","",$rut);
-            if(strlen($rut_formateado) == 9){
-                $nuevo_rut = substr($rut_formateado, 0, strlen($rut_formateado) - 1) . '-' . substr($rut_formateado, -1) ;
-                return $nuevo_rut;
-            }
-            return $rut_formateado;
-        }
-        
-        if(strlen($rut)==9){
-            $rut_guion = substr($rut, 0, strlen($rut) - 1) . '-' . substr($rut, -1) ;
-            return $rut_guion;
-        }
-        return $rut;
-        
+
+
+        $rut_formateado = str_replace(".","",$rut);
+        return $rut_formateado;
+
+
     }
-    
+
     //Función para validar la contraseña
     public function validatePassword($contrasena){
         return $this->contrasena === $contrasena;
     }
-    
-      public  function generateAuthKey()
+
+    public  function generateAuthKey()
     {
         return $this->auth_key = Yii::$app->security->generateRandomString();
     }
-    
+
     //Seleccionar el ID del usuario en base a su authkey
     public static function getUserId($auth_key){
         return self::findOne(['auth_key'=>$auth_key]);
     }
-    
-    
+
+
     //Función para formatear la fecha ingresada en el form y se inserte en el formato correcto
 
     public function beforeSave($insert){
@@ -232,9 +222,9 @@ class Persona extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         }
 
     }
-    
-    
-    
+
+
+
     //Función para validar el rut de persona
     public function validateRut($attribute,$params){
         $rut=$this->rut;
@@ -244,45 +234,45 @@ class Persona extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             if(strpos($rut,".")!=false){
                 $this->addError($attribute, 'El RUT ingresado no es válido, Ingrese formato XXXXXXXX-Y');
             }else{
-            $data = explode('-', $rut);
-            if(is_numeric($data[0])){
-            $evaluate = strrev($data[0]);
-            $multiply = 2;
-            $store = 0;
-            for ($i = 0; $i < strlen($evaluate); $i++) {
-                $store += $evaluate[$i] * $multiply;
-                $multiply++;
-                if ($multiply > 7)
+                $data = explode('-', $rut);
+                if(is_numeric($data[0])){
+                    $evaluate = strrev($data[0]);
                     $multiply = 2;
-            }
-            isset($data[1]) ? $verifyCode = strtolower($data[1]) : $verifyCode = '';
-            $result = 11 - ($store % 11);
-            if ($result == 10)
-                $result = 'k';
-            if ($result == 11)
-                $result = 0;
-            if ($verifyCode != $result)
-                $this->addError('rut', 'El RUT ingresado no es válido');
-    }else{
-              $this->addError($attribute, 'El RUT ingresado no es válido');  
-            }
-    }}
-}
-    
+                    $store = 0;
+                    for ($i = 0; $i < strlen($evaluate); $i++) {
+                        $store += $evaluate[$i] * $multiply;
+                        $multiply++;
+                        if ($multiply > 7)
+                            $multiply = 2;
+                    }
+                    isset($data[1]) ? $verifyCode = strtolower($data[1]) : $verifyCode = '';
+                    $result = 11 - ($store % 11);
+                    if ($result == 10)
+                        $result = 'k';
+                    if ($result == 11)
+                        $result = 0;
+                    if ($verifyCode != $result)
+                        $this->addError('rut', 'El RUT ingresado no es válido');
+                }else{
+                    $this->addError($attribute, 'El RUT ingresado no es válido');  
+                }
+            }}
+    }
+
     public function validarTel($attribute,$params){
-        
+
         $telefono=$this->telefono;
         if(strlen($telefono)<8){
             $this->addError($attribute, 'Ingrese un teléfono de 8 dígitos');
         }
-}
-    
+    }
+
     public function validarTel2($attribute,$params){
         $telefono=$this->telefono;
-           if(ctype_digit($telefono)==false){//ve si telefono se compone de puros digitos
-               $this->addError($attribute, 'Teléfono con formato inválido');
-            }
-            
+        if(ctype_digit($telefono)==false){//ve si telefono se compone de puros digitos
+            $this->addError($attribute, 'Teléfono con formato inválido');
         }
+
+    }
 
 }
