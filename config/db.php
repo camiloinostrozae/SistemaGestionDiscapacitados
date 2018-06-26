@@ -1,5 +1,5 @@
 <?php
-/*
+/**
 return [
     'class' => 'yii\db\Connection',
     'dsn' => 'mysql:host=146.83.196.166;dbname=jdoming',
