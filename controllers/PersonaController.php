@@ -183,17 +183,19 @@ class PersonaController extends Controller
            $model->generateAuthKey();
            $model->contrasena=substr(md5(microtime()), 1, 8);//genera contraseña aleatoria de 12 caracteres
             $email = Yii::$app->request->post('Persona') ['email']; 
-            Yii::$app->mailer->compose()
-                ->setFrom(Yii::$app->params['adminEmail'])
-                ->setTo($email)
-                ->setSubject('Envío de Contraseña')
-                ->setTextBody('Su contraseña de acceso al sistema Web es: '.$model->contrasena)
-                ->send();
+           
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->getSession()->setFlash('success', [
 
                 'message' => 'Administrador ingresado exitosamente',
             ]);
+            //Se envia el correo al email ingresado
+             Yii::$app->mailer->compose()
+                ->setFrom(Yii::$app->params['adminEmail'])
+                ->setTo($email)
+                ->setSubject('Envío de Contraseña')
+                ->setTextBody('Su contraseña de acceso al sistema Web es: '.$model->contrasena)
+                ->send();
             return $this->redirect(['listaradministradores', 'id' => $model->id_persona]);
         }
 
@@ -204,23 +206,24 @@ class PersonaController extends Controller
     
     //Acción create para personas discapacitadas
     public function actionDiscapacitado(){
-          $model = new Persona();
-           $model->generateAuthKey();
+            $model = new Persona();
+            $model->generateAuthKey();
             $model->rol_id_rol=4;
             $model->contrasena=substr(md5(microtime()), 1, 8);
             $email = Yii::$app->request->post('Persona') ['email']; 
-         Yii::$app->mailer->compose()
-                ->setFrom(Yii::$app->params['adminEmail'])
-                ->setTo($email)
-                ->setSubject('Envío de Contraseña')
-                ->setTextBody('Su contraseña de acceso a la aplicación móvil es: '.$model->contrasena)
-                ->send();
                
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->getSession()->setFlash('success', [
 
                 'message' => 'Usuario ingresado exitosamente',
             ]);
+                //Se envia el correo al email ingresado
+                Yii::$app->mailer->compose()
+                ->setFrom(Yii::$app->params['adminEmail'])
+                ->setTo($email)
+                ->setSubject('Envío de Contraseña')
+                ->setTextBody('Su contraseña de acceso a la aplicación móvil es: '.$model->contrasena)
+                ->send();
             return $this->redirect(['listardiscapacitados', 'id' => $model->id_persona]);
         }
 
