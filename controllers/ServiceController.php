@@ -54,7 +54,7 @@ class ServiceController extends ActiveController{
         $rutYaRegistrado = Persona::findOne(['rut'=>$persona->rut]);
         if(!empty($rutYaRegistrado)){
             return array('codigo'=>001, 'estado'=>false);
-        }
+        } 
         if($persona->validate()){
             $datos = array( 'nombre'=>$persona->nombre,'apellido'=>$persona->apellido,'rut'=>$persona->rut, 
                             'contrasena'=>$persona->contrasena,'auth_key'=>$persona->auth_key);
