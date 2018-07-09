@@ -27,14 +27,14 @@ use app\models\Persona;
                 <!-- User Account: style can be found in dropdown.less -->
 
                 <li class="dropdown user user-menu">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="<?= $directoryAsset ?>/img/avatar5.png" class="user-image" alt="User Image"/>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="width: 55px;height: 50px;">
+                        <img src="<?= $directoryAsset ?>/img/pdi.png" class="user-image" alt="User Image"/>
                         <span class="hidden-xs"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="<?= $directoryAsset ?>/img/avatar5.png" class="img-circle"/>
+                            <img src="<?= $directoryAsset ?>/img/pdi.png" class="img-circle"/>
 
                            
                                 
@@ -73,7 +73,7 @@ use app\models\Persona;
                         
                         <!-- Menu Footer-->
                         <li class="user-footer">
-                            <div class="pull-left" style="text-align=center;">
+                            <div class="pull-left" style="text-align=center;padding-left:70px;">
                                 <?= Html::a(
                                     'Cerrar Sesión',
                                     ['/site/logout'],

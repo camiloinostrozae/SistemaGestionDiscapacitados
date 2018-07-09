@@ -32,7 +32,7 @@ use yii\bootstrap\Modal;
 ?>
 
 <?php
-$this->title = 'Listar Acceso a Campañas';
+$this->title = 'Lista de Acceso a Campañas';
 $columns=[
 
     ['class'=>'kartik\grid\SerialColumn', 'order'=>DynaGrid::ORDER_FIX_LEFT],
@@ -120,6 +120,7 @@ $columns=[
         'pjax'=>true,
         'responsiveWrap'=>false,
         'panel'=>['heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-tasks"></i>&nbsp;Campañas</h3>'],
+        'toolbar' =>  ['{toggleData}',],
     ],
     'options'=>['id'=>'dynagrid-1'] // a unique identifier is important
 ]) ?>

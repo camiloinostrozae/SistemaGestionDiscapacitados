@@ -32,7 +32,7 @@ use yii\bootstrap\Modal;
 ?>
 
 <?php
-$this->title = 'Listar Trámites';
+$this->title = 'Lista de Trámites';
 $columns=[
 
     ['class'=>'kartik\grid\SerialColumn', 'order'=>DynaGrid::ORDER_FIX_LEFT],
@@ -68,6 +68,14 @@ $columns=[
         'filterWidgetOptions'=>[
             'pluginOptions'=>['format'=>'dd-mm-yyyy']
         ],
+    ],
+    
+    [
+        'attribute'=>'estado',
+        'pageSummary'=>'Page Total',
+        'vAlign'=>'middle',
+        
+        'contentOptions'=>['style'=>'max-width: 100px;overflow: auto; word-wrap: break-word;']
     ],
 
 
@@ -138,6 +146,7 @@ $columns=[
         'pjax'=>true,
         'responsiveWrap'=>false,
         'panel'=>['heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-tasks"></i>&nbsp;Trámites</h3>'],
+        'toolbar' =>  ['{toggleData}',],
     ],
     'options'=>['id'=>'dynagrid-1'] // a unique identifier is important
 ]) ?>

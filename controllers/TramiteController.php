@@ -107,12 +107,14 @@ class TramiteController extends \yii\web\Controller
     }
     
      public function actionUser($id){
+         $model = $this->findModel($id);
         $searchModel = new InteractuarTramiteSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->andWhere('tramite_id_tramite = '.$id);
         return $this->render('listaraccesotramites', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'model' => $model,
         ]);
 
     }

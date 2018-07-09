@@ -40,7 +40,7 @@ use app\models\Region;
     ?>
     <?= $form->field($model, 'nombre')->textInput(['placeholder'=>'Ingrese el nombre']) ?>
     <?= $form->field($model, 'apellido')->textInput(['placeholder'=>'Ingrese el apellido']) ?>
-    <?= $form->field($model, 'rut')->textInput(['placeholder'=>'Ingrese el Rut bajo el formato XXXXXXXX-Y','maxlength'=>12]) ?>
+    <?= $form->field($model, 'rut')->textInput(['placeholder'=>'Ingrese el Rut con formato XXXXXXXX-Y','maxlength'=>10]) ?>
     <?= $form->field($model, 'fecha_nacimiento')->widget(
     DatePicker::classname(),
     [

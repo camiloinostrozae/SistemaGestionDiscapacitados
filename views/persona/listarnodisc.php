@@ -32,7 +32,7 @@ use yii\bootstrap\Modal;
 ?>
 
 <?php
-$this->title = 'Listar No Discapacitados';
+$this->title = 'Lista de No Discapacitados';
 $columns=[
 
     ['class'=>'kartik\grid\SerialColumn', 'order'=>DynaGrid::ORDER_FIX_LEFT],
@@ -121,7 +121,7 @@ $columns=[
                                ['title' => Yii::t('yii', 'Ver'),
                                 'data-toggle'=>"modal",
                                 'data-target'=>"#myModal",
-                                'data-title'=>"Detalle del Usuario",]);
+                                'data-title'=>"Detalle del No Discapacitado",]);
             }
 
         ],
@@ -150,6 +150,7 @@ $columns=[
         'pjax'=>true,
         'responsiveWrap'=>false,
         'panel'=>['heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-tasks"></i>&nbsp;No Discapacitados</h3>'],
+        'toolbar' =>  ['{toggleData}',],
     ],
     'options'=>['id'=>'dynagrid-1'] // a unique identifier is important
 ]) ?>

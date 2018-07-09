@@ -10,7 +10,7 @@ use kartik\detail\DetailView;
 $atributos = [
     [
         'group'=>true,
-        'label'=>'Acerca del Usuario',
+        'label'=>'Información de la Persona',
         'rowOptions'=>['class'=>'info']
     ],
 

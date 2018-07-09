@@ -32,7 +32,7 @@ use yii\bootstrap\Modal;
 ?>
 
 <?php
-$this->title = 'Listar Administradores';
+$this->title = 'Lista de Administradores';
 $columns=[
 
     ['class'=>'kartik\grid\SerialColumn', 'order'=>DynaGrid::ORDER_FIX_LEFT],
@@ -146,6 +146,7 @@ $columns=[
         'pjax'=>true,
         'responsiveWrap'=>false,
         'panel'=>['heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-tasks"></i>&nbsp;Administradores</h3>'],
+        'toolbar' =>  ['{toggleData}',],
     ],
     'options'=>['id'=>'dynagrid-1'] // a unique identifier is important
 ]) ?>

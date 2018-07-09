@@ -99,6 +99,7 @@ $columns=[
         'pjax'=>true,
         'responsiveWrap'=>false,
 'panel'=>['heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-tasks"></i>&nbsp;'.'Trámites escuchados por '.$model->nombre.' '.$model->apellido.'</h3>'],
+    'toolbar' =>  ['{toggleData}',],
     ],
     'options'=>['id'=>'dynagrid-1'] // a unique identifier is important
 ]) ?>
