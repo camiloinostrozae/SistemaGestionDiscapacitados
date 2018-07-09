@@ -36,7 +36,8 @@ class ServiceController extends ActiveController{
         $respuesta = array();
         if($persona){
             return array('codigo'=>200,'estado'=>true,'mensaje'=>'Usuario válido','nombre'=>$persona->nombre,
-                         'apellido'=>$persona->apellido,'rut'=>$persona->rut,'contrasena'=>$persona->contrasena,'auth_key'=>$persona->auth_key);
+                         'apellido'=>$persona->apellido,'rut'=>$persona->rut,'contrasena'=>$persona->contrasena,'auth_key'=>$persona->auth_key,
+                         "rol"=>$persona->rol_id_rol);
         }else{
 
             return array('codigo'=>401,'estado'=>false,'mensaje'=>'El usuario no existe');
@@ -53,7 +54,7 @@ class ServiceController extends ActiveController{
         $rutYaRegistrado = Persona::findOne(['rut'=>$persona->rut]);
         if(!empty($rutYaRegistrado)){
             return array('codigo'=>001, 'estado'=>false);
-        }
+        } 
         if($persona->validate()){
             $datos = array( 'nombre'=>$persona->nombre,'apellido'=>$persona->apellido,'rut'=>$persona->rut, 
                             'contrasena'=>$persona->contrasena,'auth_key'=>$persona->auth_key);

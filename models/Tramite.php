@@ -115,6 +115,7 @@ class Tramite extends \yii\db\ActiveRecord
             ->from('tramite')
             ->select('id_tramite, titulo, contenido, fecha_publicacion, fecha_vencimiento, tipo')
             ->innerJoin('tipo_tramite','tramite.id_tipo_tramite = tipo_tramite.id_tipo_tramite')
+            ->where(['estado' => 'vigente'])
             ->orderBy('id_tramite')
              ->all();
         if($tramites){
