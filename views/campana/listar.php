@@ -63,7 +63,7 @@ $columns=[
     [
         'attribute'=>'fecha_publicacion',
         'filterType'=>GridView::FILTER_DATE,
-        'format'=>'raw',
+        'format'=>['date', 'php:d-m-Y'],//date solo para mostrar en formato con letras
         'width'=>'170px',
         'contentOptions'=>['style'=>'max-width: 100px;'],
         'filterWidgetOptions'=>[
@@ -91,6 +91,7 @@ $columns=[
         'class'=>'kartik\grid\ActionColumn',
         'dropdown'=>false,
         'template'=>'{view}{update}{delete}',
+        
 
         'buttons'=>[
 
@@ -99,7 +100,7 @@ $columns=[
 
                                [  
                                    'title' => Yii::t('yii', 'Eliminar'),
-                                   'data-confirm' => "¿Esta seguro de eliminar esta campaña?",
+                                   'data-confirm' => "¿Está seguro de eliminar la campaña '".$model->titulo."' ?",
                                    'data-method' => 'post',
                                    'data-pjax' => 0
                                ]);
@@ -119,7 +120,7 @@ $columns=[
                                ['title' => Yii::t('yii', 'Ver'),
                                 'data-toggle'=>"modal",
                                 'data-target'=>"#myModal",
-                                'data-title'=>"Detalle de la Campaña",]);
+                                'data-title'=>"Detalle de la Campaña Educativa",]);
             }
 
         ],
@@ -148,7 +149,12 @@ $columns=[
         'pjax'=>true,
         'responsiveWrap'=>false,
         'panel'=>['heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-tasks"></i>&nbsp;Campañas</h3>'],
-        'toolbar' =>  ['{toggleData}',],
+        'toolbar' =>  ['{toggleData}'],
+        /**'toggleDataOptions' =>[
+                                    'all'=>['label' =>Yii :: t ('kvgrid', 'Mostrar Todo'),'class'=>'btn btn-info','title'=>'Mostrar Todo'],
+                                    'page'=>['label' => Yii :: t ('kvgrid', 'Paginación'),'class'=>'btn btn-info','title'=>'Paginación'],
+                                    
+    ],*/
     ],
     'options'=>['id'=>'dynagrid-1'] // a unique identifier is important
 ]) ?>

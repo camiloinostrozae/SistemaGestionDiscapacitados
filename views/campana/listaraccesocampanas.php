@@ -59,6 +59,7 @@ $columns=[
             ],*/
     [
                 'attribute' => 'persona_id_persona',
+                 'format'=>['date', 'php:d-m-Y'],
                 'label' => 'Fecha Nacimiento',
                 'value' => function($model){
                     return $model->personaIdPersona->fecha_nacimiento;
@@ -90,6 +91,7 @@ $columns=[
 
      [
                 'attribute' => 'fecha',
+                 'format'=>['date', 'php:d-m-Y'],
                 
             ],
       [
@@ -118,7 +120,8 @@ $columns=[
         'floatHeader'=>true,
         'pjax'=>true,
         'responsiveWrap'=>false,
-        'panel'=>['heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-tasks"></i>&nbsp;'.'Usuarios que han accedido a la Campaña "'.$model->titulo.'"</h3>'],
+        'panel'=>['heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-tasks"></i>&nbsp;'.'Usuarios que han accedido a la Campaña
+        Educativa "'.$model->titulo.'"</h3>'],
         'toolbar' =>  ['{toggleData}',],
     ],
     'options'=>['id'=>'dynagrid-1'] // a unique identifier is important

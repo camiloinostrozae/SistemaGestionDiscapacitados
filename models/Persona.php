@@ -48,7 +48,6 @@ class Persona extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return [
             [['nombre', 'apellido', 'fecha_nacimiento', 'email', 'rut' ,'telefono', 'sexo', 'contrasena', 'auth_key', 'comuna_id_comuna', 'rol_id_rol'], 'required'],
             [['rut'],'unique','message'=>'Ya existe una persona registrada con ese Rut'],
-             //[['rut'],'rut'],
             [['email'],'unique','message'=>'Ya existe una persona con ese email'],
             [['fecha_nacimiento'], 'safe'],
             [['comuna_id_comuna', 'rol_id_rol'], 'integer'],
@@ -57,6 +56,7 @@ class Persona extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             [['telefono'], 'string', 'max' => 20],
             [['telefono'], 'validarTel'],
             [['telefono'], 'validarTel2'],
+            [['telefono'], 'unique','message'=>'Ya existe una persona registrada con ese Teléfono'],
             [['rut'], 'validateRut'],
             [['sexo'], 'string', 'max' => 10],
             [['email'], 'email','message'=>'Email con Formato no Válido'],
@@ -119,6 +119,12 @@ class Persona extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return $this->hasMany(Tramite::className(), ['id_tramite' => 'tramite_id_tramite'])->viaTable('interactuar_tramite', ['persona_id_persona' => 'id_persona']);
     }
+    
+      public function getNombreRegion()
+    {
+        return $this->hasOne(Region::className(), ['id_region' => 'region_id_region'])->viaTable('comuna', ['id_comuna' => 'comuna_id_comuna']);
+    }
+
 
     /**
      * @return \yii\db\ActiveQuery

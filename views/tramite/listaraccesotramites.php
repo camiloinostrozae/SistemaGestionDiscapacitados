@@ -59,6 +59,7 @@ $columns=[
             ],*/
     [
                 'attribute' => 'persona_id_persona',
+                 'format'=>['date', 'php:d-m-Y'],
                 'label' => 'Fecha Nacimiento',
                 'value' => function($model){
                     return $model->personaIdPersona->fecha_nacimiento;
@@ -91,6 +92,7 @@ $columns=[
 
      [
                 'attribute' => 'fecha',
+                'format'=>['date', 'php:d-m-Y'],
                 
             ],
       [

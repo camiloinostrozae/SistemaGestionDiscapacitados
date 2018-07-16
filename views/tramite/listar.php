@@ -62,7 +62,7 @@ $columns=[
     [
         'attribute'=>'fecha_publicacion',
         'filterType'=>GridView::FILTER_DATE,
-        'format'=>'raw',
+        'format'=>['date', 'php:d-m-Y'],
         'width'=>'170px',
         'contentOptions'=>['style'=>'max-width: 100px;'],
         'filterWidgetOptions'=>[
@@ -97,7 +97,7 @@ $columns=[
 
                                [  
                                    'title' => Yii::t('yii', 'Eliminar'),
-                                   'data-confirm' => "¿Esta seguro de eliminar este trámite?",
+                                   'data-confirm' => "¿Está seguro de eliminar el trámite '".$model->titulo."' ?",
                                    'data-method' => 'post',
                                    'data-pjax' => 0
                                ]);

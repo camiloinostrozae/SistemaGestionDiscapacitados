@@ -32,7 +32,7 @@ use yii\bootstrap\Modal;
 ?>
 
 <?php
-$this->title = 'Lista de Acceso a Campañas';
+$this->title = 'Lista de Acceso a Campañas Educativas';
 $columns=[
 
     ['class'=>'kartik\grid\SerialColumn', 'order'=>DynaGrid::ORDER_FIX_LEFT],
@@ -57,14 +57,15 @@ $columns=[
                 'value' => function($model){
                     return $model->tipoCampana->tipo;
                 },
+                'contentOptions'=>['style'=>'max-width: 100px;overflow: auto; word-wrap: break-word;']
         ],
 
 
     [
         'attribute'=>'fecha_publicacion',
         'filterType'=>GridView::FILTER_DATE,
-        'format'=>'raw',
-        'width'=>'170px',
+         'format'=>['date', 'php:d-m-Y'],
+        'width'=>'150px',
         'contentOptions'=>['style'=>'max-width: 100px;'],
         'filterWidgetOptions'=>[
             'pluginOptions'=>['format'=>'dd-mm-yyyy']

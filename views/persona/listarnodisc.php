@@ -100,7 +100,7 @@ $columns=[
 
                                [  
                                    'title' => Yii::t('yii', 'Eliminar'),
-                                   'data-confirm' => "¿Esta seguro de eliminar a este usuario?",
+                                   'data-confirm' => "¿Está seguro de eliminar al usuario '".$model->nombre." ".$model->apellido."' ?",
                                    'data-method' => 'post',
                                    'data-pjax' => 0
                                ]);

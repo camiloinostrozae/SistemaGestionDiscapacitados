@@ -47,6 +47,7 @@ $columns=[
 
      [
                 'attribute' => 'fecha',
+                 'format'=>['date', 'php:d-m-Y'],
                 
             ],
       [

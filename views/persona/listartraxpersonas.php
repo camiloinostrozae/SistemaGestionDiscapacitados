@@ -55,6 +55,7 @@ $columns=[
     [
         'attribute'=>'fecha_nacimiento',
         'pageSummary'=>'Page Total',
+         'format'=>['date', 'php:d-m-Y'],
         'vAlign'=>'middle',
         'order'=>DynaGrid::ORDER_FIX_LEFT,
         'contentOptions'=>['style'=>'max-width: 300px;max-height: 150px;overflow: auto; word-wrap: break-word;white-space: nowrap;'],

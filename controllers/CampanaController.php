@@ -50,7 +50,7 @@ class CampanaController extends \yii\web\Controller{
             // datos validos recibidos
             Yii::$app->getSession()->setFlash('success', [
 
-                'message' => 'Campaña ingresada exitosamente',
+                'message' => 'Campaña Ingresada Exitosamente',
             ]);
 
             $searchModel = new CampanaSearch();
@@ -113,7 +113,7 @@ class CampanaController extends \yii\web\Controller{
 
         Yii::$app->getSession()->setFlash('error', [
 
-            'message' => 'Campaña eliminada exitosamente',
+            'message' => 'Campaña Eliminada Exitosamente',
         ]);
         $this->findModel($id)->delete();
         return $this->redirect(['listar']);
@@ -127,7 +127,7 @@ class CampanaController extends \yii\web\Controller{
 
             Yii::$app->getSession()->setFlash('info', [
 
-                'message' => 'Campaña actualizada exitosamente',
+                'message' => 'Campaña Actualizada Exitosamente',
             ]);
             return $this->redirect(['listar', 'id' => $model->id_campana]);
         } else {

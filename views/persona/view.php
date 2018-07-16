@@ -41,7 +41,7 @@ $atributos = [
             ],
             [
                 'attribute'=>'fecha_nacimiento', 
-                'format'=>'raw', 
+                'format'=>['date', 'php:d-m-Y'],
                 'valueColOptions'=>['style'=>'width:30%'], 
             ],
         ],

@@ -46,6 +46,7 @@ $columns=[
             ],
     [
                 'attribute' => 'tramite_id_tramite',
+                 'format'=>['date', 'php:d-m-Y'],
                 'label' => 'Fecha de Publicación',
                 'value' => function($model){
                     return $model->tramiteIdTramite->fecha_publicacion;
@@ -70,6 +71,7 @@ $columns=[
 
      [
                 'attribute' => 'fecha',
+                 'format'=>['date', 'php:d-m-Y'],
                 
             ],
       [

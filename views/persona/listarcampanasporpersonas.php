@@ -32,7 +32,7 @@ use yii\bootstrap\Modal;
 ?>
 
 <?php
-$this->title = 'Lista de Campañas ';
+$this->title = 'Lista de Campañas Educativas ';
 $columns=[
 
     ['class'=>'kartik\grid\SerialColumn', 'order'=>DynaGrid::ORDER_FIX_LEFT],
@@ -46,6 +46,7 @@ $columns=[
             ],
     [
                 'attribute' => 'campana_id_campana',
+                 'format'=>['date', 'php:d-m-Y'],
                 'label' => 'Fecha de Publicación',
                 'value' => function($model){
                     return $model->campanaIdCampana->fecha_publicacion;
@@ -70,6 +71,7 @@ $columns=[
 
      [
                 'attribute' => 'fecha',
+                 'format'=>['date', 'php:d-m-Y'],
                 
             ],
       [
@@ -98,7 +100,7 @@ $columns=[
         'floatHeader'=>true,
         'pjax'=>true,
         'responsiveWrap'=>false,
-'panel'=>['heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-tasks"></i>&nbsp;'.'Campañas escuchadas por '.$model->nombre.' '.$model->apellido.'</h3>'],
+'panel'=>['heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-tasks"></i>&nbsp;'.'Campañas Educativas escuchadas por '.$model->nombre.' '.$model->apellido.'</h3>'],
     'toolbar' =>  ['{toggleData}',],
     ],
     'options'=>['id'=>'dynagrid-1'] // a unique identifier is important

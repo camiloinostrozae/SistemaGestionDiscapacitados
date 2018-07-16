@@ -47,6 +47,7 @@ use app\models\Region;
 	'name' => 'check_issue_date', 
 	'value' => date('d-M-Y', strtotime('+2 days')),
 	'options' => ['placeholder' => 'Seleccione una fecha de nacimiento'],
+    'removeButton' =>false,
 	'pluginOptions' => [
 		'format' => 'dd-mm-yyyy',
 		'todayHighlight' => true,
@@ -60,9 +61,30 @@ use app\models\Region;
     <?= $form->field($model, 'sexo')->dropDownList(['Masculino' => 'Masculino', 'Femenino' => 'Femenino'],['prompt'=>'Seleccione el Sexo'])?>
     
 
-    
-     <?php
+    <?php
+    if(isset($model->nombreRegion->nombre)){
+      $region=$model->nombreRegion->nombre;
+        
             $regiones = ArrayHelper::map(Region::find()->all(), 'id_region', 'nombre');
+            echo $form->field($model, 'region_id')->dropDownList(
+                $regiones,
+                [
+                    'prompt'=>$region,
+                    'onchange'=>'
+                                    $.get( "'.Url::toRoute('dependent-dropdown/comuna').'", { id: $(this).val() } )
+                                        .done(function( data ) {
+                                            $( "#'.Html::getInputId($model, 'comuna_id_comuna').'" ).html( data );
+                                        }
+                                    );
+                                '
+                ]
+            );
+    
+                $comuna = ArrayHelper::map(Comuna::find()->where(['id_comuna' =>$model->comuna_id_comuna])->all(), 'id_comuna', 'nombre');
+                echo $form->field($model, 'comuna_id_comuna')->dropDownList($comuna);        
+    }else{
+    
+    $regiones = ArrayHelper::map(Region::find()->all(), 'id_region', 'nombre');
             echo $form->field($model, 'region_id')->dropDownList(
                 $regiones,
                 [
@@ -78,8 +100,8 @@ use app\models\Region;
             );
     
                 $comuna = ArrayHelper::map(Comuna::find()->where(['id_comuna' =>$model->comuna_id_comuna])->all(), 'id_comuna', 'nombre');
-                echo $form->field($model, 'comuna_id_comuna')->dropDownList($comuna,['prompt'=>'Primero Seleccione Región']);        
-    
+                echo $form->field($model, 'comuna_id_comuna')->dropDownList($comuna);   
+    }
             ?>
             
 

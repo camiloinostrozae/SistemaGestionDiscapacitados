@@ -47,6 +47,7 @@ use app\models\TipoTramite;
 	'name' => 'check_issue_date', 
 	'value' => date('d-M-Y', strtotime('+2 days')),
 	'options' => ['placeholder' => 'Seleccione una fecha'],
+    'removeButton' =>false,
 	'pluginOptions' => [
 		'format' => 'dd-mm-yyyy',
 		'todayHighlight' => true,

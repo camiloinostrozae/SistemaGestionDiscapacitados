@@ -55,8 +55,8 @@ $columns=[
     [
         'attribute'=>'fecha_publicacion',
         'filterType'=>GridView::FILTER_DATE,
-        'format'=>'raw',
-        'width'=>'170px',
+         'format'=>['date', 'php:d-m-Y'],
+        'width'=>'150px',
         'contentOptions'=>['style'=>'max-width: 100px;'],
         'filterWidgetOptions'=>[
             'pluginOptions'=>['format'=>'dd-mm-yyyy']

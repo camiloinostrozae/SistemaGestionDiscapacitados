@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Campana */
 
-$this->title = 'Actualizar Campaña: '.$model->titulo;
+$this->title = 'Actualizar Campaña Educativa: '.$model->titulo;
 ?>
 <div class="campana-update">
 

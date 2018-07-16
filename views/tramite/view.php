@@ -73,10 +73,11 @@ $atributos = [
             [
                 'attribute'=>'fecha_publicacion',
                 'valueColOptions'=>['style'=>'width:30%'],
+                'format'=>['date', 'php:d-m-Y'],
             ],
             [
                 'attribute'=>'fecha_vencimiento', 
-                'format'=>'raw', 
+                'format'=>['date', 'php:d-m-Y'],
                 'valueColOptions'=>['style'=>'width:30%'], 
             ],
         ],

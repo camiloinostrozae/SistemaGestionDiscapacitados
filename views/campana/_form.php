@@ -65,7 +65,9 @@ use app\models\TipoCampana;
     [
 	'name' => 'check_issue_date', 
 	'value' => date('d-M-Y', strtotime('+2 days')),
+    'type' => DatePicker :: TYPE_COMPONENT_PREPEND,
 	'options' => ['placeholder' => 'Seleccione una fecha'],
+    'removeButton' =>false,
 	'pluginOptions' => [
 		'format' => 'dd-mm-yyyy',
 		'todayHighlight' => true,
