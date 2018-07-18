@@ -181,7 +181,7 @@ class PersonaController extends Controller
     public function actionAdministrador(){
           $model = new Persona();
            $model->generateAuthKey();
-           $model->contrasena=substr(md5(microtime()), 1, 8);//genera contraseña aleatoria de 12 caracteres
+           $model->contrasena=substr(md5(microtime()), 1, 8);//genera contraseña aleatoria de 8 caracteres
             $email = Yii::$app->request->post('Persona') ['email']; 
            
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -278,6 +278,7 @@ class PersonaController extends Controller
         $searchModel = new PersonaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->andWhere('persona.rol_id_rol = 3 or persona.rol_id_rol = 4'); 
+        $dataProvider->query->orderBy(['id_persona'=>SORT_DESC])->all(); 
         return $this->render('listarcamxpersonas', [
 
             'searchModel' => $searchModel,
@@ -291,6 +292,7 @@ class PersonaController extends Controller
         $searchModel = new InteractuarCampanaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->andWhere('persona_id_persona = '.$id);
+        $dataProvider->query->orderBy(['fecha'=>SORT_DESC,'hora'=>SORT_DESC])->all();
         return $this->render('listarcampanasporpersonas', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -305,7 +307,8 @@ class PersonaController extends Controller
      public function actionListartraporpersona(){
         $searchModel = new PersonaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->query->andWhere('persona.rol_id_rol = 3 or persona.rol_id_rol = 4'); 
+        $dataProvider->query->andWhere('persona.rol_id_rol = 3 or persona.rol_id_rol = 4');
+         $dataProvider->query->orderBy(['id_persona'=>SORT_DESC])->all(); 
         return $this->render('listartraxpersonas', [
 
             'searchModel' => $searchModel,
@@ -319,6 +322,7 @@ class PersonaController extends Controller
         $searchModel = new InteractuarTramiteSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->andWhere('persona_id_persona = '.$id);
+          $dataProvider->query->orderBy(['fecha'=>SORT_DESC,'hora'=>SORT_DESC])->all();
         return $this->render('listartramitesporpersonas', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -331,6 +335,7 @@ class PersonaController extends Controller
         $searchModel = new PersonaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->andWhere('persona.rol_id_rol = 4'); 
+        $dataProvider->query->orderBy(['id_persona'=>SORT_DESC])->all(); 
         return $this->render('listarllamadasxpersona', [
 
             'searchModel' => $searchModel,
@@ -344,7 +349,7 @@ class PersonaController extends Controller
         $searchModel = new LlamadaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
          $dataProvider->query->andWhere('llamada.persona_id_persona = '.$id); 
-         $dataProvider->query->orderBy(['fecha'=>SORT_DESC])->all();
+        $dataProvider->query->orderBy(['fecha'=>SORT_DESC,'hora'=>SORT_DESC])->all();
         return $this->render('listarllamadas', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

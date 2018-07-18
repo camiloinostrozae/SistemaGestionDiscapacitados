@@ -53,7 +53,7 @@ class TramiteController extends \yii\web\Controller
 
             $searchModel = new TramiteSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-            $dataProvider->query->orderBy(['fecha_publicacion'=>SORT_DESC])->all();
+            $dataProvider->query->orderBy(['id_tramite'=>SORT_DESC])->all();
             return $this->render('listar',  [
                 'model'=>$model,
                 'searchModel' => $searchModel,
@@ -68,7 +68,7 @@ class TramiteController extends \yii\web\Controller
      public function actionListar(){
         $searchModel = new TramiteSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-         $dataProvider->query->orderBy(['fecha_publicacion'=>SORT_DESC])->all();
+         $dataProvider->query->orderBy(['id_tramite'=>SORT_DESC])->all();
         return $this->render('listar', [
 
             'searchModel' => $searchModel,
@@ -98,7 +98,7 @@ class TramiteController extends \yii\web\Controller
       public function actionListartramites(){
         $searchModel = new TramiteSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-          $dataProvider->query->orderBy(['fecha_publicacion'=>SORT_DESC])->all();
+          $dataProvider->query->orderBy(['id_tramite'=>SORT_DESC])->all();
         return $this->render('listartramites', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -111,6 +111,7 @@ class TramiteController extends \yii\web\Controller
         $searchModel = new InteractuarTramiteSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->andWhere('tramite_id_tramite = '.$id);
+         $dataProvider->query->orderBy(['fecha'=>SORT_DESC,'hora'=>SORT_DESC])->all();
         return $this->render('listaraccesotramites', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

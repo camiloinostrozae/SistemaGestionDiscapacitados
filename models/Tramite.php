@@ -38,7 +38,6 @@ class Tramite extends \yii\db\ActiveRecord
             [['titulo', 'contenido', 'fecha_publicacion', 'fecha_vencimiento', 'estado', 'id_tipo_tramite'], 'required'],
             [['titulo', 'contenido'], 'string'],
             [['fecha_publicacion', 'fecha_vencimiento'], 'safe'],
-            [['fecha_vencimiento'], 'validarFecha'],
             [['id_tipo_tramite'], 'integer'],
             [['estado'], 'string', 'max' => 10],
             [['id_tipo_tramite'], 'exist', 'skipOnError' => true, 'targetClass' => TipoTramite::className(), 'targetAttribute' => ['id_tipo_tramite' => 'id_tipo_tramite']],

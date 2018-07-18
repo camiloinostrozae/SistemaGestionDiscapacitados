@@ -55,7 +55,7 @@ class CampanaController extends \yii\web\Controller{
 
             $searchModel = new CampanaSearch();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-            $dataProvider->query->orderBy(['fecha_publicacion'=>SORT_DESC])->all();
+            $dataProvider->query->orderBy(['id_campana'=>SORT_DESC])->all();
             return $this->render('listar',  [
                 'model'=>$model,
                 'searchModel' => $searchModel,
@@ -70,7 +70,7 @@ class CampanaController extends \yii\web\Controller{
     public function actionListar(){
         $searchModel = new CampanaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->query->orderBy(['fecha_publicacion'=>SORT_DESC])->all();
+        $dataProvider->query->orderBy(['id_campana'=>SORT_DESC])->all();
         return $this->render('listar', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -81,7 +81,7 @@ class CampanaController extends \yii\web\Controller{
     public function actionListarcampanas(){
         $searchModel = new CampanaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->query->orderBy(['fecha_publicacion'=>SORT_DESC])->all();
+        $dataProvider->query->orderBy(['id_campana'=>SORT_DESC])->all();
         return $this->render('listarcampanas', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -93,6 +93,7 @@ class CampanaController extends \yii\web\Controller{
         $searchModel = new InteractuarCampanaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->andWhere('campana_id_campana = '.$id);
+        $dataProvider->query->orderBy(['fecha'=>SORT_DESC,'hora'=>SORT_DESC])->all();
         return $this->render('listaraccesocampanas', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

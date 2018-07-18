@@ -38,7 +38,6 @@ class Campana extends \yii\db\ActiveRecord
             [['titulo', 'contenido', 'fecha_publicacion', 'fecha_vencimiento', 'estado', 'id_tipo_campana'], 'required'],
             [['titulo', 'contenido'], 'string'],
             [['fecha_publicacion', 'fecha_vencimiento'], 'safe'],
-            [['fecha_vencimiento'], 'validarFecha'],
             [['id_tipo_campana'], 'integer'],
             [['estado'], 'string', 'max' => 10],
             [['id_tipo_campana'], 'exist', 'skipOnError' => true, 'targetClass' => TipoCampana::className(), 'targetAttribute' => ['id_tipo_campana' => 'id_tipo_campana']],
