@@ -28,7 +28,7 @@
                 'icon' => 'tasks',
                 'url' => '#',
                 'items' => [
-                    ['label' => 'Listar Llamadas', 'icon' => 'file-code-o', 'url' => ['/llamada/listar'],],
+                    ['label' => 'Listar Llamadas', 'icon' => 'phone', 'url' => ['/llamada/listar'],],
                 ],
             ],
 

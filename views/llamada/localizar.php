@@ -20,10 +20,14 @@ use dosamigos\google\maps\layers\BicyclingLayer;
 
 <?php
 
-$this->title = 'Localización Llamada';
+$latitud = $modelU->latitud;
+$longitud = $modelU->longitud;
+$nombre = $modelP->nombre;
+$apellido = $modelP->apellido;
 
-$latitud = $model->latitud;
-$longitud = $model->longitud;
+$this->title = 'Localización de Llamada realizada por '.$nombre.' '.$apellido;
+
+
 
 $coord = new LatLng(['lat' => $latitud, 'lng' => $longitud]);
 $map = new Map([
@@ -41,7 +45,7 @@ $marker = new Marker([
 // Provide a shared InfoWindow to the marker
 $marker->attachInfoWindow(
     new InfoWindow([
-        'content' => '<p>Ubicación de Persona Discapacitada que realizó la Llamada</p>'
+        'content' => '<p>Ubicación estimada de '.$nombre.' '.$apellido.'</p>'
     ])
 );
  

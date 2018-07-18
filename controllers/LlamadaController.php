@@ -6,6 +6,7 @@ use Yii;
 use app\models\Llamada;
 use app\models\LlamadaSearch;
 use app\models\Ubicacion;
+use app\models\Persona;
 use yii\filters\VerbFilter;
 
 class LlamadaController extends \yii\web\Controller
@@ -65,14 +66,17 @@ class LlamadaController extends \yii\web\Controller
         $model = $this->findModel($id);
          
         $id_ubicacion = $model->ubicacion_id_ubicacion;
+        $id_persona = $model->persona_id_persona; 
          
         $modelUbicacion = $this->findModelUbicacion($id_ubicacion); 
+        $modelPersona =  $this->findModelPersona($id_persona); 
          
         //$latitud = $modelUbicacion->latitud;
         // $longitud = $modelUbicacion->longitud;
         
         return $this->render('localizar',[
-            'model' => $modelUbicacion,
+            'modelU' => $modelUbicacion,
+            'modelP' => $modelPersona,
         ]);
 
     }
@@ -87,6 +91,14 @@ class LlamadaController extends \yii\web\Controller
     
       protected function findModelUbicacion($id) {
         if (($model = Ubicacion::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+    
+       protected function findModelPersona($id) {
+        if (($model = Persona::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

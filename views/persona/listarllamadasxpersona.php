@@ -87,7 +87,7 @@ $columns=[
         'buttons'=>[
 
             'llamadas' => function ($url, $model) {
-                return Html::a('<span class="glyphicon glyphicon-earphone"></span>', $url,
+                return Html::a('<span class="glyphicon glyphicon-phone"></span>', $url,
 
                                [  
                                    'title' => Yii::t('yii', 'Llamadas'),
