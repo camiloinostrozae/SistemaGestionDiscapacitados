@@ -53,7 +53,8 @@ class LlamadaController extends \yii\web\Controller
      public function actionListar(){
         $searchModel = new LlamadaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->query->orderBy(['fecha'=>SORT_DESC,'hora'=>SORT_DESC])->all();
+        //$dataProvider->query->orderBy(['fecha'=>SORT_DESC,'hora'=>SORT_DESC])->all();
+         $dataProvider->query->orderBy(['id_llamada'=>SORT_DESC])->all();
         return $this->render('listar', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
