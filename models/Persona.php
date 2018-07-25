@@ -177,9 +177,24 @@ class Persona extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     //Función para buscar el usuario por email, servirá para el login
     public static function findByEmail($email){
-        return self::findOne(['email'=>$email]);
+        $mail = self::findOne(['email'=>$email]);
+        if($mail){
+            return true;
+        }else{
+            return false;
+        }
     }
 
+    //Función para buscar el usuario por telefono, servirá para el login
+    public static function findByTelefono($telefono){
+        $celular = self::findOne(['telefono'=>$telefono]);
+        if($celular){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
     //Verifica si el rut se encuentra en la BD
     public function isValidRut($rut){
         $run = self::findOne(['rut'=>$rut]);
