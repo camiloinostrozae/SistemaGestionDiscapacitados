@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Campana;
+use app\models\TipoCampana;
 
 /**
  * CampanaSearch represents the model behind the search form of `app\models\Campana`.
@@ -15,11 +16,13 @@ class CampanaSearch extends Campana
     /**
      * @inheritdoc
      */
+    
+    public $tipo;
     public function rules()
     {
         return [
             [['id_campana', 'id_tipo_campana'], 'integer'],
-            [['titulo', 'contenido', 'fecha_publicacion', 'fecha_vencimiento', 'estado'], 'safe'],
+            [['titulo', 'contenido', 'fecha_publicacion', 'fecha_vencimiento', 'estado','tipo'], 'safe'],
         ];
     }
 
@@ -41,7 +44,8 @@ class CampanaSearch extends Campana
      */
     public function search($params)
     {
-        $query = Campana::find();
+        $query = Campana::find()
+            ->joinWith(['tipoCampana']);
 
         // add conditions that should always apply here
 
@@ -67,7 +71,8 @@ class CampanaSearch extends Campana
 
         $query->andFilterWhere(['like', 'titulo', $this->titulo])
             ->andFilterWhere(['like', 'contenido', $this->contenido])
-            ->andFilterWhere(['like', 'estado', $this->estado]);
+            ->andFilterWhere(['like', 'estado', $this->estado])
+            ->andFilterWhere(['like', 'tipo', $this->tipo]);
 
         return $dataProvider;
     }

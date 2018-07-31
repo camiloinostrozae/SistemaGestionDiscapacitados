@@ -15,11 +15,13 @@ class TramiteSearch extends Tramite
     /**
      * @inheritdoc
      */
+    public $tipo;
+    
     public function rules()
     {
         return [
             [['id_tramite', 'id_tipo_tramite'], 'integer'],
-            [['titulo', 'contenido', 'fecha_publicacion', 'fecha_vencimiento', 'estado'], 'safe'],
+            [['titulo', 'contenido', 'fecha_publicacion', 'fecha_vencimiento', 'estado','tipo'], 'safe'],
         ];
     }
 
@@ -41,7 +43,8 @@ class TramiteSearch extends Tramite
      */
     public function search($params)
     {
-        $query = Tramite::find();
+        $query = Tramite::find() 
+            ->joinWith(['tipoTramite']);
 
         // add conditions that should always apply here
 
@@ -67,7 +70,8 @@ class TramiteSearch extends Tramite
 
         $query->andFilterWhere(['like', 'titulo', $this->titulo])
             ->andFilterWhere(['like', 'contenido', $this->contenido])
-            ->andFilterWhere(['like', 'estado', $this->estado]);
+            ->andFilterWhere(['like', 'estado', $this->estado])
+            ->andFilterWhere(['like', 'tipo', $this->tipo]);
 
         return $dataProvider;
     }

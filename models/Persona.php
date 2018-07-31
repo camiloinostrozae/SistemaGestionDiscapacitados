@@ -177,12 +177,8 @@ class Persona extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     //Función para buscar el usuario por email, servirá para el login
     public static function findByEmail($email){
-        $mail = self::findOne(['email'=>$email]);
-        if($mail){
-            return true;
-        }else{
-            return false;
-        }
+       return self::findOne(['email'=>$email]);
+        
     }
 
     //Función para buscar el usuario por telefono, servirá para el login

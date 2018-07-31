@@ -62,12 +62,17 @@ $columns=[
     
     [
         'attribute'=>'fecha_nacimiento',
+        'filterType'=>GridView::FILTER_DATE,
         'pageSummary'=>'Page Total',
          'format'=>['date', 'php:d-m-Y'],
         'vAlign'=>'middle',
         'order'=>DynaGrid::ORDER_FIX_LEFT,
         'contentOptions'=>['style'=>'max-width: 300px;max-height: 150px;overflow: auto; word-wrap: break-word;white-space: nowrap;'],
+        'filterWidgetOptions'=>[
+            'pluginOptions'=>['format'=>'yyyy-mm-dd']
+        ],
     ],
+    
     
     [
         'attribute'=>'sexo',
@@ -116,7 +121,7 @@ $columns=[
     'storage' => 'session',
     'gridOptions'=>[
         'dataProvider'=>$dataProvider,
-        //'filterModel'=>$searchModel,
+        'filterModel'=>$searchModel,
         'floatHeader'=>true,
         'pjax'=>true,
         'responsiveWrap'=>false,

@@ -70,13 +70,12 @@ $columns=[
     ],
     
     
-    [
-                'attribute' => 'rol_id_rol',
-                'label' => 'Tipo Usuario',
-                'value' => function($model){
-                    return $model->rolIdRol->tipo;
-                },
-            ],
+     [
+                'attribute' => 'tipo',
+                'label'=>'Tipo Usuario',
+                'value' => 'rolIdRol.tipo'
+                
+        ],
      [
                 'attribute' => 'comuna_id_comuna',
                 'value' => function($model){
@@ -122,7 +121,7 @@ $columns=[
     'storage' => 'session',
     'gridOptions'=>[
         'dataProvider'=>$dataProvider,
-        //'filterModel'=>$searchModel,
+        'filterModel'=>$searchModel,
         'floatHeader'=>true,
         'pjax'=>true,
         'responsiveWrap'=>false,

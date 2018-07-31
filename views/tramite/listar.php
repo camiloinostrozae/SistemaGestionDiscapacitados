@@ -51,12 +51,13 @@ $columns=[
         'order'=>DynaGrid::ORDER_FIX_LEFT,
         'contentOptions'=>['style'=>'max-width: 300px;max-height: 150px;overflow: auto; word-wrap: break-word;white-space: nowrap;'],
     ],*/
+   
     
-     [
-                'attribute' => 'id_tipo_tramite',
-                'value' => function($model){
-                    return $model->tipoTramite->tipo;
-                },
+      [
+                'attribute' => 'tipo',
+                'label'=>'Tipo del Trámite',
+                'value' => 'tipoTramite.tipo'
+                
         ],
 
     [
@@ -66,7 +67,7 @@ $columns=[
         'width'=>'170px',
         'contentOptions'=>['style'=>'max-width: 100px;'],
         'filterWidgetOptions'=>[
-            'pluginOptions'=>['format'=>'dd-mm-yyyy']
+            'pluginOptions'=>['format'=>'yyyy-mm-dd']
         ],
     ],
     
@@ -141,7 +142,7 @@ $columns=[
     'storage' => 'session',
     'gridOptions'=>[
         'dataProvider'=>$dataProvider,
-        //'filterModel'=>$searchModel,
+        'filterModel'=>$searchModel,
         'floatHeader'=>true,
         'pjax'=>true,
         'responsiveWrap'=>false,
