@@ -31,9 +31,9 @@ class Comuna extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre', 'region_id_region'], 'required'],
+            [['nombreComuna', 'region_id_region'], 'required'],
             [['region_id_region'], 'integer'],
-            [['nombre'], 'string', 'max' => 100],
+            [['nombreComuna'], 'string', 'max' => 100],
             [['region_id_region'], 'exist', 'skipOnError' => true, 'targetClass' => Region::className(), 'targetAttribute' => ['region_id_region' => 'id_region']],
         ];
     }
@@ -45,7 +45,7 @@ class Comuna extends \yii\db\ActiveRecord
     {
         return [
             'id_comuna' => 'Id Comuna',
-            'nombre' => 'Nombre',
+            'nombreComuna' => 'Nombre',
             'region_id_region' => 'Region Id Region',
         ];
     }
@@ -67,10 +67,10 @@ class Comuna extends \yii\db\ActiveRecord
     }
     
        public static function getComunas(){
-        return ArrayHelper::map(Comuna::find()->all(),'id_comuna','nombre');
+        return ArrayHelper::map(Comuna::find()->all(),'id_comuna','nombreComuna');
     }
     
     public static function  getIdComuna($comuna){
-        return self::find()->select('id_comuna')->where(['nombre'=>$comuna])->one() ;
+        return self::find()->select('id_comuna')->where(['nombreComuna'=>$comuna])->one() ;
     }
 }

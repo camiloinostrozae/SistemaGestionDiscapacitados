@@ -38,17 +38,14 @@ $columns=[
     ['class'=>'kartik\grid\SerialColumn', 'order'=>DynaGrid::ORDER_FIX_LEFT],
     
      [
-                'attribute' => 'persona_id_persona',
-                'value' => function($model){
-                    return $model->personaIdPersona->nombre;
-                },
+                'attribute' => 'nombre',
+                'label' => 'Nombre',
+                'value' => 'personaIdPersona.nombre'
             ],
     [
-                'attribute' => 'persona_id_persona',
+                'attribute' => 'apellido',
                 'label' => 'Apellido',
-                'value' => function($model){
-                    return $model->personaIdPersona->apellido;
-                },
+                'value' => 'personaIdPersona.apellido'
             ],
    /** [
                 'attribute' => 'persona_id_persona',
@@ -58,40 +55,40 @@ $columns=[
                 },
             ],*/
     [
-                'attribute' => 'persona_id_persona',
+                'attribute' => 'fecha_nacimiento',
+                'filterType'=>GridView::FILTER_DATE,
                  'format'=>['date', 'php:d-m-Y'],
                 'label' => 'Fecha Nacimiento',
-                'value' => function($model){
-                    return $model->personaIdPersona->fecha_nacimiento;
-                },
+                'value' => 'personaIdPersona.fecha_nacimiento',
+                'filterWidgetOptions'=>[
+                  'pluginOptions'=>['format'=>'yyyy-mm-dd']
+        ],
+            ],
+     [
+                'attribute' => 'sexo',
+                'label' => 'Sexo',
+                'value' => 'personaIdPersona.sexo'
             ],
     [
-                'attribute' => 'persona_id_persona',
-                'label' => 'Sexo',
-                'value' => function($model){
-                    return $model->personaIdPersona->sexo;
-                },
-            ],
-     [
-                'attribute' => 'persona_id_persona',
+                'attribute' => 'tipo',
                 'label' => 'Tipo Usuario',
-                'value' => function($model){
-                    return $model->rolIdRol->tipo;
-                },
+                'value' => 'personaIdPersona.rolIdRol.tipo'
             ],
 
 
      [
-                'attribute' => 'persona_id_persona',
+                'attribute' => 'nombreComuna',
                 'label' => 'Comuna',
-                'value' => function($model){
-                    return $model->comunaIdComuna->nombre;
-                },
+                'value' => 'personaIdPersona.comunaIdComuna.nombreComuna'
             ],
 
      [
                 'attribute' => 'fecha',
+                'filterType'=>GridView::FILTER_DATE,
                  'format'=>['date', 'php:d-m-Y'],
+                    'filterWidgetOptions'=>[
+                  'pluginOptions'=>['format'=>'yyyy-mm-dd']
+        ],
                 
             ],
       [
@@ -116,7 +113,7 @@ $columns=[
     'storage' => 'session',
     'gridOptions'=>[
         'dataProvider'=>$dataProvider,
-        //'filterModel'=>$searchModel,
+        'filterModel'=>$searchModel,
         'floatHeader'=>true,
         'pjax'=>true,
         'responsiveWrap'=>false,

@@ -54,11 +54,15 @@ $columns=[
     
     [
         'attribute'=>'fecha_nacimiento',
+        'filterType'=>GridView::FILTER_DATE,
         'pageSummary'=>'Page Total',
          'format'=>['date', 'php:d-m-Y'],
         'vAlign'=>'middle',
         'order'=>DynaGrid::ORDER_FIX_LEFT,
         'contentOptions'=>['style'=>'max-width: 300px;max-height: 150px;overflow: auto; word-wrap: break-word;white-space: nowrap;'],
+        'filterWidgetOptions'=>[
+                  'pluginOptions'=>['format'=>'yyyy-mm-dd']
+        ],
     ],
     
     [
@@ -76,12 +80,13 @@ $columns=[
                 'value' => 'rolIdRol.tipo'
                 
         ],
-     [
-                'attribute' => 'comuna_id_comuna',
-                'value' => function($model){
-                    return $model->comunaIdComuna->nombre;
-                },
-            ],
+    [
+                'attribute' => 'nombreComuna',
+                'label'=>'Comuna',
+                'value' => 'comunaIdComuna.nombreComuna'
+                
+        ],
+
 
     
     [

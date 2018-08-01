@@ -15,13 +15,13 @@ class PersonaSearch extends Persona
     /**
      * @inheritdoc
      */
-    //public $nombre;
+    public $nombreComuna;
     public $tipo;
     public function rules()
     {
         return [
             [['id_persona', 'comuna_id_comuna', 'rol_id_rol'], 'integer'],
-            [['nombre', 'apellido', 'rut', 'fecha_nacimiento', 'email', 'telefono', 'sexo', 'contrasena', 'auth_key','tipo'], 'safe'],
+            [['nombre', 'apellido', 'rut', 'fecha_nacimiento', 'email', 'telefono', 'sexo', 'contrasena', 'auth_key','tipo','nombreComuna'], 'safe'],
         ];
     }
 
@@ -46,7 +46,8 @@ class PersonaSearch extends Persona
         
         
         $query = Persona::find()
-            ->joinWith(['rolIdRol']);
+            ->joinWith(['rolIdRol'])
+            ->joinWith(['comunaIdComuna']);
       
         // add conditions that should always apply here
 
@@ -78,8 +79,8 @@ class PersonaSearch extends Persona
             ->andFilterWhere(['like', 'sexo', $this->sexo])
             ->andFilterWhere(['like', 'contrasena', $this->contrasena])
             ->andFilterWhere(['like', 'auth_key', $this->auth_key])
-            ->andFilterWhere(['like', 'tipo', $this->tipo]);
-           // ->andFilterWhere(['like', 'nombre', $this->nombre]);
+            ->andFilterWhere(['like', 'tipo', $this->tipo])
+            ->andFilterWhere(['like', 'nombreComuna', $this->nombreComuna]);
 
         return $dataProvider;
     }

@@ -80,7 +80,7 @@ use app\models\Region;
                 ]
             );
     
-                $comuna = ArrayHelper::map(Comuna::find()->where(['id_comuna' =>$model->comuna_id_comuna])->all(), 'id_comuna', 'nombre');
+                $comuna = ArrayHelper::map(Comuna::find()->where(['id_comuna' =>$model->comuna_id_comuna])->all(), 'id_comuna', 'nombreComuna');
                 echo $form->field($model, 'comuna_id_comuna')->dropDownList($comuna);        
     }else{
     
@@ -99,7 +99,7 @@ use app\models\Region;
                 ]
             );
     
-                $comuna = ArrayHelper::map(Comuna::find()->where(['id_comuna' =>$model->comuna_id_comuna])->all(), 'id_comuna', 'nombre');
+                $comuna = ArrayHelper::map(Comuna::find()->where(['id_comuna' =>$model->comuna_id_comuna])->all(), 'id_comuna', 'nombreComuna');
                 echo $form->field($model, 'comuna_id_comuna')->dropDownList($comuna);   
     }
             ?>
