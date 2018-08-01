@@ -56,16 +56,7 @@ class ServiceController extends ActiveController{
             return array('codigo'=>001, 'estado'=>false);
         } 
         
-        $emailRegistrado = Persona::findOne(['email'=>$persona->email]); 
-        if(Persona::findByEmail($emailRegistrado)){
-            return array('codigo'=>2, 'estado'=>false);
-        }
-        
-        $telefonoRegistrado = Persona::findOne(['telefono'=>$persona->telefono]);
-        if(Persona::findByTelefono($telefonoRegistrado)){
-            return array('codigo'=>3, 'estado'=>false);
-        }
-        
+       
         if($persona->validate()){
             $datos = array( 'nombre'=>$persona->nombre,'apellido'=>$persona->apellido,'rut'=>$persona->rut, 
                             'contrasena'=>$persona->contrasena,'auth_key'=>$persona->auth_key);
