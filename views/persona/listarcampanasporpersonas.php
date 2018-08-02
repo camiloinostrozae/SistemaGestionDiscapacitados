@@ -37,28 +37,26 @@ $columns=[
 
     ['class'=>'kartik\grid\SerialColumn', 'order'=>DynaGrid::ORDER_FIX_LEFT],
     
-     [
-                'attribute' => 'campana_id_campana',
+      [
+                'attribute' => 'titulo',
                 'label' => 'Título',
-                'value' => function($model){
-                    return $model->campanaIdCampana->titulo;
-                },
+                'value' => 'campanaIdCampana.titulo'
             ],
     [
-                'attribute' => 'campana_id_campana',
+                'attribute' => 'fecha_publicacion',
+                'filterType'=>GridView::FILTER_DATE,
                  'format'=>['date', 'php:d-m-Y'],
                 'label' => 'Fecha de Publicación',
-                'value' => function($model){
-                    return $model->campanaIdCampana->fecha_publicacion;
-                },
+                'value' => 'campanaIdCampana.fecha_publicacion',
+                'filterWidgetOptions'=>[
+                  'pluginOptions'=>['format'=>'yyyy-mm-dd']
+        ],
             ],
  
-    [
-                'attribute' => 'campana_id_campana',
+   [
+                'attribute' => 'estado',
                 'label' => 'Estado',
-                'value' => function($model){
-                    return $model->campanaIdCampana->estado;
-                },
+                'value' => 'campanaIdCampana.estado'
             ],
 
      [
@@ -71,7 +69,11 @@ $columns=[
 
      [
                 'attribute' => 'fecha',
+                'filterType'=>GridView::FILTER_DATE,
                  'format'=>['date', 'php:d-m-Y'],
+                    'filterWidgetOptions'=>[
+                  'pluginOptions'=>['format'=>'yyyy-mm-dd']
+        ],
                 
             ],
       [
@@ -96,7 +98,7 @@ $columns=[
     'storage' => 'session',
     'gridOptions'=>[
         'dataProvider'=>$dataProvider,
-        //'filterModel'=>$searchModel,
+        'filterModel'=>$searchModel,
         'floatHeader'=>true,
         'pjax'=>true,
         'responsiveWrap'=>false,

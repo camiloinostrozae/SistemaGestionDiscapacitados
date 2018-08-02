@@ -71,12 +71,12 @@ $columns=[
     ],
     
     
-     [
-                'attribute' => 'comuna_id_comuna',
-                'value' => function($model){
-                    return $model->comunaIdComuna->nombre;
-                },
-            ],
+      [
+                'attribute' => 'nombreComuna',
+                'label'=>'Comuna',
+                'value' => 'comunaIdComuna.nombreComuna'
+                
+        ],
 
     
   
@@ -145,7 +145,7 @@ $columns=[
     'storage' => 'session',
     'gridOptions'=>[
         'dataProvider'=>$dataProvider,
-        //'filterModel'=>$searchModel,
+        'filterModel'=>$searchModel,
         'floatHeader'=>true,
         'pjax'=>true,
         'responsiveWrap'=>false,

@@ -61,18 +61,20 @@ $columns=[
         'contentOptions'=>['style'=>'max-width: 300px;max-height: 150px;overflow: auto; word-wrap: break-word;white-space: nowrap;'],
     ],
     
-    [
-                'attribute' => 'rol_id_rol',
-                'value' => function($model){
-                    return $model->rolIdRol->tipo;
-                },
-            ],
-     [
-                'attribute' => 'comuna_id_comuna',
-                'value' => function($model){
-                    return $model->comunaIdComuna->nombre;
-                },
-            ],
+    
+      [
+                'attribute' => 'tipo',
+                'label'=>'Tipo Administrador',
+                'value' => 'rolIdRol.tipo'
+                
+        ],
+     
+      [
+                'attribute' => 'nombreComuna',
+                'label'=>'Comuna',
+                'value' => 'comunaIdComuna.nombreComuna'
+                
+        ],
 
     
   
@@ -141,7 +143,7 @@ $columns=[
     'storage' => 'session',
     'gridOptions'=>[
         'dataProvider'=>$dataProvider,
-        //'filterModel'=>$searchModel,
+        'filterModel'=>$searchModel,
         'floatHeader'=>true,
         'pjax'=>true,
         'responsiveWrap'=>false,

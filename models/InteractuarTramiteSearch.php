@@ -15,11 +15,20 @@ class InteractuarTramiteSearch extends InteractuarTramite
     /**
      * @inheritdoc
      */
+     public $nombre;
+    public $apellido;
+    public $fecha_nacimiento;
+    public $sexo;
+    public $tipo;
+    public $nombreComuna;
+    public $titulo;
+    public $fecha_publicacion;
+    public $estado;
     public function rules()
     {
         return [
             [['persona_id_persona', 'tramite_id_tramite'], 'integer'],
-            [['fecha', 'hora'], 'safe'],
+            [['fecha', 'hora', 'nombre','apellido','fecha_nacimiento','sexo','tipo', 'nombreComuna','titulo','fecha_publicacion','estado'], 'safe'],
         ];
     }
 
@@ -41,8 +50,11 @@ class InteractuarTramiteSearch extends InteractuarTramite
      */
     public function search($params)
     {
-        $query = InteractuarTramite::find();
-
+        $query = InteractuarTramite::find()
+            ->joinWith(['personaIdPersona'])
+            ->joinWith(['personaIdPersona.rolIdRol'])
+             ->joinWith(['personaIdPersona.comunaIdComuna'])
+             ->joinWith(['tramiteIdTramite']);
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
@@ -64,6 +76,16 @@ class InteractuarTramiteSearch extends InteractuarTramite
             'fecha' => $this->fecha,
             'hora' => $this->hora,
         ]);
+        
+         $query->andFilterWhere(['like', 'nombre', $this->nombre])
+              ->andFilterWhere(['like', 'apellido', $this->apellido])
+             ->andFilterWhere(['like', 'fecha_nacimiento', $this->fecha_nacimiento])
+              ->andFilterWhere(['like', 'sexo', $this->sexo])
+                   ->andFilterWhere(['like', 'tipo', $this->tipo])
+                  ->andFilterWhere(['like', 'nombreComuna', $this->nombreComuna])
+             ->andFilterWhere(['like', 'titulo', $this->titulo])
+                  ->andFilterWhere(['like', 'fecha_publicacion', $this->fecha_publicacion])
+                  ->andFilterWhere(['like', 'estado', $this->estado]);;
 
         return $dataProvider;
     }

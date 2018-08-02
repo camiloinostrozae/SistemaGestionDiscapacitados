@@ -19,7 +19,7 @@ class ComunaSearch extends Comuna
     {
         return [
             [['id_comuna', 'region_id_region'], 'integer'],
-            [['nombre'], 'safe'],
+            [['nombreComuna'], 'safe'],
         ];
     }
 
@@ -63,7 +63,7 @@ class ComunaSearch extends Comuna
             'region_id_region' => $this->region_id_region,
         ]);
 
-        $query->andFilterWhere(['like', 'nombre', $this->nombre]);
+        $query->andFilterWhere(['like', 'nombreComuna', $this->nombreComuna]);
 
         return $dataProvider;
     }

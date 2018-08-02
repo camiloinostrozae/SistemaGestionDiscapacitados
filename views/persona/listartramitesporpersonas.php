@@ -37,33 +37,31 @@ $columns=[
 
     ['class'=>'kartik\grid\SerialColumn', 'order'=>DynaGrid::ORDER_FIX_LEFT],
     
-     [
-                'attribute' => 'tramite_id_tramite',
+    [
+                'attribute' => 'titulo',
                 'label' => 'Título',
-                'value' => function($model){
-                    return $model->tramiteIdTramite->titulo;
-                },
+                'value' => 'tramiteIdTramite.titulo'
             ],
     [
-                'attribute' => 'tramite_id_tramite',
+                'attribute' => 'fecha_publicacion',
+                'filterType'=>GridView::FILTER_DATE,
                  'format'=>['date', 'php:d-m-Y'],
                 'label' => 'Fecha de Publicación',
-                'value' => function($model){
-                    return $model->tramiteIdTramite->fecha_publicacion;
-                },
+                'value' => 'tramiteIdTramite.fecha_publicacion',
+                'filterWidgetOptions'=>[
+                  'pluginOptions'=>['format'=>'yyyy-mm-dd']
+        ],
             ],
  
-    [
-                'attribute' => 'tramite_id_tramite',
+   [
+                'attribute' => 'estado',
                 'label' => 'Estado',
-                'value' => function($model){
-                    return $model->tramiteIdTramite->estado;
-                },
+                'value' => 'tramiteIdTramite.estado'
             ],
 
      [
                 'attribute' => 'tramite_id_tramite',
-                'label' => 'Tipo de Trámite',
+                'label' => 'Tipo del Trámite',
                 'value' => function($model){
                     return $model->tipotramiteIdTipotramite->tipo;
                 },
@@ -71,7 +69,11 @@ $columns=[
 
      [
                 'attribute' => 'fecha',
+                'filterType'=>GridView::FILTER_DATE,
                  'format'=>['date', 'php:d-m-Y'],
+                    'filterWidgetOptions'=>[
+                  'pluginOptions'=>['format'=>'yyyy-mm-dd']
+        ],
                 
             ],
       [
@@ -96,7 +98,7 @@ $columns=[
     'storage' => 'session',
     'gridOptions'=>[
         'dataProvider'=>$dataProvider,
-        //'filterModel'=>$searchModel,
+        'filterModel'=>$searchModel,
         'floatHeader'=>true,
         'pjax'=>true,
         'responsiveWrap'=>false,

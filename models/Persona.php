@@ -175,10 +175,18 @@ class Persona extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         throw new \yii\base\NotSupportedException();
     }
 
-    //Función para buscar el usuario por email, servirá para el login
+    //Función para buscar el usuario por email, servirá para el login Solo en el Sistema Web
     public static function findByEmail($email){
-        return self::findOne(['email'=>$email]);
+       return self::findOne(['email'=>$email]);
         
+    }
+    
+    public static function findByCorreo($email){
+        if(self::findOne(['email'=>$email])){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     //Función para buscar el usuario por telefono, servirá para el login

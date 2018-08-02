@@ -15,7 +15,7 @@ class DependentDropdownController extends Controller
 	}
 
     public function actionComuna($id){
-        echo HtmlHelpers::dropDownList(Comuna::className(), 'region_id_region', $id, 'id_comuna', 'nombre');
+        echo HtmlHelpers::dropDownList(Comuna::className(), 'region_id_region', $id, 'id_comuna', 'nombreComuna');
     }
 
     

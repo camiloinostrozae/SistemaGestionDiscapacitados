@@ -9,6 +9,7 @@ use yii\bootstrap\ActiveForm;
 use kartik\dynagrid\DynaGrid;
 use kartik\grid\GridView;
 use app\models\Campana;
+use app\models\TipoCampana;
 use kartik\growl\Growl;
 use kartik\alert\AlertBlock;
 use yii\widgets\Pjax;
@@ -53,10 +54,10 @@ $columns=[
     ],*/
     
       [
-                'attribute' => 'id_tipo_campana',
-                'value' => function($model){
-                    return $model->tipoCampana->tipo;
-                },
+                'attribute' => 'tipo',
+                'label'=>'Tipo de la Campaña',
+                'value' => 'tipoCampana.tipo'
+                
         ],
 
 
@@ -67,7 +68,7 @@ $columns=[
         'width'=>'170px',
         'contentOptions'=>['style'=>'max-width: 100px;'],
         'filterWidgetOptions'=>[
-            'pluginOptions'=>['format'=>'dd-mm-yyyy']
+            'pluginOptions'=>['format'=>'yyyy-mm-dd']
         ],
     ],
     
@@ -144,7 +145,7 @@ $columns=[
     'storage' => 'session',
     'gridOptions'=>[
         'dataProvider'=>$dataProvider,
-        //'filterModel'=>$searchModel,
+        'filterModel'=>$searchModel,
         'floatHeader'=>true,
         'pjax'=>true,
         'responsiveWrap'=>false,

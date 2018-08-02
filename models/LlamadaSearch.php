@@ -15,11 +15,17 @@ class LlamadaSearch extends Llamada
     /**
      * @inheritdoc
      */
+    public $nombre;
+    public $apellido;
+    public $telefono;
+     public $latitud;
+     public $longitud;
+    
     public function rules()
     {
         return [
             [['id_llamada', 'ubicacion_id_ubicacion', 'persona_id_persona'], 'integer'],
-            [['fecha', 'hora'], 'safe'],
+            [['fecha', 'hora','telefono','nombre','apellido', 'latitud','longitud'], 'safe'],
         ];
     }
 
@@ -41,7 +47,9 @@ class LlamadaSearch extends Llamada
      */
     public function search($params)
     {
-        $query = Llamada::find();
+        $query = Llamada::find()
+             ->joinWith(['personaIdPersona'])
+            ->joinWith(['ubicacionIdUbicacion']);
 
         // add conditions that should always apply here
 
@@ -65,6 +73,12 @@ class LlamadaSearch extends Llamada
             'ubicacion_id_ubicacion' => $this->ubicacion_id_ubicacion,
             'persona_id_persona' => $this->persona_id_persona,
         ]);
+        
+        $query->andFilterWhere(['like', 'telefono', $this->telefono])
+             ->andFilterWhere(['like', 'nombre', $this->nombre])
+             ->andFilterWhere(['like', 'apellido', $this->apellido])
+            ->andFilterWhere(['like', 'latitud', $this->latitud])
+            ->andFilterWhere(['like', 'longitud', $this->longitud]);
 
         return $dataProvider;
     }

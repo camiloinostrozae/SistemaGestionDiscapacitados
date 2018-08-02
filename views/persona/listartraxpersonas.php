@@ -54,11 +54,15 @@ $columns=[
     
     [
         'attribute'=>'fecha_nacimiento',
+        'filterType'=>GridView::FILTER_DATE,
         'pageSummary'=>'Page Total',
          'format'=>['date', 'php:d-m-Y'],
         'vAlign'=>'middle',
         'order'=>DynaGrid::ORDER_FIX_LEFT,
         'contentOptions'=>['style'=>'max-width: 300px;max-height: 150px;overflow: auto; word-wrap: break-word;white-space: nowrap;'],
+        'filterWidgetOptions'=>[
+                  'pluginOptions'=>['format'=>'yyyy-mm-dd']
+        ],
     ],
     
     [
@@ -70,19 +74,19 @@ $columns=[
     ],
     
     
-    [
-                'attribute' => 'rol_id_rol',
-                'label' => 'Tipo Usuario',
-                'value' => function($model){
-                    return $model->rolIdRol->tipo;
-                },
-            ],
      [
-                'attribute' => 'comuna_id_comuna',
-                'value' => function($model){
-                    return $model->comunaIdComuna->nombre;
-                },
-            ],
+                'attribute' => 'tipo',
+                'label'=>'Tipo Usuario',
+                'value' => 'rolIdRol.tipo'
+                
+        ],
+    [
+                'attribute' => 'nombreComuna',
+                'label'=>'Comuna',
+                'value' => 'comunaIdComuna.nombreComuna'
+                
+        ],
+
 
     
     [
@@ -122,7 +126,7 @@ $columns=[
     'storage' => 'session',
     'gridOptions'=>[
         'dataProvider'=>$dataProvider,
-        //'filterModel'=>$searchModel,
+        'filterModel'=>$searchModel,
         'floatHeader'=>true,
         'pjax'=>true,
         'responsiveWrap'=>false,

@@ -37,33 +37,33 @@ $columns=[
 
     ['class'=>'kartik\grid\SerialColumn', 'order'=>DynaGrid::ORDER_FIX_LEFT],
     
-      [
-                'attribute' => 'persona_id_persona',
+     
+     [
+                'attribute' => 'nombre',
                 'label' => 'Nombre',
-                'value' => function($model){
-                    return $model->personaIdPersona->nombre;
-                },
+                'value' => 'personaIdPersona.nombre'
             ],
-      [
-                'attribute' => 'persona_id_persona',
+     
+     [
+                'attribute' => 'apellido',
                 'label' => 'Apellido',
-                'value' => function($model){
-                    return $model->personaIdPersona->apellido;
-                },
+                'value' => 'personaIdPersona.apellido'
             ],
-      [
-                'attribute' => 'persona_id_persona',
+      
+     [
+                'attribute' => 'telefono',
                 'label' => 'Teléfono',
-                'value' => function($model){
-                    return $model->personaIdPersona->telefono;
-                },
+                'value' => 'personaIdPersona.telefono'
             ],
-    [
-        'attribute'=>'fecha',
-        'pageSummary'=>'Page Total',
-        'vAlign'=>'middle',
-        'contentOptions'=>['style'=>'max-width: 100px;overflow: auto; word-wrap: break-word;']
-    ],
+     [
+                'attribute' => 'fecha',
+                'filterType'=>GridView::FILTER_DATE,
+                 'format'=>['date', 'php:d-m-Y'],
+                    'filterWidgetOptions'=>[
+                  'pluginOptions'=>['format'=>'yyyy-mm-dd']
+        ],
+                
+            ],
 
     [
         'attribute'=>'hora',
@@ -74,18 +74,14 @@ $columns=[
     
     
     [
-                'attribute' => 'ubicacion_id_ubicacion',
+                'attribute' => 'latitud',
                 'label' => 'Latitud',
-                'value' => function($model){
-                    return $model->ubicacionIdUbicacion->latitud;
-                },
+                'value' => 'ubicacionIdUbicacion.latitud'
             ],
-     [
-                'attribute' => 'ubicacion_id_ubicacion',
+    [
+                'attribute' => 'longitud',
                 'label' => 'Longitud',
-                'value' => function($model){
-                    return $model->ubicacionIdUbicacion->longitud;
-                },
+                'value' => 'ubicacionIdUbicacion.longitud'
             ],
    
 
@@ -137,7 +133,7 @@ $columns=[
     'storage' => 'session',
     'gridOptions'=>[
         'dataProvider'=>$dataProvider,
-        //'filterModel'=>$searchModel,
+        'filterModel'=>$searchModel,
         'floatHeader'=>true,
         'pjax'=>true,
         'responsiveWrap'=>false,

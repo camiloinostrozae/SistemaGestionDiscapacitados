@@ -52,12 +52,11 @@ $columns=[
         'contentOptions'=>['style'=>'max-width: 300px;max-height: 150px;overflow: auto; word-wrap: break-word;white-space: nowrap;'],
     ],*/
     
-      [
-                'attribute' => 'id_tipo_campana',
-                'value' => function($model){
-                    return $model->tipoCampana->tipo;
-                },
-                'contentOptions'=>['style'=>'max-width: 100px;overflow: auto; word-wrap: break-word;']
+       [
+                'attribute' => 'tipo',
+                'label'=>'Tipo de la Campaña',
+                'value' => 'tipoCampana.tipo'
+                
         ],
 
 
@@ -68,7 +67,7 @@ $columns=[
         'width'=>'150px',
         'contentOptions'=>['style'=>'max-width: 100px;'],
         'filterWidgetOptions'=>[
-            'pluginOptions'=>['format'=>'dd-mm-yyyy']
+            'pluginOptions'=>['format'=>'yyyy-mm-dd']
         ],
     ],
 
@@ -116,7 +115,7 @@ $columns=[
     'storage' => 'session',
     'gridOptions'=>[
         'dataProvider'=>$dataProvider,
-        //'filterModel'=>$searchModel,
+        'filterModel'=>$searchModel,
         'floatHeader'=>true,
         'pjax'=>true,
         'responsiveWrap'=>false,

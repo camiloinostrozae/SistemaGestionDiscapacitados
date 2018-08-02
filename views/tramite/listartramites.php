@@ -44,11 +44,11 @@ $columns=[
         'contentOptions'=>['style'=>'max-width: 100px;overflow: auto; word-wrap: break-word;']
     ],
     
-      [
-                'attribute' => 'id_tipo_tramite',
-                'value' => function($model){
-                    return $model->tipoTramite->tipo;
-                },
+        [
+                'attribute' => 'tipo',
+                'label'=>'Tipo del Trámite',
+                'value' => 'tipoTramite.tipo'
+                
         ],
 
 
@@ -59,7 +59,7 @@ $columns=[
         'width'=>'150px',
         'contentOptions'=>['style'=>'max-width: 100px;'],
         'filterWidgetOptions'=>[
-            'pluginOptions'=>['format'=>'dd-mm-yyyy']
+            'pluginOptions'=>['format'=>'yyyy-mm-dd']
         ],
     ],
 
@@ -100,7 +100,7 @@ $columns=[
     'storage' => 'session',
     'gridOptions'=>[
         'dataProvider'=>$dataProvider,
-        //'filterModel'=>$searchModel,
+        'filterModel'=>$searchModel,
         'floatHeader'=>true,
         'pjax'=>true,
         'responsiveWrap'=>false,

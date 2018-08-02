@@ -38,16 +38,18 @@ $columns=[
     ['class'=>'kartik\grid\SerialColumn', 'order'=>DynaGrid::ORDER_FIX_LEFT],
     
      [
-                'attribute' => 'persona_id_persona',
+                'attribute' => 'telefono',
                 'label' => 'Teléfono',
-                'value' => function($model){
-                    return $model->personaIdPersona->telefono;
-                },
+                'value' => 'personaIdPersona.telefono'
             ],
 
-     [
+    [
                 'attribute' => 'fecha',
+                'filterType'=>GridView::FILTER_DATE,
                  'format'=>['date', 'php:d-m-Y'],
+                    'filterWidgetOptions'=>[
+                  'pluginOptions'=>['format'=>'yyyy-mm-dd']
+        ],
                 
             ],
       [
@@ -72,7 +74,7 @@ $columns=[
     'storage' => 'session',
     'gridOptions'=>[
         'dataProvider'=>$dataProvider,
-        //'filterModel'=>$searchModel,
+        'filterModel'=>$searchModel,
         'floatHeader'=>true,
         'pjax'=>true,
         'responsiveWrap'=>false,
