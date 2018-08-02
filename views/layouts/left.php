@@ -78,7 +78,7 @@
                 ],
             ],
     [
-                'label' => 'Estadísticas',
+                'label' => 'Información Importante',
                 'icon' => 'tasks',
                 'url' => '#',
                 'items' => [

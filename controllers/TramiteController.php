@@ -48,7 +48,7 @@ class TramiteController extends \yii\web\Controller
             // datos validos recibidos
             Yii::$app->getSession()->setFlash('success', [
 
-                'message' => 'Trámite ingresado exitosamente',
+                'message' => 'Trámite Ingresado Exitosamente',
             ]);
 
             $searchModel = new TramiteSearch();
@@ -89,7 +89,7 @@ class TramiteController extends \yii\web\Controller
 
         Yii::$app->getSession()->setFlash('error', [
 
-            'message' => 'Trámite eliminado exitosamente',
+            'message' => 'Trámite Eliminado Exitosamente',
         ]);
         $this->findModel($id)->delete();
         return $this->redirect(['listar']);
@@ -128,7 +128,7 @@ class TramiteController extends \yii\web\Controller
 
             Yii::$app->getSession()->setFlash('info', [
 
-                'message' => 'Trámite actualizado exitosamente',
+                'message' => 'Trámite Actualizado Exitosamente',
             ]);
             return $this->redirect(['listar', 'id' => $model->id_tramite]);
         } else {

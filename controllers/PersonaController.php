@@ -187,7 +187,7 @@ class PersonaController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->getSession()->setFlash('success', [
 
-                'message' => 'Administrador ingresado exitosamente',
+                'message' => 'Administrador Ingresado Exitosamente',
             ]);
             //Se envia el correo al email ingresado
              Yii::$app->mailer->compose()
@@ -215,7 +215,7 @@ class PersonaController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->getSession()->setFlash('success', [
 
-                'message' => 'Usuario ingresado exitosamente',
+                'message' => 'Usuario Ingresado Exitosamente',
             ]);
                 //Se envia el correo al email ingresado
                 Yii::$app->mailer->compose()
